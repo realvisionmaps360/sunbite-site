@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react'
-import { InstagramIcon } from './Icons'
-import { links } from '../links'
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false)

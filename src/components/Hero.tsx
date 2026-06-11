@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
 import { t } from '../content'
-import { links } from '../links'
 import { MapPinIcon } from './Icons'
 import logo from '../assets/logo-sunbite.png'
 import cup  from '../assets/strawberry-cup.png'
