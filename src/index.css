@@ -1,0 +1,46 @@
+@import 'tailwindcss';
+
+/* ============================================
+   SUNBITE — Design System
+   Primary: #841412  |  Cream: #F5E6C8
+   "Does this feel like a premium Swiss summer dessert experience?"
+   ============================================ */
+
+@theme {
+  --color-brand:      #841412;
+  --color-brand-dark: hsl(1 75% 18%);
+  --color-cream:      #F5E6C8;
+  --color-cream-soft: hsl(40 55% 96%);
+  --color-ink:        hsl(1 25% 12%);
+  --color-ink-muted:  hsl(1 10% 42%);
+
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-script:  'Pacifico', cursive;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background-color: var(--color-cream-soft);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  text-wrap: balance;
+}
+
+/* Warm summer light effect on brand-red backgrounds */
+.warm-glow {
+  background-image: radial-gradient(
+    ellipse 80% 50% at 50% 0%,
+    hsl(42 80% 55% / 0.10),
+    transparent 60%
+  );
+}

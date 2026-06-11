@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <rect width="400" height="400" fill="#ffffff"/>
+  <g fill="none" stroke="#841412" stroke-linecap="round" stroke-linejoin="round" stroke-width="12">
+    <!-- Market stall awning -->
+    <path d="M60,160 L200,100 L340,160" fill="#841412" stroke="#841412" stroke-width="10"/>
+    <!-- Awning scalloped bottom -->
+    <path d="M60,160 Q85,185 110,160 Q135,185 160,160 Q185,185 210,160 Q235,185 260,160 Q285,185 310,160 Q325,185 340,160" fill="#841412" stroke="#841412" stroke-width="0"/>
+    <path d="M60,160 Q85,185 110,160 Q135,185 160,160 Q185,185 210,160 Q235,185 260,160 Q285,185 310,160 Q325,185 340,160" fill="none" stroke="#ffffff" stroke-width="6"/>
+    <!-- Stall poles -->
+    <line x1="80" y1="160" x2="80" y2="320" stroke-width="14"/>
+    <line x1="320" y1="160" x2="320" y2="320" stroke-width="14"/>
+    <!-- Counter/table -->
+    <rect x="60" y="260" width="280" height="20" rx="6" fill="#841412" stroke="none"/>
+    <!-- Basket on counter -->
+    <path d="M150,260 Q150,220 200,215 Q250,220 250,260 Z" fill="#841412" stroke="none"/>
+    <path d="M150,260 Q150,220 200,215 Q250,220 250,260" fill="none" stroke="#841412" stroke-width="10"/>
+    <!-- Basket weave lines -->
+    <line x1="170" y1="257" x2="165" y2="220" stroke-width="5" stroke="#ffffff"/>
+    <line x1="200" y1="258" x2="200" y2="217" stroke-width="5" stroke="#ffffff"/>
+    <line x1="230" y1="257" x2="235" y2="220" stroke-width="5" stroke="#ffffff"/>
+    <!-- Basket handle -->
+    <path d="M160,235 Q200,200 240,235" fill="none" stroke="#841412" stroke-width="11"/>
+    <!-- Strawberry in basket -->
+    <ellipse cx="200" cy="215" rx="18" ry="22" fill="#841412"/>
+    <path d="M200,193 Q195,183 200,178 Q205,183 200,193" fill="#841412" stroke="#841412" stroke-width="3"/>
+    <!-- Small dots on strawberry -->
+    <circle cx="194" cy="208" r="3" fill="#ffffff"/>
+    <circle cx="206" cy="212" r="3" fill="#ffffff"/>
+    <circle cx="200" cy="220" r="3" fill="#ffffff"/>
+    <!-- Banner between poles -->
+    <line x1="80" y1="195" x2="320" y2="195" stroke-width="6" stroke-dasharray="16,10"/>
+  </g>
+</svg>
