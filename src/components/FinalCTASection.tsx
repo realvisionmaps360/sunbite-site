@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion'
-import { t } from '../content'
+import { useLanguage } from '../LanguageContext'
 import { links } from '../links'
 import { MapPinIcon, InstagramIcon } from './Icons'
 
 export function FinalCTASection() {
+  const { t } = useLanguage()
   const [h1, h2] = t.finalCTA.headline.split('\n')
 
   return (

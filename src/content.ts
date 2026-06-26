@@ -1,12 +1,17 @@
 // ============================================
-// SUNBITE — Website Copy (English)
-// German version: add after full EN site is approved.
+// SUNBITE — Website Copy (EN / DE)
+// DE is a localisation, not a literal translation — tone matters more
+// than word-for-word accuracy. Swiss German: use "ss", never "ß".
 // ============================================
 
-export const t = {
+export type Lang = 'en' | 'de'
+
+const en = {
   nav: {
-    findUs: 'Find Us',
-    book:   'Book',
+    about:   'About',
+    gallery: 'Gallery',
+    findUs:  'Find Us',
+    book:    'Book',
     bookCTA: 'Book SUNBITE',
   },
 
@@ -41,6 +46,7 @@ export const t = {
         body:  'Every cup is made for the person standing in front of us. Not before. Not in advance.',
       },
     ],
+    closing: 'No shortcuts. No compromises.',
   },
 
   romana: {
@@ -126,4 +132,134 @@ export const t = {
     rights:  'All rights reserved.',
     builtBy: 'Site by Real Vision',
   },
-} as const
+}
+
+const de: typeof en = {
+  nav: {
+    about:   'Über SUNBITE',
+    gallery: 'Galerie',
+    findUs:  'Finde uns',
+    book:    'Buchen',
+    bookCTA: 'SUNBITE buchen',
+  },
+
+  hero: {
+    headline:     'Der Geschmack des Sommers.',
+    subheadline:  'Frische Erdbeeren. Schweizer Premium-Schokolade.',
+    primaryCTA:   'Finde uns',
+    secondaryCTA: 'SUNBITE buchen',
+  },
+
+  product: {
+    eyebrow:   'Erdbeeren & Schokolade',
+    headline:  'Eine Idee.\nPerfekt umgesetzt.',
+    body:      'Wir bieten keine grosse Speisekarte. Wir konzentrieren uns auf ein einziges Produkt – und bereiten jeden Becher mit der Sorgfalt zu, die er verdient. Frische Erdbeeren. Schweizer Premium-Schokolade. Frisch zubereitet für jeden einzelnen Gast.',
+    pullQuote: 'Das sind keine gewöhnlichen Schoko-Erdbeeren.',
+  },
+
+  ingredients: {
+    eyebrow:  'Was in jedem Becher steckt',
+    headline: 'Jede Zutat ist eine Entscheidung.',
+    blocks: [
+      {
+        title: 'Schweizer Premium-Schokolade',
+        body:  'Nicht irgendeine Schokolade. Schweizer Qualität setzt den Massstab – und genau diesen verwenden wir.',
+      },
+      {
+        title: 'Frische Erdbeeren',
+        body:  'Wenn möglich regional. Immer saisonal. Nie tiefgekühlt.',
+      },
+      {
+        title: 'Frisch zubereitet',
+        body:  'Jeder Becher wird erst nach deiner Bestellung zubereitet. Nie im Voraus.',
+      },
+    ],
+    closing: 'Alles, was ein guter Moment braucht.',
+  },
+
+  romana: {
+    eyebrow:  'Das bin ich',
+    headline: 'Salü, ich bin Romana.\nSchön dass du da bist.',
+    body:     'Ich glaube, dass die schönsten Erinnerungen selten geplant sind. Sie entstehen an warmen Sommertagen, beim Lachen mit Freunden oder in den kleinen Momenten dazwischen.\n\nGenau aus diesem Gedanken ist SUNBITE entstanden. Ein Ort für frische Erdbeeren, gute Gespräche und das schöne Gefühl, den Sommer für einen Moment anzuhalten.\n\nWenn du mit einem Lächeln weitergehst, dann habe ich genau das erreicht, was ich mir für SUNBITE wünsche.',
+    photoAlt: 'Romana, Gründerin von SUNBITE',
+  },
+
+  findUs: {
+    eyebrow:    'Finde Sunbite',
+    headline:   'Wir sind unterwegs.\nSo findest du uns.',
+    leftTitle:  'Nächste Standorte',
+    noEvents:   'Neue Termine folgen bald. Folge uns auf Instagram und erfahre dort als Erste oder Erster, wo wir als Nächstes sind.',
+    rightTitle: 'Immer aktuell',
+    rightBody:  'Alle neuen Standorte veröffentlichen wir zuerst auf Instagram.',
+    cta:        '@sunbite.ch folgen',
+  },
+
+  book: {
+    eyebrow:    'Sunbite für besondere Momente',
+    headline:   'Jeder Anlass wird ein bisschen süsser.',
+    body:       'Ob Hochzeit, Geburtstag oder Firmenanlass – unser Foodbike bringt frische Erdbeeren und Schweizer Schokolade direkt zu deinem Event.',
+    categories: [
+      { label: 'Hochzeiten',       tagline: 'Macht deinen schönsten Tag noch süsser.' },
+      { label: 'Geburtstage',      tagline: 'Ein weiteres Jahr, das gefeiert werden darf.' },
+      { label: 'Firmenanlässe',    tagline: 'Etwas Handgemachtes für dein Team.' },
+      { label: 'Festivals',        tagline: 'Sonnenwarme Erdbeeren, mitten im Geschehen.' },
+      { label: 'Private Feiern',   tagline: 'Auch kleine Momente verdienen etwas Besonderes.' },
+      { label: 'Märkte',           tagline: 'Folge dem Duft, finde das Bike.' },
+    ],
+    cta:   'Event anfragen',
+    trust: 'Antwort innerhalb von 24 Stunden.',
+  },
+
+  gallery: {
+    eyebrow:  'Momente mit Sunbite',
+    headline: 'So schmeckt ein sonniger Tag.',
+    cta:      '@sunbite.ch auf Instagram folgen',
+  },
+
+  faq: {
+    eyebrow:  'Fragen',
+    headline: 'Gute Fragen.\nEhrliche Antworten.',
+    items: [
+      {
+        q: 'Kann ich SUNBITE für private Anlässe buchen?',
+        a: 'Ja. SUNBITE kann für Geburtstage, Hochzeiten, Firmenanlässe, Festivals und private Feiern gebucht werden. Nutze einfach das Buchungsformular – wir melden uns innerhalb von 24 Stunden bei dir.',
+      },
+      {
+        q: 'Wo finde ich SUNBITE als Nächstes?',
+        a: 'Schau im Abschnitt „Finde Sunbite” weiter oben nach den nächsten Terminen. Für aktuelle Updates und spontane Standorte folge uns auf Instagram @sunbite.ch.',
+      },
+      {
+        q: 'Welche Schokolade verwendet ihr?',
+        a: 'Schweizer Premium-Schokolade. Wir setzen auf erstklassige Schweizer Qualität – denn wenn das Produkt so einfach ist, muss jede Zutat aussergewöhnlich sein.',
+      },
+      {
+        q: 'Werden die Becher frisch zubereitet?',
+        a: 'Immer. Jeder Strawberry Chocolate Cup wird frisch für die Person zubereitet, die vor uns steht. Nie im Voraus.',
+      },
+      {
+        q: 'Wie früh sollte ich buchen?',
+        a: 'Wir empfehlen, dich mindestens 4–6 Wochen vor deinem Anlass zu melden, um die Verfügbarkeit zu sichern. Für die Hochsaison und Hochzeiten gilt: je früher, desto besser.',
+      },
+      {
+        q: 'Kommt ihr auch ausserhalb von Aarau?',
+        a: 'Ja. Wir sind an Events und Märkten in der ganzen Region unterwegs. Schreib uns die Details zu deinem Anlass, und wir bestätigen dir Verfügbarkeit und allfällige Anfahrtsdetails.',
+      },
+    ],
+  },
+
+  finalCTA: {
+    headline: 'Lust auf SUNBITE?',
+    find:     'Finde uns',
+    book:     'SUNBITE buchen',
+    follow:   'Instagram folgen',
+  },
+
+  footer: {
+    slogan:  'Made for Sunny Days.',
+    contact: 'hello@sunbite.ch',
+    rights:  'Alle Rechte vorbehalten.',
+    builtBy: 'Website von Real Vision',
+  },
+}
+
+export const content: Record<Lang, typeof en> = { en, de }

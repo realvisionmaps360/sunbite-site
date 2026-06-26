@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion'
-import { t } from '../content'
+import { useLanguage } from '../LanguageContext'
 import emblem from '../assets/emblem.jpg'
 
 export function RomanaSection() {
+  const { t } = useLanguage()
   const paragraphs = t.romana.body.split('\n\n')
 
   return (
@@ -38,7 +39,12 @@ export function RomanaSection() {
             {t.romana.eyebrow}
           </p>
           <h2 className="mb-8 font-display text-4xl font-bold italic text-ink md:text-5xl">
-            {t.romana.headline}
+            {t.romana.headline.split('\n').map((line, i) => (
+              <span key={i}>
+                {i > 0 && <br />}
+                {line}
+              </span>
+            ))}
           </h2>
           {paragraphs.map((para, i) => (
             <p key={i} className={`text-lg leading-relaxed text-ink-muted ${i > 0 ? 'mt-5' : ''}`}>

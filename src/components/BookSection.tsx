@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { t } from '../content'
+import { useLanguage } from '../LanguageContext'
 import { links } from '../links'
 
 const ICONS = [
@@ -55,6 +55,7 @@ const ICONS = [
 ]
 
 export function BookSection() {
+  const { t } = useLanguage()
   const [hoverIdx, setHoverIdx] = useState<number | null>(null)
   const [openIdx, setOpenIdx]   = useState<number | null>(null)
 

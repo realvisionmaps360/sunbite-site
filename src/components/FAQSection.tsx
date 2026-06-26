@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { t } from '../content'
+import { useLanguage } from '../LanguageContext'
 import { ChevronDownIcon } from './Icons'
 
 export function FAQSection() {
+  const { t } = useLanguage()
   const [open, setOpen] = useState<number | null>(null)
   const [h1, h2] = t.faq.headline.split('\n')
 

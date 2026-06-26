@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion'
-import { t } from '../content'
+import { useLanguage } from '../LanguageContext'
 import { MapPinIcon } from './Icons'
 import cup from '../assets/strawberry-cup.png'
 
 export function Hero() {
+  const { t } = useLanguage()
   return (
     <section id="top" className="warm-glow relative min-h-svh overflow-hidden bg-brand">
 

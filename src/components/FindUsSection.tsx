@@ -1,10 +1,11 @@
 import { motion } from 'framer-motion'
-import { t } from '../content'
+import { useLanguage } from '../LanguageContext'
 import { links } from '../links'
 import { InstagramIcon, CalendarIcon } from './Icons'
 import { upcomingEvents } from '../data/events'
 
 export function FindUsSection() {
+  const { t } = useLanguage()
   const [headline1, headline2] = t.findUs.headline.split('\n')
 
   return (

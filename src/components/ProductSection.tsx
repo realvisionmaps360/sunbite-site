@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { t } from '../content'
+import { useLanguage } from '../LanguageContext'
 import cup from '../assets/strawberry-cup.png'
 
 const fade = {
@@ -9,6 +9,7 @@ const fade = {
 } as const
 
 export function ProductSection() {
+  const { t } = useLanguage()
   const [line1, line2] = t.product.headline.split('\n')
 
   return (

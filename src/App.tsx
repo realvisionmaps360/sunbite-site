@@ -1,3 +1,4 @@
+import { LanguageProvider } from './LanguageContext'
 import { Header }           from './components/Header'
 import { Hero }             from './components/Hero'
 import { ProductSection }   from './components/ProductSection'
@@ -12,7 +13,7 @@ import { Footer }           from './components/Footer'
 
 function App() {
   return (
-    <>
+    <LanguageProvider>
       <Header />
       <main>
         <Hero />              {/* 1 — Crave it   */}
@@ -26,7 +27,7 @@ function App() {
         <FinalCTASection />   {/* 9 — Take action*/}
       </main>
       <Footer />              {/* 10 — Remember  */}
-    </>
+    </LanguageProvider>
   )
 }
 

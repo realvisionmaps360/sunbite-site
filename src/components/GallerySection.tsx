@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { t } from '../content'
+import { useLanguage } from '../LanguageContext'
 import { links } from '../links'
 import { InstagramIcon } from './Icons'
 import cup    from '../assets/strawberry-cup.png'
@@ -15,6 +15,7 @@ const photos = [
 ]
 
 export function GallerySection() {
+  const { t } = useLanguage()
   return (
     <section id="gallery" className="bg-cream-soft py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-5">

@@ -1,8 +1,9 @@
 import { InstagramIcon } from './Icons'
-import { t } from '../content'
+import { useLanguage } from '../LanguageContext'
 import { links } from '../links'
 
 export function Footer() {
+  const { t } = useLanguage()
   const year = new Date().getFullYear()
   return (
     <footer className="bg-brand-dark py-12 text-cream/75">

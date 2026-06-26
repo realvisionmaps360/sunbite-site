@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion'
-import { t } from '../content'
+import { useLanguage } from '../LanguageContext'
 
 export function IngredientsSection() {
+  const { t } = useLanguage()
   return (
     <section className="warm-glow bg-brand py-24 md:py-36">
       <div className="mx-auto max-w-5xl px-5">
@@ -55,7 +56,7 @@ export function IngredientsSection() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-20 text-center font-display text-lg italic text-cream/40"
         >
-          No shortcuts. No compromises.
+          {t.ingredients.closing}
         </motion.p>
 
       </div>
