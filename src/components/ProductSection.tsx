@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { useLanguage } from '../LanguageContext'
-import cup from '../assets/strawberry-cup.png'
+import menu from '../assets/menu.png'
 
 const fade = {
   initial: { opacity: 0, y: 32 },
@@ -35,9 +35,9 @@ export function ProductSection() {
           >
             <div className="overflow-hidden rounded-[2.5rem] shadow-2xl">
               <img
-                src={cup}
-                alt="Strawberry Chocolate Cup — fresh strawberries with premium Swiss chocolate"
-                className="aspect-[4/5] w-full object-cover object-top"
+                src={menu}
+                alt="Sunbite Menü — Erdbeer-Schoko-Becher"
+                className="aspect-[1055/1491] w-full object-contain"
               />
             </div>
           </motion.div>
