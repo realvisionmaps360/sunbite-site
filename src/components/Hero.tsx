@@ -1,8 +1,7 @@
 import { motion } from 'framer-motion'
 import { t } from '../content'
 import { MapPinIcon } from './Icons'
-import logo from '../assets/logo-sunbite.png'
-import cup  from '../assets/strawberry-cup.png'
+import cup from '../assets/strawberry-cup.png'
 
 export function Hero() {
   return (
@@ -20,9 +19,8 @@ export function Hero() {
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
+          className="md:-translate-y-4"
         >
-          <img src={logo} alt="Sunbite.ch" className="mb-8 w-52 md:w-64" />
-
           <h1 className="mb-5 font-display text-4xl font-bold italic leading-tight text-cream md:text-5xl lg:text-6xl">
             {t.hero.headline}
           </h1>
