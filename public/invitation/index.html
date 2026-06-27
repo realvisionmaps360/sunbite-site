@@ -15,7 +15,7 @@
     :root {
       --choc:       #2A0F06;
       --choc-mid:   #6B2D1A;
-      --berry:      #7A1010;
+      --berry:      #8B1515;
       --berry-mid:  #A41818;
       --cream:      #F5E6C8;
       --cream-soft: #FDF6E9;
@@ -25,7 +25,8 @@
       --ink:        #1A0A06;
     }
 
-    html, body { height: 100%; overflow: hidden; }
+    html { height: 100%; }
+    body { overflow: hidden; }
 
     body {
       background: #2A0F06;
@@ -33,6 +34,8 @@
         radial-gradient(ellipse 130% 55% at 50% -5%,  #6B2D1A 0%, transparent 55%),
         radial-gradient(ellipse 90%  45% at 50% 108%, #4A1A0C 0%, transparent 50%);
       min-height: 100vh;
+      min-height: calc(var(--vh, 1vh) * 100);
+      min-height: 100dvh;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -122,8 +125,7 @@
 
     /* ── Scene / Deck ── */
     .scene {
-      width: 100%;
-      max-width: 340px;
+      width: min(340px, 88vw);
       perspective: 1400px;
       z-index: 10;
     }
@@ -144,7 +146,7 @@
     .card {
       position: relative;
       width: 100%;
-      padding-bottom: 140%;
+      padding-bottom: min(140%, 72dvh);
       transform-style: preserve-3d;
       transition: transform 0.85s cubic-bezier(.4,0,.2,1);
       cursor: pointer;
@@ -283,10 +285,10 @@
     }
 
     /* Card themes */
-    .c1 { background: linear-gradient(155deg, #180703 0%, #4A1E0C 55%, #180703 100%); border-color: var(--gold); }
-    .c2 { background: linear-gradient(155deg, #FDF6E9 0%, #F5E6C8 100%); border-color: var(--berry); color: var(--ink); }
-    .c3 { background: linear-gradient(155deg, #5C0E0E 0%, #9E1818 60%, #5C0E0E 100%); border-color: var(--gold); }
-    .c4 { background: linear-gradient(145deg, #3D1C0D 0%, #8B400E 60%, #C4891A 100%); border-color: var(--gold-light); }
+    .c1 { background: #F5EBDA; border-color: #8B1515; color: #8B1515; }
+    .c2 { background: #F5EBDA; border-color: #8B1515; color: var(--ink); }
+    .c3 { background: #F5EBDA; border-color: #8B1515; color: #8B1515; }
+    .c4 { background: #F5EBDA; border-color: #8B1515; color: #8B1515; }
 
     /* Typography */
     .eyebrow {
@@ -363,20 +365,20 @@
     .btn-maps:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(52,168,83,0.48); }
 
     .btn-360 {
-      background: rgba(106,16,16,0.1);
-      color: var(--berry);
-      border: 1.5px solid rgba(106,16,16,0.28);
+      background: rgba(139,21,21,0.1);
+      color: #8B1515;
+      border: 1.5px solid rgba(139,21,21,0.35);
     }
-    .btn-360:hover { transform: translateY(-2px); background: rgba(106,16,16,0.16); }
+    .btn-360:hover { transform: translateY(-2px); background: rgba(139,21,21,0.18); }
 
     .btn-restart {
-      background: var(--gold);
-      color: #1A0A06;
+      background: #8B1515;
+      color: #F5EBDA;
       font-weight: 800;
-      box-shadow: 0 4px 20px rgba(212,175,55,0.38);
+      box-shadow: 0 4px 20px rgba(139,21,21,0.38);
       font-size: 12.5px;
     }
-    .btn-restart:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(212,175,55,0.5); }
+    .btn-restart:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(139,21,21,0.5); }
 
     /* Product image */
     .prod-img {
@@ -419,12 +421,12 @@
       font-family: 'Playfair Display', serif;
       font-size: 14px;
       font-weight: 700;
-      color: var(--gold-light);
+      color: #8B1515;
       letter-spacing: 0.5px;
-      border: 1px solid rgba(240,208,96,0.35);
+      border: 1px solid rgba(139,21,21,0.35);
       border-radius: 6px;
       padding: 4px 12px;
-      background: rgba(0,0,0,0.2);
+      background: rgba(139,21,21,0.08);
     }
 
     /* Reduced motion: disable all JS-driven animations */
@@ -481,6 +483,11 @@
   </div>
 
   <script>
+    /* ─── iOS viewport height fix ─── */
+    function setVh() { document.documentElement.style.setProperty('--vh', window.innerHeight * 0.01 + 'px'); }
+    setVh();
+    window.addEventListener('resize', setVh);
+
     /* ─── Reduced motion guard (skill: motion-framer — accessibility) ─── */
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const M = window.Motion || null; // graceful fallback if CDN fails
@@ -536,35 +543,35 @@
       {
         cls: 'c1',
         de: `
-          <div class="inner" style="color:var(--gold)">
-            <div class="eyebrow" style="color:rgba(212,175,55,.52)">✦ Eine Überraschung ✦</div>
-            <div class="script" style="color:var(--gold-light); font-size:32px">Es beginnt…</div>
+          <div class="inner" style="color:#8B1515">
+            <div class="eyebrow" style="color:rgba(139,21,21,.6)">✦ Eine Überraschung ✦</div>
+            <div class="script" style="color:#8B1515; font-size:32px">Es beginnt…</div>
             <div class="orn"><div class="orn-line"></div><div class="orn-gem">◆</div><div class="orn-line"></div></div>
-            <p class="body-text" style="color:rgba(245,230,200,.82); font-style:italic; font-family:'Playfair Display',serif; font-size:13.5px">
+            <p class="body-text" style="color:#5C0E0E; font-style:italic; font-family:'Playfair Display',serif; font-size:13.5px">
               Monate der Arbeit im Verborgenen.<br/>
               Heute enthüllen wir unser Geheimnis.<br/><br/>
-              <span style="color:rgba(212,175,55,.6); font-size:12.5px">
+              <span style="color:rgba(139,21,21,.65); font-size:12.5px">
                 Wir freuen uns so, das mit dir zu teilen —<br/>und möchten, dass du dabei bist.
               </span>
             </p>
             <div class="emoji-row" style="opacity:.82">🌟 ✨ 🍓</div>
-            <span class="tap" style="color:rgba(212,175,55,.4)">↓ tippe um fortzufahren</span>
+            <span class="tap" style="color:rgba(139,21,21,.4)">↓ tippe um fortzufahren</span>
           </div>
         `,
         en: `
-          <div class="inner" style="color:var(--gold)">
-            <div class="eyebrow" style="color:rgba(212,175,55,.52)">✦ A Surprise ✦</div>
-            <div class="script" style="color:var(--gold-light); font-size:32px">It begins…</div>
+          <div class="inner" style="color:#8B1515">
+            <div class="eyebrow" style="color:rgba(139,21,21,.6)">✦ A Surprise ✦</div>
+            <div class="script" style="color:#8B1515; font-size:32px">It begins…</div>
             <div class="orn"><div class="orn-line"></div><div class="orn-gem">◆</div><div class="orn-line"></div></div>
-            <p class="body-text" style="color:rgba(245,230,200,.82); font-style:italic; font-family:'Playfair Display',serif; font-size:13.5px">
+            <p class="body-text" style="color:#5C0E0E; font-style:italic; font-family:'Playfair Display',serif; font-size:13.5px">
               Months of work, kept in secret.<br/>
               Today we finally reveal it.<br/><br/>
-              <span style="color:rgba(212,175,55,.6); font-size:12.5px">
+              <span style="color:rgba(139,21,21,.65); font-size:12.5px">
                 We're so happy to share this with you —<br/>and we want <em>you</em> to be part of it.
               </span>
             </p>
             <div class="emoji-row" style="opacity:.82">🌟 ✨ 🍓</div>
-            <span class="tap" style="color:rgba(212,175,55,.4)">↓ tap to continue</span>
+            <span class="tap" style="color:rgba(139,21,21,.4)">↓ tap to continue</span>
           </div>
         `
       },
@@ -575,16 +582,16 @@
         de: `
           <div class="inner">
             <img src="/invitation/assets/logo-oficial.png" alt="Sunbite" style="width:52px; height:52px; border-radius:8px; object-fit:contain; background:#6B1515;"/>
-            <div class="eyebrow" style="color:#7A1010">Persönliche Einladung</div>
-            <div class="orn" style="color:#7A1010"><div class="orn-line"></div><div class="orn-gem">◆</div><div class="orn-line"></div></div>
-            <div class="script" style="color:#7A1010; font-size:30px">18. Juli 2026</div>
-            <div style="font-family:'Playfair Display',serif; font-size:21px; font-weight:700; color:#7A1010; letter-spacing:2px">20:00 — 00:00</div>
-            <div class="orn" style="color:#7A1010"><div class="orn-line"></div><div class="orn-gem">◆</div><div class="orn-line"></div></div>
+            <div class="eyebrow" style="color:#8B1515">Persönliche Einladung</div>
+            <div class="orn" style="color:#8B1515"><div class="orn-line"></div><div class="orn-gem">◆</div><div class="orn-line"></div></div>
+            <div class="script" style="color:#8B1515; font-size:30px">18. Juli 2026</div>
+            <div style="font-family:'Playfair Display',serif; font-size:21px; font-weight:700; color:#8B1515; letter-spacing:2px">20:00 — 00:00</div>
+            <div class="orn" style="color:#8B1515"><div class="orn-line"></div><div class="orn-gem">◆</div><div class="orn-line"></div></div>
             <div style="font-family:'Playfair Display',serif; font-size:17px; font-weight:700; color:var(--ink); line-height:1.35">
               Am Aareufer<br/>
-              <span style="font-size:13px; font-weight:400; font-style:italic; color:#7A1010bb">Aarau, Schweiz</span>
+              <span style="font-size:13px; font-weight:400; font-style:italic; color:#8B1515bb">Aarau, Schweiz</span>
             </div>
-            <p class="body-text" style="font-size:12.5px; color:#7A1010cc">Musik · Lachen · Sommerabend</p>
+            <p class="body-text" style="font-size:12.5px; color:#8B1515cc">Musik · Lachen · Sommerabend</p>
             <div style="display:flex; flex-direction:column; gap:8px; width:100%;">
               <a href="#" class="btn btn-maps" onclick="event.stopPropagation()">🗺️ &nbsp;Google Maps</a>
               <button class="btn btn-360" onclick="event.stopPropagation()">🌐 &nbsp;360° Ansicht</button>
@@ -595,16 +602,16 @@
         en: `
           <div class="inner">
             <img src="/invitation/assets/logo-oficial.png" alt="Sunbite" style="width:52px; height:52px; border-radius:8px; object-fit:contain; background:#6B1515;"/>
-            <div class="eyebrow" style="color:#7A1010">Personal Invitation</div>
-            <div class="orn" style="color:#7A1010"><div class="orn-line"></div><div class="orn-gem">◆</div><div class="orn-line"></div></div>
-            <div class="script" style="color:#7A1010; font-size:28px">July 18, 2026</div>
-            <div style="font-family:'Playfair Display',serif; font-size:21px; font-weight:700; color:#7A1010; letter-spacing:2px">8:00 pm — Midnight</div>
-            <div class="orn" style="color:#7A1010"><div class="orn-line"></div><div class="orn-gem">◆</div><div class="orn-line"></div></div>
+            <div class="eyebrow" style="color:#8B1515">Personal Invitation</div>
+            <div class="orn" style="color:#8B1515"><div class="orn-line"></div><div class="orn-gem">◆</div><div class="orn-line"></div></div>
+            <div class="script" style="color:#8B1515; font-size:28px">July 18, 2026</div>
+            <div style="font-family:'Playfair Display',serif; font-size:21px; font-weight:700; color:#8B1515; letter-spacing:2px">8:00 pm — Midnight</div>
+            <div class="orn" style="color:#8B1515"><div class="orn-line"></div><div class="orn-gem">◆</div><div class="orn-line"></div></div>
             <div style="font-family:'Playfair Display',serif; font-size:17px; font-weight:700; color:var(--ink); line-height:1.35">
               Aare Riverside<br/>
-              <span style="font-size:13px; font-weight:400; font-style:italic; color:#7A1010bb">Aarau, Switzerland</span>
+              <span style="font-size:13px; font-weight:400; font-style:italic; color:#8B1515bb">Aarau, Switzerland</span>
             </div>
-            <p class="body-text" style="font-size:12.5px; color:#7A1010cc">Music · Laughter · Summer Evening</p>
+            <p class="body-text" style="font-size:12.5px; color:#8B1515cc">Music · Laughter · Summer Evening</p>
             <div style="display:flex; flex-direction:column; gap:8px; width:100%;">
               <a href="#" class="btn btn-maps" onclick="event.stopPropagation()">🗺️ &nbsp;Google Maps</a>
               <button class="btn btn-360" onclick="event.stopPropagation()">🌐 &nbsp;360° View</button>
@@ -618,33 +625,33 @@
       {
         cls: 'c3',
         de: `
-          <div class="inner" style="color:var(--cream)">
-            <div class="eyebrow" style="color:rgba(240,208,96,.62)">Das Projekt</div>
+          <div class="inner" style="color:#8B1515">
+            <div class="eyebrow" style="color:rgba(139,21,21,.7)">Das Projekt</div>
             <img src="/invitation/assets/strawberry-cup.png" class="prod-img" alt="Sunbite Cup"/>
-            <img src="/invitation/assets/logo-wordmark-tight.png" class="logo-light" alt="Sunbite"/>
-            <div class="orn" style="color:var(--gold)"><div class="orn-line"></div><div class="orn-gem">◆</div><div class="orn-line"></div></div>
+            <img src="/invitation/assets/logo-wordmark-tight.png" class="logo-dark" alt="Sunbite"/>
+            <div class="orn" style="color:#8B1515"><div class="orn-line"></div><div class="orn-gem">◆</div><div class="orn-line"></div></div>
             <p class="body-text" style="font-family:'Playfair Display',serif; font-style:italic; font-size:13.5px; line-height:1.5">
               Frische Erdbeer-Schokoladen-Cups<br/>
-              <span style="font-size:12px; color:rgba(240,208,96,.68)">& Hausgemachte Limonade</span>
+              <span style="font-size:12px; color:rgba(139,21,21,.65)">& Hausgemachte Limonade</span>
             </p>
             <div class="price-badge">Nur CHF 5.— am Eröffnungstag</div>
             <div class="emoji-row">🍓 🍫 🍋</div>
-            <span class="tap" style="color:rgba(240,208,96,.32)">↓ letzte Karte</span>
+            <span class="tap" style="color:rgba(139,21,21,.35)">↓ letzte Karte</span>
           </div>
         `,
         en: `
-          <div class="inner" style="color:var(--cream)">
-            <div class="eyebrow" style="color:rgba(240,208,96,.62)">The Project</div>
+          <div class="inner" style="color:#8B1515">
+            <div class="eyebrow" style="color:rgba(139,21,21,.7)">The Project</div>
             <img src="/invitation/assets/strawberry-cup.png" class="prod-img" alt="Sunbite Cup"/>
-            <img src="/invitation/assets/logo-wordmark-tight.png" class="logo-light" alt="Sunbite"/>
-            <div class="orn" style="color:var(--gold)"><div class="orn-line"></div><div class="orn-gem">◆</div><div class="orn-line"></div></div>
+            <img src="/invitation/assets/logo-wordmark-tight.png" class="logo-dark" alt="Sunbite"/>
+            <div class="orn" style="color:#8B1515"><div class="orn-line"></div><div class="orn-gem">◆</div><div class="orn-line"></div></div>
             <p class="body-text" style="font-family:'Playfair Display',serif; font-style:italic; font-size:13.5px; line-height:1.5">
               Fresh Strawberry Chocolate Cups<br/>
-              <span style="font-size:12px; color:rgba(240,208,96,.68)">& Homemade Lemonade</span>
+              <span style="font-size:12px; color:rgba(139,21,21,.65)">& Homemade Lemonade</span>
             </p>
             <div class="price-badge">Only CHF 5.— on Opening Day</div>
             <div class="emoji-row">🍓 🍫 🍋</div>
-            <span class="tap" style="color:rgba(240,208,96,.32)">↓ last card</span>
+            <span class="tap" style="color:rgba(139,21,21,.35)">↓ last card</span>
           </div>
         `
       },
@@ -653,11 +660,11 @@
       {
         cls: 'c4',
         de: `
-          <div class="inner" style="color:#fff">
-            <div class="eyebrow" style="color:rgba(240,208,96,.78)">✦ Bis bald ✦</div>
-            <div class="script" style="color:#fff; font-size:32px">Wir sehen uns!</div>
-            <div class="orn" style="color:var(--gold-light)"><div class="orn-line"></div><div class="orn-gem">◆</div><div class="orn-line"></div></div>
-            <p class="body-text" style="font-size:13px; font-family:'Playfair Display',serif; line-height:1.6">
+          <div class="inner" style="color:#8B1515">
+            <div class="eyebrow" style="color:rgba(139,21,21,.7)">✦ Bis bald ✦</div>
+            <div class="script" style="color:#8B1515; font-size:32px">Wir sehen uns!</div>
+            <div class="orn" style="color:#8B1515"><div class="orn-line"></div><div class="orn-gem">◆</div><div class="orn-line"></div></div>
+            <p class="body-text" style="font-size:13px; font-family:'Playfair Display',serif; line-height:1.6; color:#5C0E0E">
               18. Juli 2026 &nbsp;·&nbsp; 20:00 — 00:00<br/>
               Am Aareufer, Aarau
             </p>
@@ -678,16 +685,16 @@
               </svg>
               <span>sunbite.ch<br/><span style="opacity:.4; font-size:8px">QR em breve</span></span>
             </div>
-            <div style="font-size:10px; color:rgba(255,255,255,.32); letter-spacing:2.5px">sunbite.ch</div>
+            <div style="font-size:10px; color:rgba(139,21,21,.35); letter-spacing:2.5px">sunbite.ch</div>
             <button class="btn btn-restart" onclick="event.stopPropagation(); restartExp()">↩ Von vorne beginnen</button>
           </div>
         `,
         en: `
-          <div class="inner" style="color:#fff">
-            <div class="eyebrow" style="color:rgba(240,208,96,.78)">✦ See You There ✦</div>
-            <div class="script" style="color:#fff; font-size:32px">Can't wait!</div>
-            <div class="orn" style="color:var(--gold-light)"><div class="orn-line"></div><div class="orn-gem">◆</div><div class="orn-line"></div></div>
-            <p class="body-text" style="font-size:13px; font-family:'Playfair Display',serif; line-height:1.6">
+          <div class="inner" style="color:#8B1515">
+            <div class="eyebrow" style="color:rgba(139,21,21,.7)">✦ See You There ✦</div>
+            <div class="script" style="color:#8B1515; font-size:32px">Can't wait!</div>
+            <div class="orn" style="color:#8B1515"><div class="orn-line"></div><div class="orn-gem">◆</div><div class="orn-line"></div></div>
+            <p class="body-text" style="font-size:13px; font-family:'Playfair Display',serif; line-height:1.6; color:#5C0E0E">
               July 18, 2026 &nbsp;·&nbsp; 8 pm — Midnight<br/>
               Aare Riverside, Aarau
             </p>
@@ -708,7 +715,7 @@
               </svg>
               <span>sunbite.ch<br/><span style="opacity:.4; font-size:8px">QR coming soon</span></span>
             </div>
-            <div style="font-size:10px; color:rgba(255,255,255,.32); letter-spacing:2.5px">sunbite.ch</div>
+            <div style="font-size:10px; color:rgba(139,21,21,.35); letter-spacing:2.5px">sunbite.ch</div>
             <button class="btn btn-restart" onclick="event.stopPropagation(); restartExp()">↩ Start Over</button>
           </div>
         `
