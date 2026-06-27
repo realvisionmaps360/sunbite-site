@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Sunbite â€” Grand Opening Â· 18. Juli 2026</title>
+  <title>Sunbite – Grand Opening · 18. Juli 2026</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Plus+Jakarta+Sans:wght@400;600;700&family=Pacifico&display=swap" rel="stylesheet" />
@@ -11,26 +11,25 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --brand:      #841412;
-      --brand-dark: #3D0A09;
+      --choc:       #2A0F06;
+      --choc-mid:   #6B2D1A;
+      --berry:      #7A1010;
+      --berry-mid:  #A41818;
       --cream:      #F5E6C8;
       --cream-soft: #FDF6E9;
       --gold:       #D4AF37;
       --gold-light: #F0D060;
-      --gold-dim:   rgba(212,175,55,0.35);
-      --ink:        #1A0A09;
+      --gold-dim:   rgba(212,175,55,0.28);
+      --ink:        #1A0A06;
     }
 
-    html, body {
-      height: 100%;
-      overflow: hidden;
-    }
+    html, body { height: 100%; overflow: hidden; }
 
     body {
-      background: #1A0504;
+      background: #2A0F06;
       background-image:
-        radial-gradient(ellipse 120% 60% at 50% -10%, #841412 0%, transparent 55%),
-        radial-gradient(ellipse 80%  40% at 50% 110%, #500D0C 0%, transparent 50%);
+        radial-gradient(ellipse 130% 55% at 50% -5%,  #6B2D1A 0%, transparent 55%),
+        radial-gradient(ellipse 90%  45% at 50% 108%, #4A1A0C 0%, transparent 50%);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -40,10 +39,40 @@
       color: var(--cream);
       position: relative;
       padding: 16px 20px 20px;
-      gap: 0;
     }
 
-    /* â”€â”€ Floating particles â”€â”€ */
+    /* ── Language Toggle ── */
+    .lang-toggle {
+      position: fixed;
+      top: 14px;
+      right: 14px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(20, 6, 2, 0.72);
+      border: 1px solid rgba(212,175,55,0.32);
+      border-radius: 999px;
+      padding: 5px 11px;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .btn-lang {
+      background: none;
+      border: none;
+      color: rgba(212,175,55,0.38);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      cursor: pointer;
+      padding: 1px 3px;
+      transition: color 0.2s;
+    }
+    .btn-lang.active { color: var(--gold); }
+    .lang-sep { color: rgba(212,175,55,0.22); font-size: 11px; }
+
+    /* ── Particles ── */
     .particle {
       position: fixed;
       border-radius: 50%;
@@ -53,73 +82,67 @@
       z-index: 0;
     }
     @keyframes float-up {
-      0%   { transform: translateY(110vh) rotate(0deg); opacity: 0; }
-      8%   { opacity: 1; }
-      92%  { opacity: 0.7; }
+      0%   { transform: translateY(110vh) rotate(0deg);   opacity: 0; }
+      8%   { opacity: 0.75; }
+      92%  { opacity: 0.55; }
       100% { transform: translateY(-60px) rotate(720deg); opacity: 0; }
     }
 
-    /* â”€â”€ Top hint â”€â”€ */
+    /* ── Top hint ── */
     .top-hint {
       font-family: 'Playfair Display', serif;
       font-style: italic;
-      font-size: 13px;
-      color: rgba(245,230,200,0.45);
+      font-size: 12px;
+      color: rgba(245,230,200,0.38);
       letter-spacing: 1.5px;
-      margin-bottom: 14px;
+      margin-bottom: 13px;
       z-index: 10;
       text-align: center;
     }
 
-    /* â”€â”€ Progress dots â”€â”€ */
+    /* ── Progress dots ── */
     .dots {
       display: flex;
       gap: 9px;
       justify-content: center;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
       z-index: 10;
     }
     .dot {
       width: 7px; height: 7px;
       border-radius: 50%;
-      background: rgba(212,175,55,0.2);
-      border: 1px solid rgba(212,175,55,0.35);
+      background: rgba(212,175,55,0.14);
+      border: 1px solid rgba(212,175,55,0.28);
       transition: all 0.45s cubic-bezier(.4,0,.2,1);
     }
     .dot.active { background: var(--gold); transform: scale(1.4); }
-    .dot.done   { background: rgba(212,175,55,0.5); }
+    .dot.done   { background: rgba(212,175,55,0.42); }
 
-    /* â”€â”€ Scene + deck illusion â”€â”€ */
+    /* ── Scene / Deck ── */
     .scene {
       width: 100%;
       max-width: 340px;
       perspective: 1400px;
       z-index: 10;
     }
+    .deck { position: relative; width: 100%; }
 
-    .deck {
-      position: relative;
-      width: 100%;
-    }
-
-    /* fake stacked cards behind */
-    .deck::before,
-    .deck::after {
+    .deck::before, .deck::after {
       content: '';
       position: absolute;
       inset: 0;
       border-radius: 20px;
       border: 1.5px solid var(--gold-dim);
-      background: linear-gradient(145deg, #2D0908, #5C1211);
+      background: linear-gradient(145deg, #3D1C0D, #6B2D1A);
     }
     .deck::before { transform: translateY(10px) translateX(5px) rotate(2.5deg); z-index: -1; }
     .deck::after  { transform: translateY(5px)  translateX(2px) rotate(1deg);   z-index: -2; }
 
-    /* â”€â”€ Card wrapper (flip container) â”€â”€ */
+    /* ── Card flip container ── */
     .card {
       position: relative;
       width: 100%;
-      padding-bottom: 152%; /* ~tarot 2:3 */
+      padding-bottom: 140%;
       transform-style: preserve-3d;
       transition: transform 0.85s cubic-bezier(.4,0,.2,1);
       cursor: pointer;
@@ -129,13 +152,12 @@
     }
     .card.flipped { transform: rotateY(180deg); }
     .card.flyoff  { animation: flyoff 0.7s cubic-bezier(.4,0,.2,1) forwards; }
-
     @keyframes flyoff {
-      0%   { transform: rotateY(180deg) scale(1) translateY(0);    opacity: 1; }
+      0%   { transform: rotateY(180deg) scale(1)    translateY(0);     opacity: 1; }
       100% { transform: rotateY(180deg) scale(0.65) translateY(-130%) rotateZ(-14deg); opacity: 0; }
     }
 
-    /* â”€â”€ Shared face/back styles â”€â”€ */
+    /* ── Shared face / back ── */
     .face, .back {
       position: absolute;
       inset: 0;
@@ -145,120 +167,90 @@
       overflow: hidden;
     }
 
-    /* â”â”â” FACE (tarot back â€” shown face-down) â”â”â” */
+    /* ══ FACE — Sunbite brand (shown before flip) ══ */
     .face {
-      background: linear-gradient(150deg, #2D0908 0%, #6A1514 45%, #2D0908 100%);
+      background: linear-gradient(150deg, #1E0904 0%, #5C2010 50%, #1E0904 100%);
       border: 2px solid var(--gold);
       display: flex;
       align-items: center;
       justify-content: center;
       box-shadow:
-        0 0 0 1px rgba(212,175,55,0.25),
-        0 24px 70px rgba(0,0,0,0.7),
-        inset 0 1px 0 rgba(212,175,55,0.15);
-      animation: pulse-glow 2.8s ease-in-out infinite;
+        0 0 0 1px rgba(212,175,55,0.18),
+        0 24px 70px rgba(0,0,0,0.72),
+        inset 0 1px 0 rgba(212,175,55,0.1);
+      animation: pulse-glow 3s ease-in-out infinite;
     }
     .card.flipped .face,
-    .card.flyoff  .face { animation: none; }
-
+    .card.flyoff  .face { animation: none; pointer-events: none; }
     @keyframes pulse-glow {
-      0%,100% { box-shadow: 0 0 0 1px rgba(212,175,55,0.25), 0 24px 70px rgba(0,0,0,0.7), 0 0 30px rgba(212,175,55,0.15); }
-      50%      { box-shadow: 0 0 0 1px rgba(212,175,55,0.5),  0 24px 70px rgba(0,0,0,0.7), 0 0 70px rgba(212,175,55,0.35); }
+      0%,100% { box-shadow: 0 0 0 1px rgba(212,175,55,0.18), 0 24px 70px rgba(0,0,0,0.72), 0 0 28px rgba(212,175,55,0.1); }
+      50%      { box-shadow: 0 0 0 1px rgba(212,175,55,0.42), 0 24px 70px rgba(0,0,0,0.72), 0 0 58px rgba(212,175,55,0.26); }
     }
 
-    /* inner border */
+    /* inner border line */
     .face::before {
       content: '';
       position: absolute;
-      inset: 9px;
-      border: 1px solid rgba(212,175,55,0.3);
+      inset: 10px;
+      border: 1px solid rgba(212,175,55,0.2);
       border-radius: 13px;
-      background: repeating-linear-gradient(
-        45deg,
-        transparent, transparent 5px,
-        rgba(212,175,55,0.025) 5px, rgba(212,175,55,0.025) 6px
-      );
       pointer-events: none;
     }
 
-    .tarot-content {
+    .face-content {
       position: relative;
       z-index: 2;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 14px;
-      padding: 28px 24px;
+      gap: 13px;
+      padding: 32px 24px;
       text-align: center;
     }
 
-    .tarot-stars { font-size: 16px; letter-spacing: 10px; color: var(--gold-light); opacity: 0.75; }
+    .face-orn {
+      font-size: 11px;
+      color: rgba(212,175,55,0.45);
+      letter-spacing: 10px;
+    }
 
-    .tarot-emblem {
-      width: 130px; height: 130px;
+    .face-logo {
+      width: 130px;
+      height: 130px;
       border-radius: 50%;
       object-fit: cover;
-      border: 2.5px solid var(--gold);
-      box-shadow: 0 0 35px rgba(212,175,55,0.5), 0 0 70px rgba(212,175,55,0.15);
-      filter: sepia(15%) saturate(1.1) brightness(0.95);
+      border: 2px solid rgba(212,175,55,0.6);
+      box-shadow: 0 0 28px rgba(212,175,55,0.35), 0 0 60px rgba(212,175,55,0.1);
     }
 
-    .tarot-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 24px;
-      color: var(--gold);
-      letter-spacing: 5px;
-      text-transform: uppercase;
-      text-shadow: 0 0 25px rgba(212,175,55,0.6);
+    .face-divider {
+      width: 65px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212,175,55,0.5), transparent);
     }
 
-    .tarot-sub {
+    .face-date {
       font-size: 10px;
-      color: rgba(212,175,55,0.55);
-      letter-spacing: 3px;
+      color: rgba(212,175,55,0.48);
+      letter-spacing: 2.5px;
       text-transform: uppercase;
     }
 
-    /* corner runes */
-    .rune {
-      position: absolute;
-      font-size: 18px;
-      color: rgba(212,175,55,0.45);
-      line-height: 1;
-    }
-    .rune.tl { top: 14px; left: 14px; }
-    .rune.tr { top: 14px; right: 14px; transform: scaleX(-1); }
-    .rune.bl { bottom: 14px; left: 14px; transform: scaleY(-1); }
-    .rune.br { bottom: 14px; right: 14px; transform: scale(-1); }
-
-    /* stars scattered */
-    .star-scatter {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-    }
-    .s {
-      position: absolute;
-      color: var(--gold-light);
-      animation: twinkle 2.2s ease-in-out infinite alternate;
-      opacity: 0.25;
-    }
-    @keyframes twinkle {
-      from { opacity: 0.08; transform: scale(0.7); }
-      to   { opacity: 0.45; transform: scale(1.2); }
+    .face-hint {
+      font-size: 10px;
+      color: rgba(245,230,200,0.28);
+      letter-spacing: 1px;
+      font-style: italic;
+      font-family: 'Playfair Display', serif;
     }
 
-    /* shimmer sweep */
+    /* Shimmer */
     .shimmer-wrap::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(110deg,
-        transparent 35%,
-        rgba(255,255,255,0.06) 50%,
-        transparent 65%
-      );
-      animation: shimmer-sweep 3.5s ease-in-out infinite;
+      background: linear-gradient(110deg, transparent 35%, rgba(255,255,255,0.045) 50%, transparent 65%);
+      animation: shimmer-sweep 4s ease-in-out infinite;
       pointer-events: none;
       z-index: 3;
     }
@@ -267,11 +259,9 @@
       100% { transform: translateX(200%); }
     }
 
-    /* â”â”â” BACK (content side) â”â”â” */
+    /* ══ BACK — Content side ══ */
     .back {
       transform: rotateY(180deg);
-      display: flex;
-      flex-direction: column;
       border: 2px solid transparent;
     }
 
@@ -282,75 +272,75 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 30px 22px 48px;
+      padding: 26px 22px 42px;
       text-align: center;
-      gap: 14px;
+      gap: 11px;
       overflow: hidden;
     }
 
-    /* card-specific themes */
-    .s1 { background: linear-gradient(155deg, #0C0404 0%, #3D0A09 55%, #180605 100%); border-color: var(--gold); }
-    .s2 { background: linear-gradient(155deg, #FDF6E9 0%, #F5E6C8 100%); border-color: var(--brand); color: var(--ink); }
-    .s3 { background: linear-gradient(155deg, #7A1210 0%, #C41E1B 60%, #841412 100%); border-color: var(--gold); }
-    .s4 { background: linear-gradient(155deg, #0E2A1C 0%, #1B4830 100%); border-color: #52C47E; }
-    .s5 { background: linear-gradient(155deg, #FDF6E9 0%, #FFE8D0 100%); border-color: var(--brand); color: var(--ink); }
-    .s6 { background: linear-gradient(145deg, #841412 0%, #B5860D 70%, #D4AF37 100%); border-color: var(--gold-light); }
+    /* Card themes */
+    .c1 { background: linear-gradient(155deg, #180703 0%, #4A1E0C 55%, #180703 100%); border-color: var(--gold); }
+    .c2 { background: linear-gradient(155deg, #FDF6E9 0%, #F5E6C8 100%); border-color: var(--berry); color: var(--ink); }
+    .c3 { background: linear-gradient(155deg, #5C0E0E 0%, #9E1818 60%, #5C0E0E 100%); border-color: var(--gold); }
+    .c4 { background: linear-gradient(145deg, #3D1C0D 0%, #8B400E 60%, #C4891A 100%); border-color: var(--gold-light); }
 
-    /* text helpers */
+    /* Typography */
     .eyebrow {
-      font-size: 9.5px;
+      font-size: 9px;
       letter-spacing: 3.5px;
       text-transform: uppercase;
       opacity: 0.65;
       font-weight: 600;
     }
-    .title {
+    .card-title {
       font-family: 'Playfair Display', serif;
-      font-size: 28px;
+      font-size: 27px;
       line-height: 1.12;
       font-weight: 900;
     }
-    .body-text {
-      font-size: 14.5px;
-      line-height: 1.72;
-      opacity: 0.88;
-      max-width: 270px;
-    }
     .script {
       font-family: 'Pacifico', cursive;
-      font-size: 38px;
+      font-size: 34px;
       line-height: 1.15;
     }
+    .body-text {
+      font-size: 13.5px;
+      line-height: 1.72;
+      opacity: 0.88;
+      max-width: 272px;
+    }
 
-    /* tap hint */
-    .tap {
-      position: absolute;
-      bottom: 14px;
-      font-size: 10.5px;
-      opacity: 0.4;
-      letter-spacing: 0.5px;
+    /* Ornamental divider */
+    .orn {
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 8px;
+      opacity: 0.32;
+      width: 82%;
+    }
+    .orn-line { flex: 1; height: 1px; background: currentColor; }
+    .orn-gem  { font-size: 8px; }
+
+    /* Tap hint */
+    .tap {
+      position: absolute;
+      bottom: 12px;
+      font-size: 10px;
+      opacity: 0.33;
+      letter-spacing: 0.5px;
+      font-style: italic;
+      font-family: 'Playfair Display', serif;
     }
 
-    /* divider */
-    .divider {
-      width: 50px; height: 1.5px;
-      background: currentColor;
-      opacity: 0.3;
-      border-radius: 2px;
-    }
-
-    /* buttons */
+    /* Buttons */
     .btn {
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      padding: 11px 22px;
+      padding: 10px 20px;
       border-radius: 999px;
       font-weight: 700;
-      font-size: 13.5px;
+      font-size: 13px;
       border: none;
       cursor: pointer;
       text-decoration: none;
@@ -361,233 +351,266 @@
     }
     .btn:active { transform: scale(0.96) !important; }
 
-    .btn-maps { background: #34A853; color: #fff; box-shadow: 0 4px 22px rgba(52,168,83,0.45); }
-    .btn-maps:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(52,168,83,0.5); }
+    .btn-maps {
+      background: #34A853;
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(52,168,83,0.38);
+    }
+    .btn-maps:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(52,168,83,0.48); }
 
     .btn-360 {
-      background: rgba(255,255,255,0.12);
-      color: #fff;
-      border: 1.5px solid rgba(255,255,255,0.3);
-      backdrop-filter: blur(12px);
+      background: rgba(106,16,16,0.1);
+      color: var(--berry);
+      border: 1.5px solid rgba(106,16,16,0.28);
     }
-    .btn-360:hover { transform: translateY(-2px); background: rgba(255,255,255,0.18); }
+    .btn-360:hover { transform: translateY(-2px); background: rgba(106,16,16,0.16); }
 
-    /* product circle */
+    .btn-restart {
+      background: var(--gold);
+      color: #1A0A06;
+      font-weight: 800;
+      box-shadow: 0 4px 20px rgba(212,175,55,0.38);
+      font-size: 12.5px;
+    }
+    .btn-restart:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(212,175,55,0.5); }
+
+    /* Product image */
     .prod-img {
-      width: 100px; height: 100px;
+      width: 92px; height: 92px;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid var(--brand);
-      box-shadow: 0 8px 30px rgba(132,20,18,0.35);
+      border: 3px solid var(--berry);
+      box-shadow: 0 8px 26px rgba(122,16,16,0.32);
     }
 
     /* QR placeholder */
     .qr-box {
-      width: 110px; height: 110px;
+      width: 96px; height: 96px;
       background: white;
-      border-radius: 10px;
+      border-radius: 8px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       gap: 5px;
       color: #444;
-      font-size: 10px;
+      font-size: 9.5px;
       text-align: center;
       padding: 8px;
-      line-height: 1.5;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.22);
+      line-height: 1.4;
     }
-    .qr-box svg { opacity: 0.5; }
+    .qr-box svg { opacity: 0.42; }
 
-    /* logo in cards */
-    .logo-dark  { width: 72px; height: auto; filter: brightness(0); }
-    .logo-light { width: 90px; height: auto; filter: brightness(0) invert(1); }
-    .wordmark-dark  { width: 150px; height: auto; filter: brightness(0); }
+    /* Logo helpers */
+    .logo-dark    { width: 65px;  height: auto; filter: brightness(0); }
+    .logo-light   { width: 82px;  height: auto; filter: brightness(0) invert(1); }
+    .wordmark-dark { width: 135px; height: auto; filter: brightness(0); }
 
-    /* emoji row */
-    .emoji-row { font-size: 22px; letter-spacing: 6px; }
+    /* Emoji row */
+    .emoji-row { font-size: 20px; letter-spacing: 8px; }
 
   </style>
 </head>
 <body>
 
-  <!-- particles -->
+  <!-- Particles -->
   <div id="fx"></div>
 
-  <!-- header hint -->
-  <p class="top-hint">âœ¦ Toca para revelar &nbsp;Â·&nbsp; Tap to reveal âœ¦</p>
+  <!-- Language Toggle -->
+  <div class="lang-toggle">
+    <button class="btn-lang active" data-lang="de" onclick="setLang('de')">DE</button>
+    <span class="lang-sep">|</span>
+    <button class="btn-lang" data-lang="en" onclick="setLang('en')">EN</button>
+  </div>
 
-  <!-- progress -->
+  <!-- Top hint -->
+  <p class="top-hint" id="topHint">✦ Tippe zum Enthüllen</p>
+
+  <!-- Progress dots -->
   <div class="dots" id="dots"></div>
 
-  <!-- scene -->
+  <!-- Scene -->
   <div class="scene">
     <div class="deck">
       <div class="card shimmer-wrap" id="card" onclick="handleClick()">
 
-        <!-- â”€â”€ TAROT FACE (face-down) â”€â”€ -->
+        <!-- FACE: Sunbite brand -->
         <div class="face shimmer-wrap">
-          <div class="star-scatter" id="starField"></div>
-          <span class="rune tl">â˜½</span>
-          <span class="rune tr">â˜½</span>
-          <span class="rune bl">âŠ¹</span>
-          <span class="rune br">âŠ¹</span>
-          <div class="tarot-content">
-            <div class="tarot-stars">â˜… &nbsp; â˜… &nbsp; â˜…</div>
-            <img src="./assets/emblem.jpg" alt="Sunbite" class="tarot-emblem" />
-            <div class="tarot-name">Sunbite</div>
-            <div class="tarot-sub">Grand Opening Â· 18. Juli 2026</div>
-            <div class="tarot-stars">â˜… &nbsp; â˜… &nbsp; â˜…</div>
+          <div class="face-content">
+            <div class="face-orn">✦ &nbsp; ✦ &nbsp; ✦</div>
+            <img src="./assets/logo-oficial.png" alt="Sunbite" class="face-logo" />
+            <div class="face-divider"></div>
+            <div class="face-date">Grand Opening &nbsp;·&nbsp; 18. Juli 2026</div>
+            <div class="face-orn">✦ &nbsp; ✦ &nbsp; ✦</div>
+            <div class="face-hint" id="faceHint">Tippe um zu öffnen</div>
           </div>
         </div>
 
-        <!-- â”€â”€ CONTENT BACK â”€â”€ -->
-        <div class="back" id="back">
-          <!-- filled by JS -->
-        </div>
+        <!-- BACK: Content (filled by JS) -->
+        <div class="back" id="back"></div>
 
       </div>
     </div>
   </div>
 
   <script>
-    /* â”€â”€â”€â”€â”€ card content â”€â”€â”€â”€â”€ */
+    /* ─── Language ─── */
+    let lang = 'de';
+
+    const i18n = {
+      topHint:   { de: '✦ Tippe zum Enthüllen',  en: '✦ Tap to Reveal' },
+      faceHint:  { de: 'Tippe um zu öffnen',      en: 'Tap to open'      },
+    };
+
+    function setLang(l) {
+      lang = l;
+      document.querySelectorAll('.btn-lang').forEach(el => {
+        el.classList.toggle('active', el.dataset.lang === l);
+      });
+      document.getElementById('topHint').textContent  = i18n.topHint[l];
+      document.getElementById('faceHint').textContent = i18n.faceHint[l];
+      loadStep(step);
+    }
+
+    /* ─── Card content (4 cards, DE + EN) ─── */
     const steps = [
-      /* 0 â€” The Secret */
+
+      /* Card 1 — Das Geheimnis / The Secret */
       {
-        cls: 's1',
-        html: `
+        cls: 'c1',
+        de: `
           <div class="inner" style="color:var(--gold)">
-            <div class="eyebrow" style="color:rgba(212,175,55,.6)">âœ¦ Eine Ãœberraschung &nbsp;Â·&nbsp; A Surprise âœ¦</div>
-            <div class="script" style="color:var(--gold-light); font-size:34px">Es beginntâ€¦</div>
-            <div class="divider"></div>
-            <p class="body-text" style="color:rgba(245,230,200,.8); font-style:italic">
+            <div class="eyebrow" style="color:rgba(212,175,55,.52)">✦ Eine Überraschung ✦</div>
+            <div class="script" style="color:var(--gold-light); font-size:32px">Es beginnt…</div>
+            <div class="orn"><div class="orn-line"></div><div class="orn-gem">◆</div><div class="orn-line"></div></div>
+            <p class="body-text" style="color:rgba(245,230,200,.82); font-style:italic; font-family:'Playfair Display',serif; font-size:13.5px">
               Monate der Arbeit im Verborgenen.<br/>
-              Heute enthÃ¼llen wir unser Geheimnis.<br/>
-              <br/>
-              <span style="color:rgba(212,175,55,.65); font-size:13px">
-                Months of work, kept in secret.<br/>
-                Today we finally reveal it.
+              Heute enthüllen wir unser Geheimnis.<br/><br/>
+              <span style="color:rgba(212,175,55,.6); font-size:12.5px">
+                Wir freuen uns so, das mit dir zu teilen —<br/>und möchten, dass du dabei bist.
               </span>
             </p>
-            <div class="emoji-row" style="opacity:.85">ðŸŒŸ âœ¨ ðŸŒ™</div>
-            <span class="tap" style="color:rgba(212,175,55,.5)">â†“ toca para continuar Â· tap to continue</span>
+            <div class="emoji-row" style="opacity:.82">🌟 ✨ 🍓</div>
+            <span class="tap" style="color:rgba(212,175,55,.4)">↓ tippe um fortzufahren</span>
+          </div>
+        `,
+        en: `
+          <div class="inner" style="color:var(--gold)">
+            <div class="eyebrow" style="color:rgba(212,175,55,.52)">✦ A Surprise ✦</div>
+            <div class="script" style="color:var(--gold-light); font-size:32px">It begins…</div>
+            <div class="orn"><div class="orn-line"></div><div class="orn-gem">◆</div><div class="orn-line"></div></div>
+            <p class="body-text" style="color:rgba(245,230,200,.82); font-style:italic; font-family:'Playfair Display',serif; font-size:13.5px">
+              Months of work, kept in secret.<br/>
+              Today we finally reveal it.<br/><br/>
+              <span style="color:rgba(212,175,55,.6); font-size:12.5px">
+                We're so happy to share this with you —<br/>and we want <em>you</em> to be part of it.
+              </span>
+            </p>
+            <div class="emoji-row" style="opacity:.82">🌟 ✨ 🍓</div>
+            <span class="tap" style="color:rgba(212,175,55,.4)">↓ tap to continue</span>
           </div>
         `
       },
-      /* 1 â€” The Invite */
+
+      /* Card 2 — Einladung / The Invitation + Date */
       {
-        cls: 's2',
-        html: `
+        cls: 'c2',
+        de: `
           <div class="inner">
-            <img src="./assets/logo-sunbite.png" class="logo-dark" alt="Sunbite"/>
-            <div class="eyebrow" style="color:#841412">PersÃ¶nliche Einladung Â· Personal Invite</div>
-            <div class="title" style="color:#841412; font-size:25px">Wir laden dich ein</div>
-            <div class="divider" style="background:#841412"></div>
-            <p class="body-text" style="color:var(--ink); font-size:14px">
-              Wir sind so froh, dieses Projekt mit dir zu teilen â€” und mÃ¶chten, dass du dabei bist.<br/>
-              <br/>
-              <span style="color:#841412aa; font-size:12.5px">
-                We're so happy to share what we've been building all these months â€” and we want <em>you</em> to be part of it.
-              </span>
-            </p>
-            <div class="emoji-row">ðŸŽ¶ ðŸ“ âœ¨</div>
-            <span class="tap" style="color:rgba(132,20,18,.4)">â†“ tap to continue</span>
-          </div>
-        `
-      },
-      /* 2 â€” The Date */
-      {
-        cls: 's3',
-        html: `
-          <div class="inner" style="color:var(--cream)">
-            <div class="eyebrow" style="color:rgba(240,208,96,.7)">Der Abend Â· The Evening</div>
-            <div class="script" style="color:var(--gold-light)">18. Juli</div>
-            <div style="font-family:'Playfair Display',serif; font-size:52px; font-weight:900; line-height:1; color:#fff">2026</div>
-            <div class="divider" style="background:var(--gold); width:70px; height:2px;"></div>
-            <div style="font-family:'Playfair Display',serif; font-size:30px; letter-spacing:3px; font-weight:700">
-              20:00 â€“ 00:00
-            </div>
-            <p class="body-text" style="font-size:14px; opacity:.85">
-              Musik Â· Lachen Â· Sommerabend<br/>
-              <span style="font-size:12.5px; opacity:.7">Music Â· Laughter Â· Summer Evening</span>
-            </p>
-            <div class="emoji-row">ðŸŽ¶ ðŸŒ… ðŸ¥‚</div>
-            <span class="tap">â†“ tap to continue</span>
-          </div>
-        `
-      },
-      /* 3 â€” The Place */
-      {
-        cls: 's4',
-        html: `
-          <div class="inner" style="color:#fff">
-            <div class="eyebrow" style="color:#7CFC00">ðŸ“ Der Ort Â· The Place</div>
-            <div class="title" style="color:#fff; font-size:26px; line-height:1.15">
+            <img src="./assets/logo-oficial.png" alt="Sunbite" style="width:52px; height:52px; border-radius:8px; object-fit:cover;"/>
+            <div class="eyebrow" style="color:#7A1010">Persönliche Einladung</div>
+            <div class="orn" style="color:#7A1010"><div class="orn-line"></div><div class="orn-gem">◆</div><div class="orn-line"></div></div>
+            <div class="script" style="color:#7A1010; font-size:30px">18. Juli 2026</div>
+            <div style="font-family:'Playfair Display',serif; font-size:21px; font-weight:700; color:#7A1010; letter-spacing:2px">20:00 — 00:00</div>
+            <div class="orn" style="color:#7A1010"><div class="orn-line"></div><div class="orn-gem">◆</div><div class="orn-line"></div></div>
+            <div style="font-family:'Playfair Display',serif; font-size:17px; font-weight:700; color:var(--ink); line-height:1.35">
               Am Aareufer<br/>
-              <span style="font-size:16px; font-weight:400; font-style:italic; opacity:.75">Aare River Â· Aarau, Schweiz</span>
+              <span style="font-size:13px; font-weight:400; font-style:italic; color:#7A1010bb">Aarau, Schweiz</span>
             </div>
-            <div class="divider" style="background:#52C47E; opacity:.5"></div>
-            <p class="body-text" style="font-size:13.5px; opacity:.85">
-              Wir treffen uns am Ufer der Aare fÃ¼r einen unvergesslichen Sommerabend.<br/>
-              <span style="font-size:12px; opacity:.7">We're meeting at the banks of the Aare for an unforgettable summer evening.</span>
-            </p>
-            <div style="display:flex; flex-direction:column; gap:9px; width:100%;">
-              <a href="#" class="btn btn-maps" onclick="event.stopPropagation(); alert('Google Maps â€” em breve! / Coming soon!')">
-                ðŸ—ºï¸ &nbsp;Google Maps
-              </a>
-              <button class="btn btn-360" onclick="event.stopPropagation(); alert('Tour 360Â° â€” em breve! / Coming soon!')">
-                ðŸŒ &nbsp;360Â° View
-              </button>
+            <p class="body-text" style="font-size:12.5px; color:#7A1010cc">Musik · Lachen · Sommerabend</p>
+            <div style="display:flex; flex-direction:column; gap:8px; width:100%;">
+              <a href="#" class="btn btn-maps" onclick="event.stopPropagation()">🗺️ &nbsp;Google Maps</a>
+              <button class="btn btn-360" onclick="event.stopPropagation()">🌐 &nbsp;360° Ansicht</button>
             </div>
-            <span class="tap" style="color:rgba(255,255,255,.35)">â†“ tap to continue</span>
+            <span class="tap" style="color:rgba(122,16,16,.32)">↓ tippe um fortzufahren</span>
           </div>
-        `
-      },
-      /* 4 â€” Sunbite reveal */
-      {
-        cls: 's5',
-        html: `
+        `,
+        en: `
           <div class="inner">
-            <div class="eyebrow" style="color:#841412">Das Projekt Â· The Project</div>
-            <img src="./assets/strawberry-cup.png" class="prod-img" alt="Sunbite Cup"/>
-            <img src="./assets/logo-wordmark-tight.png" class="wordmark-dark" alt="Sunbite"/>
-            <div class="divider" style="background:#841412"></div>
-            <p class="body-text" style="font-size:13px; color:#841412cc">
-              Frische Erdbeer-Schokoladen-Cups<br/>
-              & Hausgemachte Limonade<br/>
-              <br/>
-              <span style="font-size:12px">Fresh Strawberry Chocolate Cups<br/>& Homemade Lemonade</span>
-            </p>
-            <div class="emoji-row">ðŸ“ ðŸ« ðŸ‹</div>
-            <span class="tap" style="color:rgba(132,20,18,.4)">â†“ last card Â· letzte Karte</span>
+            <img src="./assets/logo-oficial.png" alt="Sunbite" style="width:52px; height:52px; border-radius:8px; object-fit:cover;"/>
+            <div class="eyebrow" style="color:#7A1010">Personal Invitation</div>
+            <div class="orn" style="color:#7A1010"><div class="orn-line"></div><div class="orn-gem">◆</div><div class="orn-line"></div></div>
+            <div class="script" style="color:#7A1010; font-size:28px">July 18, 2026</div>
+            <div style="font-family:'Playfair Display',serif; font-size:21px; font-weight:700; color:#7A1010; letter-spacing:2px">8:00 pm — Midnight</div>
+            <div class="orn" style="color:#7A1010"><div class="orn-line"></div><div class="orn-gem">◆</div><div class="orn-line"></div></div>
+            <div style="font-family:'Playfair Display',serif; font-size:17px; font-weight:700; color:var(--ink); line-height:1.35">
+              Aare Riverside<br/>
+              <span style="font-size:13px; font-weight:400; font-style:italic; color:#7A1010bb">Aarau, Switzerland</span>
+            </div>
+            <p class="body-text" style="font-size:12.5px; color:#7A1010cc">Music · Laughter · Summer Evening</p>
+            <div style="display:flex; flex-direction:column; gap:8px; width:100%;">
+              <a href="#" class="btn btn-maps" onclick="event.stopPropagation()">🗺️ &nbsp;Google Maps</a>
+              <button class="btn btn-360" onclick="event.stopPropagation()">🌐 &nbsp;360° View</button>
+            </div>
+            <span class="tap" style="color:rgba(122,16,16,.32)">↓ tap to continue</span>
           </div>
         `
       },
-      /* 5 â€” See You There */
+
+      /* Card 3 — Das Projekt / The Project */
       {
-        cls: 's6',
-        html: `
-          <div class="inner" style="color:#fff">
-            <div class="eyebrow" style="color:rgba(240,208,96,.85)">âœ¦ Bis bald &nbsp;Â·&nbsp; See You There âœ¦</div>
-            <div class="script" style="color:#fff; font-size:36px">Wir sehen uns!</div>
-            <div class="divider" style="background:var(--gold-light); width:70px"></div>
-            <p class="body-text" style="font-size:13.5px; color:rgba(255,255,255,.9)">
-              18. Juli 2026 &nbsp;Â·&nbsp; 20:00 â€“ 00:00<br/>
-              Am Aareufer, Aarau<br/>
-              <br/>
-              <em style="opacity:.8; font-size:12.5px">We can't wait to share this moment with you.</em>
+        cls: 'c3',
+        de: `
+          <div class="inner" style="color:var(--cream)">
+            <div class="eyebrow" style="color:rgba(240,208,96,.62)">Das Projekt</div>
+            <img src="./assets/strawberry-cup.png" class="prod-img" alt="Sunbite Cup"/>
+            <img src="./assets/logo-wordmark-tight.png" class="logo-light" alt="Sunbite"/>
+            <div class="orn" style="color:var(--gold)"><div class="orn-line"></div><div class="orn-gem">◆</div><div class="orn-line"></div></div>
+            <p class="body-text" style="font-family:'Playfair Display',serif; font-style:italic; font-size:14.5px; line-height:1.55">
+              Frische Erdbeer-<br/>Schokoladen-Cups<br/>
+              <span style="font-size:12.5px; color:rgba(240,208,96,.68)">& Hausgemachte Limonade</span>
             </p>
-            <div class="emoji-row">ðŸŽ‰ ðŸŒŸ ðŸ“</div>
+            <div class="emoji-row">🍓 🍫 🍋</div>
+            <span class="tap" style="color:rgba(240,208,96,.32)">↓ letzte Karte</span>
+          </div>
+        `,
+        en: `
+          <div class="inner" style="color:var(--cream)">
+            <div class="eyebrow" style="color:rgba(240,208,96,.62)">The Project</div>
+            <img src="./assets/strawberry-cup.png" class="prod-img" alt="Sunbite Cup"/>
+            <img src="./assets/logo-wordmark-tight.png" class="logo-light" alt="Sunbite"/>
+            <div class="orn" style="color:var(--gold)"><div class="orn-line"></div><div class="orn-gem">◆</div><div class="orn-line"></div></div>
+            <p class="body-text" style="font-family:'Playfair Display',serif; font-style:italic; font-size:14.5px; line-height:1.55">
+              Fresh Strawberry<br/>Chocolate Cups<br/>
+              <span style="font-size:12.5px; color:rgba(240,208,96,.68)">& Homemade Lemonade</span>
+            </p>
+            <div class="emoji-row">🍓 🍫 🍋</div>
+            <span class="tap" style="color:rgba(240,208,96,.32)">↓ last card</span>
+          </div>
+        `
+      },
+
+      /* Card 4 — Bis bald / See You There */
+      {
+        cls: 'c4',
+        de: `
+          <div class="inner" style="color:#fff">
+            <div class="eyebrow" style="color:rgba(240,208,96,.78)">✦ Bis bald ✦</div>
+            <div class="script" style="color:#fff; font-size:32px">Wir sehen uns!</div>
+            <div class="orn" style="color:var(--gold-light)"><div class="orn-line"></div><div class="orn-gem">◆</div><div class="orn-line"></div></div>
+            <p class="body-text" style="font-size:13px; font-family:'Playfair Display',serif; line-height:1.6">
+              18. Juli 2026 &nbsp;·&nbsp; 20:00 — 00:00<br/>
+              Am Aareufer, Aarau
+            </p>
             <div class="qr-box">
-              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                <rect x="2" y="2" width="16" height="16" rx="2" stroke="#444" stroke-width="2" fill="none"/>
-                <rect x="6" y="6" width="8" height="8" fill="#444"/>
-                <rect x="22" y="2" width="16" height="16" rx="2" stroke="#444" stroke-width="2" fill="none"/>
-                <rect x="26" y="6" width="8" height="8" fill="#444"/>
-                <rect x="2" y="22" width="16" height="16" rx="2" stroke="#444" stroke-width="2" fill="none"/>
-                <rect x="6" y="26" width="8" height="8" fill="#444"/>
+              <svg width="36" height="36" viewBox="0 0 40 40" fill="none">
+                <rect x="2"  y="2"  width="16" height="16" rx="2" stroke="#444" stroke-width="2" fill="none"/>
+                <rect x="6"  y="6"  width="8"  height="8"  fill="#444"/>
+                <rect x="22" y="2"  width="16" height="16" rx="2" stroke="#444" stroke-width="2" fill="none"/>
+                <rect x="26" y="6"  width="8"  height="8"  fill="#444"/>
+                <rect x="2"  y="22" width="16" height="16" rx="2" stroke="#444" stroke-width="2" fill="none"/>
+                <rect x="6"  y="26" width="8"  height="8"  fill="#444"/>
                 <rect x="22" y="22" width="4" height="4" fill="#444"/>
                 <rect x="28" y="22" width="4" height="4" fill="#444"/>
                 <rect x="34" y="22" width="4" height="4" fill="#444"/>
@@ -595,9 +618,40 @@
                 <rect x="28" y="32" width="4" height="4" fill="#444"/>
                 <rect x="34" y="28" width="4" height="4" fill="#444"/>
               </svg>
-              <span>QR Code<br/><span style="opacity:.5; font-size:9px">a adicionar</span></span>
+              <span>sunbite.ch<br/><span style="opacity:.4; font-size:8px">QR em breve</span></span>
             </div>
-            <div style="font-size:11px; color:rgba(255,255,255,.4); letter-spacing:1.5px">sunbite.ch</div>
+            <div style="font-size:10px; color:rgba(255,255,255,.32); letter-spacing:2.5px">sunbite.ch</div>
+            <button class="btn btn-restart" onclick="event.stopPropagation(); restartExp()">↩ Von vorne beginnen</button>
+          </div>
+        `,
+        en: `
+          <div class="inner" style="color:#fff">
+            <div class="eyebrow" style="color:rgba(240,208,96,.78)">✦ See You There ✦</div>
+            <div class="script" style="color:#fff; font-size:32px">Can't wait!</div>
+            <div class="orn" style="color:var(--gold-light)"><div class="orn-line"></div><div class="orn-gem">◆</div><div class="orn-line"></div></div>
+            <p class="body-text" style="font-size:13px; font-family:'Playfair Display',serif; line-height:1.6">
+              July 18, 2026 &nbsp;·&nbsp; 8 pm — Midnight<br/>
+              Aare Riverside, Aarau
+            </p>
+            <div class="qr-box">
+              <svg width="36" height="36" viewBox="0 0 40 40" fill="none">
+                <rect x="2"  y="2"  width="16" height="16" rx="2" stroke="#444" stroke-width="2" fill="none"/>
+                <rect x="6"  y="6"  width="8"  height="8"  fill="#444"/>
+                <rect x="22" y="2"  width="16" height="16" rx="2" stroke="#444" stroke-width="2" fill="none"/>
+                <rect x="26" y="6"  width="8"  height="8"  fill="#444"/>
+                <rect x="2"  y="22" width="16" height="16" rx="2" stroke="#444" stroke-width="2" fill="none"/>
+                <rect x="6"  y="26" width="8"  height="8"  fill="#444"/>
+                <rect x="22" y="22" width="4" height="4" fill="#444"/>
+                <rect x="28" y="22" width="4" height="4" fill="#444"/>
+                <rect x="34" y="22" width="4" height="4" fill="#444"/>
+                <rect x="22" y="28" width="4" height="4" fill="#444"/>
+                <rect x="28" y="32" width="4" height="4" fill="#444"/>
+                <rect x="34" y="28" width="4" height="4" fill="#444"/>
+              </svg>
+              <span>sunbite.ch<br/><span style="opacity:.4; font-size:8px">QR coming soon</span></span>
+            </div>
+            <div style="font-size:10px; color:rgba(255,255,255,.32); letter-spacing:2.5px">sunbite.ch</div>
+            <button class="btn btn-restart" onclick="event.stopPropagation(); restartExp()">↩ Start Over</button>
           </div>
         `
       }
@@ -607,7 +661,7 @@
     let step  = 0;
     let phase = 'down'; // 'down' | 'up' | 'anim'
 
-    /* â”€â”€ build dots â”€â”€ */
+    /* ─── Build dots ─── */
     const dotsEl = document.getElementById('dots');
     for (let i = 0; i < TOTAL; i++) {
       const d = document.createElement('div');
@@ -616,54 +670,50 @@
       dotsEl.appendChild(d);
     }
 
-    /* â”€â”€ scatter stars on tarot face â”€â”€ */
-    const sf = document.getElementById('starField');
-    const GLYPHS = ['â˜…','âœ¦','Â·','âœ§','â•'];
-    for (let i = 0; i < 22; i++) {
-      const s = document.createElement('span');
-      s.className = 's';
-      s.textContent = GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
-      s.style.top  = Math.random() * 100 + '%';
-      s.style.left = Math.random() * 100 + '%';
-      s.style.fontSize = (7 + Math.random() * 13) + 'px';
-      s.style.animationDelay = Math.random() * 2.5 + 's';
-      sf.appendChild(s);
-    }
-
-    /* â”€â”€ floating particles â”€â”€ */
+    /* ─── Floating particles ─── */
     const fx = document.getElementById('fx');
-    const COLORS = ['#D4AF37','#841412','#F5E6C8','#E85D30','#F0D060','#fff'];
-    for (let i = 0; i < 22; i++) {
+    const COLORS = ['#D4AF37','#8B1A1A','#F5E6C8','#C04A30','#F0D060','#fff'];
+    for (let i = 0; i < 18; i++) {
       const p = document.createElement('div');
       p.className = 'particle';
       p.style.left = Math.random() * 100 + 'vw';
-      p.style.width = p.style.height = (2 + Math.random() * 4) + 'px';
+      p.style.width = p.style.height = (2 + Math.random() * 3.5) + 'px';
       p.style.background = COLORS[Math.floor(Math.random() * COLORS.length)];
-      p.style.animationDuration = (7 + Math.random() * 9) + 's';
+      p.style.animationDuration = (8 + Math.random() * 8) + 's';
       p.style.animationDelay    = (Math.random() * 10) + 's';
       fx.appendChild(p);
     }
 
-    /* â”€â”€ load step content â”€â”€ */
+    /* ─── Load step ─── */
     function loadStep(n) {
       const back = document.getElementById('back');
       back.className = 'back ' + steps[n].cls;
-      back.innerHTML  = steps[n].html;
+      back.innerHTML = steps[n][lang] || steps[n].de;
     }
 
     loadStep(0);
 
-    /* â”€â”€ update dots â”€â”€ */
+    /* ─── Refresh dots ─── */
     function refreshDots() {
       for (let i = 0; i < TOTAL; i++) {
         const d = document.getElementById('dot' + i);
-        if (i < step) d.className = 'dot done';
+        if (i < step)       d.className = 'dot done';
         else if (i === step) d.className = 'dot active';
-        else d.className = 'dot';
+        else                 d.className = 'dot';
       }
     }
 
-    /* â”€â”€ main click handler â”€â”€ */
+    /* ─── Restart ─── */
+    function restartExp() {
+      step  = 0;
+      phase = 'down';
+      const card = document.getElementById('card');
+      card.classList.remove('flipped', 'flyoff');
+      refreshDots();
+      loadStep(0);
+    }
+
+    /* ─── Main click handler ─── */
     function handleClick() {
       if (phase === 'anim') return;
       const card = document.getElementById('card');
@@ -675,10 +725,9 @@
       }
 
       if (phase === 'up') {
-        if (step === TOTAL - 1) return; // done â€” no more cards
+        if (step === TOTAL - 1) return; // last card — use restart button
         phase = 'anim';
         card.classList.add('flyoff');
-
         setTimeout(() => {
           step++;
           refreshDots();
@@ -693,4 +742,3 @@
   </script>
 </body>
 </html>
-
