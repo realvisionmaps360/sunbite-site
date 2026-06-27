@@ -7,6 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Plus+Jakarta+Sans:wght@400;600;700&family=Pacifico&display=swap" rel="stylesheet" />
+  <!-- Motion.js v11 UMD — vanilla JS animation library (skill: motion-framer) -->
+  <script src="https://cdn.jsdelivr.net/npm/motion@11/dist/motion.min.js" crossorigin></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -214,11 +216,13 @@
       letter-spacing: 10px;
     }
 
+    /* Logo: contain so full wordmark is visible, no cropping */
     .face-logo {
       width: 130px;
       height: 130px;
       border-radius: 50%;
-      object-fit: cover;
+      object-fit: contain;
+      background: #6B1515;
       border: 2px solid rgba(212,175,55,0.6);
       box-shadow: 0 0 28px rgba(212,175,55,0.35), 0 0 60px rgba(212,175,55,0.1);
     }
@@ -349,7 +353,7 @@
       width: 100%;
       justify-content: center;
     }
-    .btn:active { transform: scale(0.96) !important; }
+    .btn:active { transform: scale(0.95) !important; }
 
     .btn-maps {
       background: #34A853;
@@ -376,7 +380,7 @@
 
     /* Product image */
     .prod-img {
-      width: 92px; height: 92px;
+      width: 88px; height: 88px;
       border-radius: 50%;
       object-fit: cover;
       border: 3px solid var(--berry);
@@ -410,6 +414,27 @@
     /* Emoji row */
     .emoji-row { font-size: 20px; letter-spacing: 8px; }
 
+    /* Price badge — card 3 */
+    .price-badge {
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--gold-light);
+      letter-spacing: 0.5px;
+      border: 1px solid rgba(240,208,96,0.35);
+      border-radius: 6px;
+      padding: 4px 12px;
+      background: rgba(0,0,0,0.2);
+    }
+
+    /* Reduced motion: disable all JS-driven animations */
+    @media (prefers-reduced-motion: reduce) {
+      .particle { display: none; }
+      .shimmer-wrap::after { display: none; }
+      .face { animation: none !important; }
+      .card { transition: none !important; }
+    }
+
   </style>
 </head>
 <body>
@@ -418,7 +443,7 @@
   <div id="fx"></div>
 
   <!-- Language Toggle -->
-  <div class="lang-toggle">
+  <div class="lang-toggle" id="langToggle">
     <button class="btn-lang active" data-lang="de" onclick="setLang('de')">DE</button>
     <span class="lang-sep">|</span>
     <button class="btn-lang" data-lang="en" onclick="setLang('en')">EN</button>
@@ -439,7 +464,8 @@
         <div class="face shimmer-wrap">
           <div class="face-content">
             <div class="face-orn">✦ &nbsp; ✦ &nbsp; ✦</div>
-            <img src="./assets/logo-oficial.png" alt="Sunbite" class="face-logo" />
+            <!-- absolute path — works on /invitation without trailing slash -->
+            <img src="/invitation/assets/logo-oficial.png" alt="Sunbite" class="face-logo" />
             <div class="face-divider"></div>
             <div class="face-date">Grand Opening &nbsp;·&nbsp; 18. Juli 2026</div>
             <div class="face-orn">✦ &nbsp; ✦ &nbsp; ✦</div>
@@ -455,12 +481,41 @@
   </div>
 
   <script>
+    /* ─── Reduced motion guard (skill: motion-framer — accessibility) ─── */
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const M = window.Motion || null; // graceful fallback if CDN fails
+
+    /* ─── Motion helpers (motion-framer skill patterns) ─── */
+    function motionEntranceCard() {
+      if (prefersReduced || !M) return;
+      M.animate('#card', { scale: [0.88, 1], opacity: [0, 1] }, {
+        duration: 0.65,
+        easing: M.spring({ stiffness: 180, damping: 18 })
+      });
+    }
+
+    function motionStaggerContent(container) {
+      if (prefersReduced || !M) return;
+      const els = container.querySelectorAll('.inner > *');
+      if (!els.length) return;
+      M.animate(els, { opacity: [0, 1], y: [12, 0] }, {
+        delay: M.stagger(0.055),
+        duration: 0.30,
+        easing: 'ease-out'
+      });
+    }
+
+    function motionLangBounce(el) {
+      if (prefersReduced || !M) return;
+      M.animate(el, { scale: [1, 1.18, 0.95, 1] }, { duration: 0.32, easing: 'ease-out' });
+    }
+
     /* ─── Language ─── */
     let lang = 'de';
 
     const i18n = {
-      topHint:   { de: '✦ Tippe zum Enthüllen',  en: '✦ Tap to Reveal' },
-      faceHint:  { de: 'Tippe um zu öffnen',      en: 'Tap to open'      },
+      topHint:  { de: '✦ Tippe zum Enthüllen', en: '✦ Tap to Reveal' },
+      faceHint: { de: 'Tippe um zu öffnen',    en: 'Tap to open'      },
     };
 
     function setLang(l) {
@@ -470,6 +525,7 @@
       });
       document.getElementById('topHint').textContent  = i18n.topHint[l];
       document.getElementById('faceHint').textContent = i18n.faceHint[l];
+      motionLangBounce(document.getElementById('langToggle'));
       loadStep(step);
     }
 
@@ -518,7 +574,7 @@
         cls: 'c2',
         de: `
           <div class="inner">
-            <img src="./assets/logo-oficial.png" alt="Sunbite" style="width:52px; height:52px; border-radius:8px; object-fit:cover;"/>
+            <img src="/invitation/assets/logo-oficial.png" alt="Sunbite" style="width:52px; height:52px; border-radius:8px; object-fit:contain; background:#6B1515;"/>
             <div class="eyebrow" style="color:#7A1010">Persönliche Einladung</div>
             <div class="orn" style="color:#7A1010"><div class="orn-line"></div><div class="orn-gem">◆</div><div class="orn-line"></div></div>
             <div class="script" style="color:#7A1010; font-size:30px">18. Juli 2026</div>
@@ -538,7 +594,7 @@
         `,
         en: `
           <div class="inner">
-            <img src="./assets/logo-oficial.png" alt="Sunbite" style="width:52px; height:52px; border-radius:8px; object-fit:cover;"/>
+            <img src="/invitation/assets/logo-oficial.png" alt="Sunbite" style="width:52px; height:52px; border-radius:8px; object-fit:contain; background:#6B1515;"/>
             <div class="eyebrow" style="color:#7A1010">Personal Invitation</div>
             <div class="orn" style="color:#7A1010"><div class="orn-line"></div><div class="orn-gem">◆</div><div class="orn-line"></div></div>
             <div class="script" style="color:#7A1010; font-size:28px">July 18, 2026</div>
@@ -564,13 +620,14 @@
         de: `
           <div class="inner" style="color:var(--cream)">
             <div class="eyebrow" style="color:rgba(240,208,96,.62)">Das Projekt</div>
-            <img src="./assets/strawberry-cup.png" class="prod-img" alt="Sunbite Cup"/>
-            <img src="./assets/logo-wordmark-tight.png" class="logo-light" alt="Sunbite"/>
+            <img src="/invitation/assets/strawberry-cup.png" class="prod-img" alt="Sunbite Cup"/>
+            <img src="/invitation/assets/logo-wordmark-tight.png" class="logo-light" alt="Sunbite"/>
             <div class="orn" style="color:var(--gold)"><div class="orn-line"></div><div class="orn-gem">◆</div><div class="orn-line"></div></div>
-            <p class="body-text" style="font-family:'Playfair Display',serif; font-style:italic; font-size:14.5px; line-height:1.55">
-              Frische Erdbeer-<br/>Schokoladen-Cups<br/>
-              <span style="font-size:12.5px; color:rgba(240,208,96,.68)">& Hausgemachte Limonade</span>
+            <p class="body-text" style="font-family:'Playfair Display',serif; font-style:italic; font-size:13.5px; line-height:1.5">
+              Frische Erdbeer-Schokoladen-Cups<br/>
+              <span style="font-size:12px; color:rgba(240,208,96,.68)">& Hausgemachte Limonade</span>
             </p>
+            <div class="price-badge">Nur CHF 5.— am Eröffnungstag</div>
             <div class="emoji-row">🍓 🍫 🍋</div>
             <span class="tap" style="color:rgba(240,208,96,.32)">↓ letzte Karte</span>
           </div>
@@ -578,13 +635,14 @@
         en: `
           <div class="inner" style="color:var(--cream)">
             <div class="eyebrow" style="color:rgba(240,208,96,.62)">The Project</div>
-            <img src="./assets/strawberry-cup.png" class="prod-img" alt="Sunbite Cup"/>
-            <img src="./assets/logo-wordmark-tight.png" class="logo-light" alt="Sunbite"/>
+            <img src="/invitation/assets/strawberry-cup.png" class="prod-img" alt="Sunbite Cup"/>
+            <img src="/invitation/assets/logo-wordmark-tight.png" class="logo-light" alt="Sunbite"/>
             <div class="orn" style="color:var(--gold)"><div class="orn-line"></div><div class="orn-gem">◆</div><div class="orn-line"></div></div>
-            <p class="body-text" style="font-family:'Playfair Display',serif; font-style:italic; font-size:14.5px; line-height:1.55">
-              Fresh Strawberry<br/>Chocolate Cups<br/>
-              <span style="font-size:12.5px; color:rgba(240,208,96,.68)">& Homemade Lemonade</span>
+            <p class="body-text" style="font-family:'Playfair Display',serif; font-style:italic; font-size:13.5px; line-height:1.5">
+              Fresh Strawberry Chocolate Cups<br/>
+              <span style="font-size:12px; color:rgba(240,208,96,.68)">& Homemade Lemonade</span>
             </p>
+            <div class="price-badge">Only CHF 5.— on Opening Day</div>
             <div class="emoji-row">🍓 🍫 🍋</div>
             <span class="tap" style="color:rgba(240,208,96,.32)">↓ last card</span>
           </div>
@@ -671,17 +729,19 @@
     }
 
     /* ─── Floating particles ─── */
-    const fx = document.getElementById('fx');
-    const COLORS = ['#D4AF37','#8B1A1A','#F5E6C8','#C04A30','#F0D060','#fff'];
-    for (let i = 0; i < 18; i++) {
-      const p = document.createElement('div');
-      p.className = 'particle';
-      p.style.left = Math.random() * 100 + 'vw';
-      p.style.width = p.style.height = (2 + Math.random() * 3.5) + 'px';
-      p.style.background = COLORS[Math.floor(Math.random() * COLORS.length)];
-      p.style.animationDuration = (8 + Math.random() * 8) + 's';
-      p.style.animationDelay    = (Math.random() * 10) + 's';
-      fx.appendChild(p);
+    if (!prefersReduced) {
+      const fx = document.getElementById('fx');
+      const COLORS = ['#D4AF37','#8B1A1A','#F5E6C8','#C04A30','#F0D060','#fff'];
+      for (let i = 0; i < 18; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        p.style.left = Math.random() * 100 + 'vw';
+        p.style.width = p.style.height = (2 + Math.random() * 3.5) + 'px';
+        p.style.background = COLORS[Math.floor(Math.random() * COLORS.length)];
+        p.style.animationDuration = (8 + Math.random() * 8) + 's';
+        p.style.animationDelay    = (Math.random() * 10) + 's';
+        fx.appendChild(p);
+      }
     }
 
     /* ─── Load step ─── */
@@ -689,6 +749,8 @@
       const back = document.getElementById('back');
       back.className = 'back ' + steps[n].cls;
       back.innerHTML = steps[n][lang] || steps[n].de;
+      // Stagger content in (motion-framer skill: stagger pattern)
+      setTimeout(() => motionStaggerContent(back), 60);
     }
 
     loadStep(0);
@@ -697,9 +759,9 @@
     function refreshDots() {
       for (let i = 0; i < TOTAL; i++) {
         const d = document.getElementById('dot' + i);
-        if (i < step)       d.className = 'dot done';
-        else if (i === step) d.className = 'dot active';
-        else                 d.className = 'dot';
+        if (i < step)        d.className = 'dot done';
+        else if (i === step)  d.className = 'dot active';
+        else                  d.className = 'dot';
       }
     }
 
@@ -721,6 +783,8 @@
       if (phase === 'down') {
         card.classList.add('flipped');
         phase = 'up';
+        // Stagger content once flip is halfway (motion-framer: entrance pattern)
+        setTimeout(() => motionStaggerContent(document.getElementById('back')), 480);
         return;
       }
 
@@ -739,6 +803,11 @@
     }
 
     refreshDots();
+
+    /* ─── Card entrance on load (motion-framer: spring entrance) ─── */
+    window.addEventListener('load', () => {
+      motionEntranceCard();
+    });
   </script>
 </body>
 </html>
