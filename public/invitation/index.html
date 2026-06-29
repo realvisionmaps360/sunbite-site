@@ -435,6 +435,61 @@
       .card { transition: none !important; }
     }
 
+    /* ── Mobile fullscreen ── */
+    @media (max-width: 500px) {
+      body {
+        padding: 0;
+        justify-content: flex-start;
+        align-items: stretch;
+        gap: 0;
+      }
+      .top-hint {
+        padding-top: 10px;
+        margin-bottom: 8px;
+      }
+      .dots {
+        margin-bottom: 8px;
+      }
+      .scene {
+        width: 100%;
+        max-width: 100%;
+        flex: 1;
+      }
+      .deck {
+        height: 100%;
+      }
+      .card {
+        padding-bottom: 0;
+        height: 100%;
+        border-radius: 12px 12px 0 0;
+      }
+      .deck::before,
+      .deck::after {
+        display: none;
+      }
+      .face,
+      .back {
+        border-radius: 12px 12px 0 0;
+      }
+      /* Toggle maior e fácil de tocar */
+      .lang-toggle {
+        top: 12px;
+        right: 12px;
+        padding: 8px 16px;
+        gap: 6px;
+      }
+      .btn-lang {
+        font-size: 13px;
+        padding: 3px 6px;
+        min-height: 32px;
+        display: flex;
+        align-items: center;
+      }
+      .lang-sep {
+        font-size: 14px;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -776,6 +831,7 @@
       phase = 'down';
       const card = document.getElementById('card');
       card.classList.remove('flipped', 'flyoff');
+      card.style.opacity = '1';
       refreshDots();
       loadStep(0);
     }
@@ -801,8 +857,13 @@
           step++;
           refreshDots();
           loadStep(step);
-          card.classList.remove('flipped', 'flyoff');
-          phase = 'down';
+          card.classList.remove('flyoff'); // mantém 'flipped' → back já visível
+          if (M && !prefersReduced) {
+            M.animate(card, { opacity: [0, 1], scale: [0.92, 1] }, { duration: 0.35, easing: 'ease-out' });
+          } else {
+            card.style.opacity = '1';
+          }
+          phase = 'up'; // já com conteúdo visível, próximo toque avança direto
         }, 700);
       }
     }
