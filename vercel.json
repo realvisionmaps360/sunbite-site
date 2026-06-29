@@ -1,17 +1,15 @@
 {
-  "headers": [
-    {
-      "source": "/invitation(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "no-store, no-cache, must-revalidate" },
-        { "key": "CDN-Cache-Control", "value": "no-store" },
-        { "key": "Vercel-CDN-Cache-Control", "value": "no-store" }
-      ]
-    }
-  ],
   "routes": [
     { "src": "/invitation/assets/(.*)", "dest": "/invitation/assets/$1" },
-    { "src": "/invitation", "dest": "/invitation/index.html" },
+    {
+      "src": "/invitation/?",
+      "dest": "/invitation/index.html",
+      "headers": {
+        "Cache-Control": "no-store, no-cache, must-revalidate",
+        "CDN-Cache-Control": "no-store",
+        "Vercel-CDN-Cache-Control": "no-store"
+      }
+    },
     { "handle": "filesystem" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
