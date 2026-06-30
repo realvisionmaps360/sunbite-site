@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sunbite · Grand Opening</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;height:100%}
+body{background:#1c0f0a;font-family:'Spectral',Georgia,serif;color:#5a2a1e;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.stage{position:relative;width:100vw;height:100dvh;overflow:hidden;background:#F4E6C4;user-select:none}
+@media(min-width:480px){
+  body{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:18px}
+  .stage{width:418px;height:858px;max-height:95vh;border-radius:46px;box-shadow:0 50px 100px -24px rgba(0,0,0,.7),0 0 0 11px #160c08,0 0 0 13px #3a2218,inset 0 0 0 1px rgba(255,255,255,.04)}
+}
+.deck{position:relative;height:100%;display:flex;flex-direction:column;transition:transform 1.05s cubic-bezier(.62,.04,.16,1)}
+.panel{flex:0 0 100%;height:100%;position:relative;overflow:hidden;perspective:1500px}
+.panel-scroll{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column}
+.tilt{position:relative;flex:1;display:flex;flex-direction:column;transition:transform .5s cubic-bezier(.2,.7,.2,1);transform-style:preserve-3d;will-change:transform}
+/* entrance reveals */
+.rv{opacity:0;transform:translateY(20px);transition:opacity .8s cubic-bezier(.2,.75,.2,1),transform .8s cubic-bezier(.2,.75,.2,1)}
+.panel.active .rv{opacity:1;transform:none}
+.panel.active .rv.d1{transition-delay:.10s}
+.panel.active .rv.d2{transition-delay:.20s}
+.panel.active .rv.d3{transition-delay:.30s}
+.panel.active .rv.d4{transition-delay:.40s}
+.panel.active .rv.d5{transition-delay:.50s}
+.panel.active .rv.d6{transition-delay:.60s}
+.panel.active .rv.d7{transition-delay:.70s}
+/* css strawberry */
+.berry{position:absolute;width:30px;height:34px;will-change:transform;pointer-events:none}
+.berry .bd{position:absolute;inset:0;border-radius:46% 46% 48% 48%/36% 36% 66% 66%;
+  background-image:
+    radial-gradient(circle at 30% 40%,#f6ead0 0 1.1px,transparent 1.7px),
+    radial-gradient(circle at 56% 32%,#f6ead0 0 1.1px,transparent 1.7px),
+    radial-gradient(circle at 44% 60%,#f6ead0 0 1.1px,transparent 1.7px),
+    radial-gradient(circle at 70% 56%,#f6ead0 0 1.1px,transparent 1.7px),
+    radial-gradient(circle at 32% 72%,#f6ead0 0 1.1px,transparent 1.7px),
+    radial-gradient(circle at 62% 76%,#f6ead0 0 1.1px,transparent 1.7px),
+    radial-gradient(circle at 34% 30%,#db4129,#a81d1a 74%);
+  box-shadow:inset -3px -4px 6px rgba(110,20,20,.55),inset 3px 3px 5px rgba(255,205,170,.4)}
+.berry .lf{position:absolute;top:-6px;left:50%;width:21px;height:14px;transform:translateX(-50%);background:#7fa04a;
+  clip-path:polygon(50% 100%,10% 36%,27% 52%,40% 6%,50% 40%,60% 6%,73% 52%,90% 36%)}
+/* sparkle */
+.spark{position:absolute;width:8px;height:8px;pointer-events:none;
+  background:radial-gradient(circle,#fff 0 18%,#f2c84b 30% 42%,transparent 60%);
+  clip-path:polygon(50% 0,58% 42%,100% 50%,58% 58%,50% 100%,42% 58%,0 50%,42% 42%)}
+/* grain */
+.grain{position:absolute;inset:0;pointer-events:none;z-index:7;mix-blend-mode:soft-light;opacity:.07;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+/* scallop drip mask */
+.scallop{-webkit-mask:radial-gradient(12px at 12px 100%,#0000 96%,#000) 0 0/24px 100% repeat-x;mask:radial-gradient(12px at 12px 100%,#0000 96%,#000) 0 0/24px 100% repeat-x}
+/* buttons */
+.pbtn{cursor:pointer;border:none;font-family:'Fredoka',sans-serif;transition:transform .25s cubic-bezier(.2,.8,.3,1.4),box-shadow .25s,filter .2s}
+.pbtn:active{transform:scale(.96)}
+/* dotted leader */
+.lead{flex:1;border-bottom:1.5px dotted rgba(158,26,26,.4);margin:0 10px 5px}
+/* keyframes */
+@keyframes floatY{0%,100%{transform:translateY(0) rotate(var(--r,0deg))}50%{transform:translateY(-15px) rotate(calc(var(--r,0deg) + 7deg))}}
+@keyframes sunPulse{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:.85;transform:scale(1.05)}}
+@keyframes spinSlow{to{transform:rotate(360deg)}}
+@keyframes sparkleA{0%,100%{opacity:0;transform:scale(.3) rotate(0)}50%{opacity:.95;transform:scale(1) rotate(40deg)}}
+@keyframes hintPulse{0%,100%{transform:translateY(0);opacity:.9}50%{transform:translateY(5px);opacity:1}}
+@keyframes ringPulse{0%{transform:scale(.8);opacity:.7}100%{transform:scale(1.7);opacity:0}}
+@keyframes dripBob{0%,100%{transform:translateY(0) scaleY(1)}50%{transform:translateY(4px) scaleY(1.08)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){
+  .berry,.spark,.grain{animation:none !important}
+  .tilt{transition:none !important}
+}
+</style>
+</head>
+<body>
+
+<div class="stage" id="stage">
+
+  <div class="deck" id="deck">
+
+    <!-- ===== CARD 1 — THE GIFT ===== -->
+    <div class="panel active" id="panel-0" onclick="tapGift()" style="cursor:pointer">
+      <div class="panel-scroll" style="overflow:hidden">
+      <div class="tilt" id="tilt-0">
+        <div id="flipper" style="position:relative;flex:1;transform-style:preserve-3d;transition:transform 1.05s cubic-bezier(.6,.02,.2,1);transform:rotateY(0.001deg) translateZ(0)">
+
+          <!-- BACK: vintage red packaging -->
+          <div style="position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:radial-gradient(130% 100% at 50% 8%,#b22420 0%,#9e1a1a 46%,#7c1414 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:54px 30px;overflow:hidden">
+            <div style="position:absolute;top:-30%;left:50%;width:520px;height:520px;transform:translateX(-50%);opacity:.16;background:repeating-conic-gradient(from 0deg,#f4e6c4 0deg 7deg,transparent 7deg 14deg);border-radius:50%;animation:spinSlow 90s linear infinite"></div>
+            <div style="position:absolute;top:60px;left:50%;width:260px;height:260px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(244,230,196,.34),transparent 62%);animation:sunPulse 6s ease-in-out infinite"></div>
+            <div class="scallop" style="position:absolute;top:0;left:0;right:0;height:40px;background:linear-gradient(#3a1c12,#4a2418)"></div>
+            <div style="position:absolute;top:38px;left:24%;width:13px;height:22px;background:#46210f;border-radius:50% 50% 50% 50%/58% 58% 42% 42%;animation:dripBob 4s ease-in-out infinite"></div>
+            <div style="position:absolute;top:38px;left:62%;width:11px;height:30px;background:#46210f;border-radius:50% 50% 50% 50%/58% 58% 42% 42%;animation:dripBob 5s ease-in-out .6s infinite"></div>
+            <div style="position:absolute;inset:20px;border:2px solid rgba(244,230,196,.5);border-radius:30px;pointer-events:none"></div>
+            <div style="position:absolute;inset:27px;border:1px solid rgba(244,230,196,.28);border-radius:24px;pointer-events:none"></div>
+            <div class="spark" style="top:24%;left:20%;animation:sparkleA 3.4s ease-in-out infinite"></div>
+            <div class="spark" style="top:30%;right:18%;width:11px;height:11px;animation:sparkleA 4s ease-in-out .8s infinite"></div>
+            <div class="spark" style="bottom:30%;left:24%;width:6px;height:6px;animation:sparkleA 3s ease-in-out 1.4s infinite"></div>
+            <div class="berry" style="top:21%;right:24%;--r:14deg;animation:floatY 7s ease-in-out infinite;opacity:.92"><div class="bd"></div><div class="lf"></div></div>
+            <div class="berry" style="bottom:23%;left:20%;--r:-12deg;width:24px;height:27px;animation:floatY 8s ease-in-out 1s infinite;opacity:.85"><div class="bd"></div><div class="lf"></div></div>
+            <div style="position:relative;text-align:center;display:flex;flex-direction:column;align-items:center;gap:18px;z-index:2">
+              <div style="font-family:'Fredoka';font-weight:500;letter-spacing:.42em;font-size:11px;color:rgba(244,230,196,.78);padding-left:.42em">A LITTLE GIFT FOR YOU</div>
+              <img src="assets/sunbite-wordmark.png" alt="Sunbite.ch" style="width:248px;max-width:74%;filter:drop-shadow(0 6px 14px rgba(0,0,0,.4))">
+              <div style="display:flex;align-items:center;gap:11px;color:rgba(244,230,196,.72);font-family:'Fredoka';font-weight:500;letter-spacing:.32em;font-size:10.5px">
+                <span style="width:26px;height:1px;background:rgba(244,230,196,.5)"></span>EST. 2026 · AARAU<span style="width:26px;height:1px;background:rgba(244,230,196,.5)"></span>
+              </div>
+            </div>
+            <div style="position:absolute;bottom:46px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:12px;z-index:2">
+              <div style="position:relative;width:50px;height:50px;display:flex;align-items:center;justify-content:center">
+                <span style="position:absolute;inset:0;border:1.5px solid rgba(244,230,196,.6);border-radius:50%;animation:ringPulse 2.2s ease-out infinite"></span>
+                <span style="width:34px;height:34px;border-radius:50%;background:rgba(244,230,196,.16);border:1.5px solid rgba(244,230,196,.7);display:flex;align-items:center;justify-content:center;font-size:17px">☝︎</span>
+              </div>
+              <div style="font-family:'Fredoka';font-weight:500;letter-spacing:.28em;font-size:11px;color:rgba(244,230,196,.85)">TAP TO OPEN</div>
+            </div>
+          </div>
+
+          <!-- FRONT: welcome message -->
+          <div style="position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:rotateY(180deg);background:radial-gradient(120% 90% at 50% 0%,#fbf3de,#f1e1ba);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px 36px;text-align:center;overflow:hidden">
+            <div style="position:absolute;top:-60px;right:-50px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(242,200,75,.4),transparent 65%);animation:sunPulse 7s ease-in-out infinite"></div>
+            <div class="berry" style="top:13%;left:16%;--r:-10deg;width:26px;height:30px;animation:floatY 8s ease-in-out infinite;opacity:.5"><div class="bd"></div><div class="lf"></div></div>
+            <div class="spark" style="top:18%;right:22%;animation:sparkleA 3.6s ease-in-out infinite"></div>
+            <div style="font-family:'Fredoka';font-weight:600;font-size:34px;color:#9e1a1a;line-height:1;margin-bottom:26px">Welcome <span style="font-size:30px">☀️</span></div>
+            <p style="font-family:'Spectral';font-size:18.5px;line-height:1.62;color:#6a3326;margin:0 0 22px;max-width:300px">I've been keeping a little secret…<br>After months of work…<br>I'm finally ready to share it with you.</p>
+            <div style="width:42px;height:2px;background:#c9683e;border-radius:2px;margin:4px 0 22px"></div>
+            <p style="font-family:'Spectral';font-style:italic;font-size:16.5px;line-height:1.6;color:#8a4733;margin:0;max-width:280px">I would love for you to be part of the very beginning of this adventure.</p>
+            <div style="position:absolute;bottom:42px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:7px;animation:hintPulse 2s ease-in-out infinite">
+              <div style="font-family:'Fredoka';font-weight:500;letter-spacing:.26em;font-size:11px;color:#b5563a">TAP TO CONTINUE</div>
+              <div style="font-size:15px;color:#c9683e">⌄</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- ===== CARD 2 — THE REVEAL ===== -->
+    <div class="panel" id="panel-1" style="background:radial-gradient(130% 100% at 50% 0%,#b42420,#9e1a1a 50%,#7c1414)">
+      <div class="panel-scroll">
+      <div class="tilt" id="tilt-1" style="padding:74px 30px 34px;align-items:center;text-align:center;justify-content:flex-start;gap:0">
+        <div style="position:absolute;top:-40px;left:50%;width:240px;height:240px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(244,230,196,.22),transparent 64%);animation:sunPulse 7s ease-in-out infinite;pointer-events:none"></div>
+        <div class="scallop" style="position:absolute;top:0;left:0;right:0;height:34px;background:linear-gradient(#3a1c12,#4a2418);pointer-events:none"></div>
+        <div class="berry" style="top:16%;right:14%;--r:16deg;animation:floatY 7.5s ease-in-out infinite;opacity:.9"><div class="bd"></div><div class="lf"></div></div>
+        <div class="berry" style="bottom:12%;left:12%;--r:-14deg;width:25px;height:28px;animation:floatY 8.5s ease-in-out 1.2s infinite;opacity:.82"><div class="bd"></div><div class="lf"></div></div>
+        <div class="spark" style="top:30%;left:18%;animation:sparkleA 3.4s ease-in-out infinite"></div>
+        <div class="spark" style="top:46%;right:16%;width:11px;height:11px;animation:sparkleA 4.2s ease-in-out 1s infinite"></div>
+        <div class="rv d1" style="font-family:'Fredoka';font-weight:500;letter-spacing:.4em;font-size:11px;color:rgba(244,230,196,.72);padding-left:.4em;z-index:2">THE SECRET IS OUT</div>
+        <h1 class="rv d2" style="font-family:'Fredoka';font-weight:700;font-size:50px;line-height:.96;color:#f4e6c4;margin:16px 0 0;text-shadow:0 4px 0 #6e1414,0 6px 16px rgba(0,0,0,.35);z-index:2">SUNBITE<br>IS OPENING</h1>
+        <p class="rv d3" style="font-family:'Spectral';font-size:16px;line-height:1.62;color:rgba(247,234,208,.92);margin:24px 0 0;max-width:320px;z-index:2">After months of building this dream, I'm incredibly happy to finally invite you to celebrate with me. Join us for an unforgettable summer evening by the Aare River.</p>
+        <p class="rv d4" style="font-family:'Spectral';font-style:italic;font-size:15.5px;color:rgba(242,200,75,.95);margin:14px 0 0;max-width:300px;z-index:2">This is only the beginning — and I'd love for you to be part of it.</p>
+        <div class="rv d5" style="width:100%;max-width:312px;margin:30px 0 0;display:flex;flex-direction:column;gap:1px;background:rgba(244,230,196,.22);border-radius:18px;overflow:hidden;z-index:2">
+          <div style="display:flex;align-items:center;gap:15px;padding:16px 20px;background:rgba(126,20,20,.55)">
+            <span style="font-size:21px">📅</span>
+            <div style="text-align:left"><div style="font-family:'Fredoka';font-weight:600;font-size:18px;color:#f4e6c4">18 July 2026</div><div style="font-family:'Fredoka';font-weight:400;font-size:11px;letter-spacing:.18em;color:rgba(244,230,196,.6)">SAVE THE DATE</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:15px;padding:16px 20px;background:rgba(126,20,20,.55)">
+            <span style="font-size:21px">🕗</span>
+            <div style="text-align:left"><div style="font-family:'Fredoka';font-weight:600;font-size:18px;color:#f4e6c4">20:00 – Midnight</div><div style="font-family:'Fredoka';font-weight:400;font-size:11px;letter-spacing:.18em;color:rgba(244,230,196,.6)">GOLDEN HOUR ONWARDS</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:15px;padding:16px 20px;background:rgba(126,20,20,.55)">
+            <span style="font-size:21px">📍</span>
+            <div style="text-align:left"><div style="font-family:'Fredoka';font-weight:600;font-size:18px;color:#f4e6c4">Aarau – Aare River</div><div style="font-family:'Fredoka';font-weight:400;font-size:11px;letter-spacing:.18em;color:rgba(244,230,196,.6)">RIVERSIDE · SWITZERLAND</div></div>
+          </div>
+        </div>
+        <button class="pbtn rv d6" onclick="goTo(2)" style="margin:28px 0 6px;background:#f4e6c4;color:#9e1a1a;font-weight:600;font-size:16px;padding:15px 34px;border-radius:40px;box-shadow:0 10px 24px -8px rgba(0,0,0,.5);display:flex;align-items:center;gap:9px;z-index:2">Continue <span style="font-size:13px">→</span></button>
+      </div>
+      </div>
+    </div>
+
+    <!-- ===== CARD 3 — THE EXPERIENCE ===== -->
+    <div class="panel" id="panel-2" style="background:radial-gradient(120% 90% at 50% 0%,#fbf3de,#f0e0b8)">
+      <div class="panel-scroll">
+      <div class="tilt" id="tilt-2" style="padding:70px 30px 34px;align-items:center;text-align:center;justify-content:flex-start">
+        <div style="position:absolute;top:-50px;right:-40px;width:210px;height:210px;border-radius:50%;background:radial-gradient(circle,rgba(242,200,75,.42),transparent 65%);animation:sunPulse 7s ease-in-out infinite;pointer-events:none"></div>
+        <div class="berry" style="top:9%;left:13%;--r:-12deg;width:24px;height:27px;animation:floatY 8s ease-in-out infinite;opacity:.65"><div class="bd"></div><div class="lf"></div></div>
+        <div class="rv d1" style="font-family:'Fredoka';font-weight:500;letter-spacing:.4em;font-size:11px;color:#b5563a;padding-left:.4em">AN EVENING OF</div>
+        <h2 class="rv d2" style="font-family:'Fredoka';font-weight:700;font-size:33px;line-height:1.02;color:#9e1a1a;margin:10px 0 4px">Sun, Strawberries<br>&amp; Slow Moments</h2>
+        <div class="rv d3" style="width:100%;max-width:320px;margin:22px 0 0;display:flex;flex-direction:column;gap:13px">
+          <div style="display:flex;align-items:center"><span style="font-size:18px;width:30px;text-align:left">🍓</span><span style="font-family:'Fredoka';font-weight:500;font-size:16.5px;color:#5a2a1e;white-space:nowrap">Strawberry Chocolate Cups</span><span class="lead"></span></div>
+          <div style="display:flex;align-items:center"><span style="font-size:18px;width:30px;text-align:left">🎵</span><span style="font-family:'Fredoka';font-weight:500;font-size:16.5px;color:#5a2a1e">Music by the water</span><span class="lead"></span></div>
+          <div style="display:flex;align-items:center"><span style="font-size:18px;width:30px;text-align:left">🌅</span><span style="font-family:'Fredoka';font-weight:500;font-size:16.5px;color:#5a2a1e">Sunset over the Aare</span><span class="lead"></span></div>
+          <div style="display:flex;align-items:center"><span style="font-size:18px;width:30px;text-align:left">☀️</span><span style="font-family:'Fredoka';font-weight:500;font-size:16.5px;color:#5a2a1e">Summer atmosphere</span><span class="lead"></span></div>
+          <div style="display:flex;align-items:center"><span style="font-size:18px;width:30px;text-align:left">🤍</span><span style="font-family:'Fredoka';font-weight:500;font-size:16.5px;color:#5a2a1e">Good friends</span><span class="lead"></span></div>
+        </div>
+        <!-- ticket -->
+        <div class="rv d4" style="position:relative;margin:30px 0 0;width:100%;max-width:300px;background:#9e1a1a;border-radius:18px;padding:22px 24px;display:flex;align-items:center;justify-content:space-between;gap:14px;box-shadow:0 16px 30px -14px rgba(126,20,20,.6)">
+          <span style="position:absolute;left:-9px;top:50%;width:18px;height:18px;border-radius:50%;background:#f3e1b6;transform:translateY(-50%)"></span>
+          <span style="position:absolute;right:-9px;top:50%;width:18px;height:18px;border-radius:50%;background:#f3e1b6;transform:translateY(-50%)"></span>
+          <div style="text-align:left">
+            <div style="font-family:'Fredoka';font-weight:500;letter-spacing:.26em;font-size:9.5px;color:rgba(244,230,196,.7)">OPENING SPECIAL</div>
+            <div style="font-family:'Fredoka';font-weight:600;font-size:21px;color:#f4e6c4;line-height:1.1;margin-top:3px">Chocolate Cups</div>
+          </div>
+          <div style="text-align:center;border-left:1.5px dashed rgba(244,230,196,.4);padding-left:16px">
+            <div style="font-family:'Fredoka';font-weight:700;font-size:30px;color:#f2c84b;line-height:.9">5</div>
+            <div style="font-family:'Fredoka';font-weight:600;font-size:11px;letter-spacing:.12em;color:#f4e6c4">CHF</div>
+          </div>
+        </div>
+        <img class="rv d5" src="assets/made-for-sunny.png" alt="Made for Sunny Days" style="width:230px;max-width:72%;margin:32px 0 0">
+        <button class="pbtn rv d6" onclick="goTo(3)" style="margin:26px 0 6px;background:#9e1a1a;color:#f4e6c4;font-weight:600;font-size:16px;padding:15px 34px;border-radius:40px;box-shadow:0 12px 26px -10px rgba(126,20,20,.6);display:flex;align-items:center;gap:9px">Continue <span style="font-size:13px">→</span></button>
+      </div>
+      </div>
+    </div>
+
+    <!-- ===== CARD 4 — SEE YOU THERE ===== -->
+    <div class="panel" id="panel-3" style="background:radial-gradient(120% 90% at 50% 0%,#fbf3de,#f0e0b8)">
+      <div class="panel-scroll">
+      <div class="tilt" id="tilt-3" style="padding:66px 26px 36px;align-items:center;text-align:center;justify-content:flex-start">
+        <div class="rv d1" style="font-family:'Fredoka';font-weight:500;letter-spacing:.4em;font-size:11px;color:#b5563a;padding-left:.4em">THE PLACE</div>
+        <!-- hero photo placeholder -->
+        <div class="rv d2" style="position:relative;width:100%;margin:16px 0 0;border-radius:24px;overflow:hidden;box-shadow:0 22px 40px -18px rgba(90,30,20,.55)">
+          <div style="width:100%;height:220px;background:linear-gradient(160deg,#6e9bb0 0%,#5d8aa0 40%,#cdb98a 65%,#7fa04a 80%,#e3cfa0 100%);display:flex;align-items:center;justify-content:center">
+            <div style="text-align:center;font-family:'Fredoka';color:rgba(255,255,255,.7);font-size:13px;letter-spacing:.1em">📸 Photo coming soon</div>
+          </div>
+          <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(to top,rgba(126,20,20,.42),transparent 46%)"></div>
+          <div style="position:absolute;left:16px;bottom:14px;display:flex;align-items:center;gap:7px;color:#fbf3de;font-family:'Fredoka';font-weight:500;font-size:13px;letter-spacing:.04em;pointer-events:none"><span style="font-size:14px">📍</span> Aarau · Aare Riverside</div>
+        </div>
+        <h2 class="rv d3" style="font-family:'Fredoka';font-weight:700;font-size:34px;color:#9e1a1a;margin:24px 0 0;line-height:1">See you there</h2>
+        <p class="rv d3" style="font-family:'Spectral';font-style:italic;font-size:15.5px;color:#8a4733;margin:8px 0 0;max-width:290px">Come find us where the river bends and the sun stays late.</p>
+        <div class="rv d4" style="width:100%;max-width:320px;margin:24px 0 0;display:flex;flex-direction:column;gap:12px">
+          <button class="pbtn" onclick="openPano()" style="background:#9e1a1a;color:#f4e6c4;font-weight:600;font-size:16px;padding:16px;border-radius:40px;box-shadow:0 12px 26px -10px rgba(126,20,20,.6);display:flex;align-items:center;justify-content:center;gap:10px"><span style="font-size:17px">🌅</span> Explore in 360°</button>
+          <a class="pbtn" href="https://www.google.com/maps/search/?api=1&query=Aarau+Aare+Flussbad" target="_blank" rel="noopener" style="text-decoration:none;background:#fbf3de;color:#9e1a1a;font-weight:600;font-size:16px;padding:16px;border-radius:40px;border:2px solid #9e1a1a;display:flex;align-items:center;justify-content:center;gap:10px"><span style="font-size:17px">📍</span> Open in Google Maps</a>
+        </div>
+        <!-- QR placeholder -->
+        <div class="rv d5" style="margin:26px 0 0;display:flex;flex-direction:column;align-items:center;gap:9px">
+          <div style="width:118px;height:118px;border-radius:16px;border:2px dashed rgba(158,26,26,.45);background:rgba(158,26,26,.05);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px">
+            <span style="font-size:24px;opacity:.5">▣</span>
+            <span style="font-family:ui-monospace,Menlo,monospace;font-size:9px;letter-spacing:.14em;color:#b5563a">QR · COMING SOON</span>
+          </div>
+          <span style="font-family:'Spectral';font-style:italic;font-size:12.5px;color:#a06a52">Scan to RSVP — added shortly</span>
+        </div>
+        <div class="rv d6" style="width:46px;height:2px;background:#c9683e;border-radius:2px;margin:28px 0 18px"></div>
+        <p class="rv d6" style="font-family:'Spectral';font-size:16px;line-height:1.6;color:#6a3326;margin:0;max-width:290px">Thank you for being part of the beginning of Sunbite.<br><span style="font-family:'Fredoka';font-weight:600;color:#9e1a1a">See you on July 18.</span> <span style="font-size:17px">❤️</span></p>
+        <img class="rv d7" src="assets/sunbite-wordmark.png" alt="Sunbite.ch" style="width:150px;margin:26px 0 6px;filter:brightness(.45) sepia(1) saturate(6) hue-rotate(-12deg)">
+      </div>
+      </div>
+    </div>
+
+  </div><!-- /deck -->
+
+  <!-- Progress dots -->
+  <div id="dots-bar" style="position:absolute;top:0;left:0;right:0;height:54px;display:flex;align-items:center;justify-content:center;z-index:6;pointer-events:none;padding-top:6px">
+    <div style="display:flex;align-items:center;gap:8px;background:rgba(28,15,10,.22);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:8px 13px;border-radius:30px;pointer-events:auto">
+      <button class="pbtn" onclick="goTo(0)" aria-label="Card 1" style="background:none;padding:0;width:auto;height:9px;display:flex;align-items:center"><span id="dot-0" style="display:block;height:7px;border-radius:5px;transition:all .4s;width:22px;background:#f4e6c4"></span></button>
+      <button class="pbtn" onclick="goTo(1)" aria-label="Card 2" style="background:none;padding:0;width:auto;height:9px;display:flex;align-items:center"><span id="dot-1" style="display:block;height:7px;border-radius:5px;transition:all .4s;width:7px;background:rgba(244,230,196,.4)"></span></button>
+      <button class="pbtn" onclick="goTo(2)" aria-label="Card 3" style="background:none;padding:0;width:auto;height:9px;display:flex;align-items:center"><span id="dot-2" style="display:block;height:7px;border-radius:5px;transition:all .4s;width:7px;background:rgba(244,230,196,.4)"></span></button>
+      <button class="pbtn" onclick="goTo(3)" aria-label="Card 4" style="background:none;padding:0;width:auto;height:9px;display:flex;align-items:center"><span id="dot-3" style="display:block;height:7px;border-radius:5px;transition:all .4s;width:7px;background:rgba(244,230,196,.4)"></span></button>
+    </div>
+  </div>
+
+  <div class="grain"></div>
+
+  <!-- 360° Panorama Overlay -->
+  <div id="pano-overlay" style="display:none;position:absolute;inset:0;z-index:30;background:#0d0a09;overflow:hidden;animation:fadeUp .4s ease;touch-action:none">
+    <div id="pano-scene" style="position:absolute;top:0;left:0;width:300%;height:100%;cursor:grab">
+      <div style="position:absolute;inset:0;background:
+            radial-gradient(120px 120px at 14% 26%,rgba(242,200,75,.9),transparent 70%),
+            radial-gradient(90px 60px at 40% 60%,rgba(127,160,74,.55),transparent 70%),
+            radial-gradient(120px 70px at 72% 58%,rgba(127,160,74,.5),transparent 72%),
+            linear-gradient(to bottom,#bfe0ea 0%,#d8e6d0 40%,#e9d9b0 52%,#6e9bb0 53%,#5d8aa0 64%,#cdb98a 66%,#e3cfa0 100%)">
+      </div>
+      <div style="position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 16.6%,rgba(0,0,0,.05) 16.6% 16.7%);opacity:.5"></div>
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;font-family:ui-monospace,Menlo,monospace;color:rgba(40,20,12,.55)">
+        <div style="font-size:13px;letter-spacing:.2em">360° PANORAMA</div>
+        <div style="font-size:10px;margin-top:8px;letter-spacing:.1em">Photo coming soon</div>
+      </div>
+    </div>
+    <div style="position:absolute;top:18px;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:0 18px;pointer-events:none">
+      <div style="background:rgba(28,15,10,.45);backdrop-filter:blur(8px);color:#f4e6c4;font-family:'Fredoka';font-weight:500;font-size:12px;letter-spacing:.16em;padding:8px 14px;border-radius:30px">🧭 DRAG TO LOOK AROUND</div>
+      <button class="pbtn" onclick="closePano()" style="pointer-events:auto;width:40px;height:40px;border-radius:50%;background:rgba(28,15,10,.5);backdrop-filter:blur(8px);color:#f4e6c4;font-size:20px;display:flex;align-items:center;justify-content:center">✕</button>
+    </div>
+    <div style="position:absolute;bottom:22px;left:50%;transform:translateX(-50%);background:rgba(28,15,10,.45);backdrop-filter:blur(8px);color:rgba(244,230,196,.9);font-family:'Fredoka';font-weight:500;font-size:12px;padding:9px 16px;border-radius:30px;display:flex;align-items:center;gap:8px">📍 Sunbite · Aarau Riverside</div>
+  </div>
+
+</div><!-- /stage -->
+
+<script>
+(function(){
+  var step = 0;
+  var flipped = false;
+  var panoOpen = false;
+  var panoX = 0, panoTarget = 0, panoDir = -1;
+  var dragging = false, lastX = 0;
+  var raf;
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var deck = document.getElementById('deck');
+  var flipper = document.getElementById('flipper');
+  var panoOverlay = document.getElementById('pano-overlay');
+  var panoScene = document.getElementById('pano-scene');
+  var stage = document.getElementById('stage');
+  var tilts = [0,1,2,3].map(function(i){ return document.getElementById('tilt-'+i); });
+
+  function updateDeck(){
+    deck.style.transform = 'translateY('+(-step*100)+'%)';
+    for(var i=0;i<4;i++){
+      var p = document.getElementById('panel-'+i);
+      if(i===step){ p.classList.add('active'); }
+      else { p.classList.remove('active'); }
+    }
+    updateDots();
+    // reset tilt on card change
+    tilts.forEach(function(t){ if(t) t.style.transform=''; });
+  }
+
+  function updateDots(){
+    // dots are cream on red cards (0 back, 1), dark red on cream cards
+    var onRed = (step===0 && !flipped) || step===1;
+    var act = onRed ? '#f4e6c4' : '#9e1a1a';
+    var idle = onRed ? 'rgba(244,230,196,.4)' : 'rgba(120,90,70,.32)';
+    for(var i=0;i<4;i++){
+      var d = document.getElementById('dot-'+i);
+      d.style.width = (i===step) ? '22px' : '7px';
+      d.style.background = (i===step) ? act : idle;
+    }
+  }
+
+  window.goTo = function(n){
+    step = Math.max(0, Math.min(3, n));
+    updateDeck();
+  };
+
+  window.tapGift = function(){
+    if(!flipped){
+      flipped = true;
+      flipper.style.transform = 'rotateY(180deg)';
+      updateDots(); // front face = cream card
+    } else {
+      goTo(1);
+    }
+  };
+
+  window.openPano = function(){
+    panoOpen = true;
+    panoX = 0; panoTarget = 0; panoDir = -1;
+    panoScene.style.transform = 'translateX(0)';
+    panoOverlay.style.display = 'block';
+  };
+
+  window.closePano = function(){
+    panoOpen = false;
+    panoOverlay.style.display = 'none';
+  };
+
+  // parallax tilt
+  if(!reduceMotion){
+    var S = 3.2;
+    stage.addEventListener('mousemove', function(e){
+      var r = stage.getBoundingClientRect();
+      var nx = ((e.clientX - r.left)/r.width - .5)*2;
+      var ny = ((e.clientY - r.top)/r.height - .5)*2;
+      var t = tilts[step];
+      if(t) t.style.transform = 'rotateX('+(-ny*S).toFixed(2)+'deg) rotateY('+(nx*S).toFixed(2)+'deg)';
+    });
+    stage.addEventListener('mouseleave', function(){
+      tilts.forEach(function(t){ if(t) t.style.transform=''; });
+    });
+    stage.addEventListener('touchmove', function(e){
+      if(panoOpen) return;
+      var touch = e.touches[0];
+      var r = stage.getBoundingClientRect();
+      var nx = ((touch.clientX - r.left)/r.width - .5)*2;
+      var ny = ((touch.clientY - r.top)/r.height - .5)*2;
+      var t = tilts[step];
+      if(t) t.style.transform = 'rotateX('+(-ny*S).toFixed(2)+'deg) rotateY('+(nx*S).toFixed(2)+'deg)';
+    }, {passive:true});
+  }
+
+  // 360° pano drag
+  function panoClientX(e){ return e.touches ? e.touches[0].clientX : e.clientX; }
+  panoOverlay.addEventListener('mousedown', function(e){ dragging=true; lastX=e.clientX; });
+  panoOverlay.addEventListener('mousemove', function(e){
+    if(!dragging) return;
+    panoTarget += (e.clientX - lastX)*0.08;
+    lastX = e.clientX;
+    if(panoTarget>0) panoTarget=0;
+    if(panoTarget<-150) panoTarget=-150;
+  });
+  panoOverlay.addEventListener('mouseup', function(){ dragging=false; });
+  panoOverlay.addEventListener('mouseleave', function(){ dragging=false; });
+  panoOverlay.addEventListener('touchstart', function(e){ dragging=true; lastX=panoClientX(e); }, {passive:true});
+  panoOverlay.addEventListener('touchmove', function(e){
+    if(!dragging) return;
+    var x = panoClientX(e);
+    panoTarget += (x - lastX)*0.08;
+    lastX = x;
+    if(panoTarget>0) panoTarget=0;
+    if(panoTarget<-150) panoTarget=-150;
+  }, {passive:true});
+  panoOverlay.addEventListener('touchend', function(){ dragging=false; });
+
+  // rAF loop for pano auto-rotate
+  function tick(){
+    if(panoOpen && !reduceMotion){
+      if(!dragging){
+        panoTarget += panoDir * 0.10;
+        if(panoTarget <= -150){ panoTarget=-150; panoDir=1; }
+        if(panoTarget >= 0){ panoTarget=0; panoDir=-1; }
+      }
+      panoX += (panoTarget - panoX)*0.10;
+      panoScene.style.transform = 'translateX('+panoX.toFixed(2)+'%)';
+    }
+    raf = requestAnimationFrame(tick);
+  }
+  raf = requestAnimationFrame(tick);
+
+  // init
+  updateDeck();
+})();
+</script>
+
+</body>
+</html>
