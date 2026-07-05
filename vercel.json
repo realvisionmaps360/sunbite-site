@@ -20,17 +20,11 @@
         "Vercel-CDN-Cache-Control": "no-store"
       }
     },
-    { "src": "/eroffnung/assets/(.*)", "dest": "https://sunbite-opening18.vercel.app/eroffnung/assets/$1" },
-    {
-      "src": "/eroffnung/?",
-      "dest": "https://sunbite-opening18.vercel.app/eroffnung/",
-      "headers": {
-        "Cache-Control": "no-store, no-cache, must-revalidate",
-        "CDN-Cache-Control": "no-store",
-        "Vercel-CDN-Cache-Control": "no-store"
-      }
-    },
     { "handle": "filesystem" },
     { "src": "/(.*)", "dest": "/index.html" }
+  ],
+  "rewrites": [
+    { "source": "/eroffnung", "destination": "https://sunbite-opening18.vercel.app/eroffnung/" },
+    { "source": "/eroffnung/:match*", "destination": "https://sunbite-opening18.vercel.app/eroffnung/:match*" }
   ]
 }
