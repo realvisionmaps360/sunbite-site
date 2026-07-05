@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { useLanguage } from '../LanguageContext'
-import emblem from '../assets/emblem.jpg'
+import romanaPhoto from '../assets/romana-photo.jpg'
 
 export function RomanaSection() {
   const { t } = useLanguage()
@@ -20,7 +20,7 @@ export function RomanaSection() {
         >
           <div className="overflow-hidden rounded-[2.5rem] shadow-xl ring-1 ring-brand/10">
             <img
-              src={emblem}
+              src={romanaPhoto}
               alt={t.romana.photoAlt}
               className="aspect-[4/5] w-full object-cover"
             />
