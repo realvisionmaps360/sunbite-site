@@ -2,16 +2,16 @@ import { motion } from 'framer-motion'
 import { useLanguage } from '../LanguageContext'
 import { links } from '../links'
 import { InstagramIcon } from './Icons'
-import cup    from '../assets/strawberry-cup.png'
-import emblem from '../assets/emblem.jpg'
-import sunny  from '../assets/made-for-sunny.jpg'
-import cupsTitle from '../assets/cups-title.jpg'
+import galleryCup    from '../assets/gallery-cup.jpg'
+import galleryChoco  from '../assets/gallery-choco.jpg'
+import galleryBike   from '../assets/gallery-bike.jpg'
+import galleryRomana from '../assets/gallery-romana.jpg'
 
 const photos = [
-  { src: cup,       alt: 'Strawberry Chocolate Cup', tall: true },
-  { src: cupsTitle, alt: 'Strawberry Chocolate Cups',tall: false },
-  { src: emblem,    alt: 'Sunbite menu board',        tall: false },
-  { src: sunny,     alt: 'Made for Sunny Days',       tall: true },
+  { src: galleryCup,    alt: 'Sunbite Strawberry Chocolate Cup',  tall: true  },
+  { src: galleryChoco,  alt: 'Schokolade wird frisch gegossen',   tall: false },
+  { src: galleryBike,   alt: 'Das Sunbite Foodbike im Park',      tall: false },
+  { src: galleryRomana, alt: 'Romana am Sunbite Bike',            tall: true  },
 ]
 
 export function GallerySection() {
