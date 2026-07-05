@@ -2,16 +2,20 @@ import { motion } from 'framer-motion'
 import { useLanguage } from '../LanguageContext'
 import { links } from '../links'
 import { InstagramIcon } from './Icons'
-import galleryCup    from '../assets/gallery-cup.jpg'
-import galleryChoco  from '../assets/gallery-choco.jpg'
-import galleryBike   from '../assets/gallery-bike.jpg'
-import galleryRomana from '../assets/gallery-romana.jpg'
+import galleryCupGolden from '../assets/gallery-cup-golden.jpg'
+import galleryRomana    from '../assets/gallery-romana.jpg'
+import galleryBike      from '../assets/gallery-bike.jpg'
+import galleryCup       from '../assets/gallery-cup.jpg'
+import galleryChoco     from '../assets/gallery-choco.jpg'
+import galleryStickers  from '../assets/gallery-stickers.jpg'
 
 const photos = [
-  { src: galleryCup,    alt: 'Sunbite Strawberry Chocolate Cup',  tall: true  },
-  { src: galleryChoco,  alt: 'Schokolade wird frisch gegossen',   tall: false },
-  { src: galleryBike,   alt: 'Das Sunbite Foodbike im Park',      tall: false },
-  { src: galleryRomana, alt: 'Romana am Sunbite Bike',            tall: true  },
+  { src: galleryCupGolden, alt: 'Strawberry Chocolate Cup – goldene Stunde' },
+  { src: galleryRomana,    alt: 'Romana mit frischen Erdbeeren' },
+  { src: galleryBike,      alt: 'Das Sunbite.ch Foodbike' },
+  { src: galleryCup,       alt: 'Sunbite Erdbeer-Schoko-Becher' },
+  { src: galleryChoco,     alt: 'Premium Schweizer Schokolade' },
+  { src: galleryStickers,  alt: 'Sunbite Erdbeeren-Sticker' },
 ]
 
 export function GallerySection() {
@@ -35,23 +39,22 @@ export function GallerySection() {
           </h2>
         </motion.div>
 
-        {/* Asymmetric 2-column grid */}
-        <div className="mb-14 grid grid-cols-2 gap-4 md:gap-6">
+        {/* 3-column editorial grid */}
+        <div className="mb-14 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
           {photos.map((photo, i) => (
             <motion.div
               key={photo.alt}
               initial={{ opacity: 0, scale: 0.96 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.55, delay: i * 0.1 }}
-              className={`overflow-hidden rounded-3xl ${photo.tall ? 'row-span-2' : ''}`}
+              transition={{ duration: 0.55, delay: i * 0.08 }}
+              className="overflow-hidden rounded-2xl md:rounded-3xl"
             >
               <img
                 src={photo.src}
                 alt={photo.alt}
                 loading="lazy"
-                className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.03]"
-                style={{ minHeight: photo.tall ? '400px' : '180px' }}
+                className="aspect-[4/5] w-full object-cover transition-transform duration-500 hover:scale-[1.03]"
               />
             </motion.div>
           ))}
