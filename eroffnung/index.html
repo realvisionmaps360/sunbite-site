@@ -1,16 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
-  <title>Sunbite · Big Opening</title>
-  <script type="module" crossorigin src="/eroffnung/assets/index-CRC6J6R4.js"></script>
-  <link rel="stylesheet" crossorigin href="/eroffnung/assets/index-yQODDijr.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<title>Sunbite · Big Opening</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:#1c0f0a;font-family:'Spectral',Georgia,serif;color:#5a2a1e;-webkit-font-smoothing:antialiased}
+.stage{position:relative;width:100vw;height:100dvh;overflow:hidden;background:#F4E6C4;user-select:none;-webkit-tap-highlight-color:transparent}
+
+/* Desktop phone mockup */
+@media(min-width:480px){
+ body{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:18px}
+ .stage{width:418px;height:858px;max-height:95vh;border-radius:46px;box-shadow:0 50px 100px -24px rgba(0,0,0,.7),0 0 0 11px #160c08,0 0 0 13px #3a2218,inset 0 0 0 1px rgba(255,255,255,.04)}
+}
+
+.deck{position:relative;height:100%;display:flex;flex-direction:column;transition:transform 1.05s cubic-bezier(.62,.04,.16,1)}
+.deck.flipped{transform:translateY(-100%)}
+
+.panel{flex:0 0 100%;height:100%;position:relative;overflow:hidden;perspective:1500px}
+.panel-scroll{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column}
+
+/* Cover card tilt wrapper */
+.tilt-cover{position:relative;flex:1;display:flex;flex-direction:column;transition:transform .5s cubic-bezier(.2,.7,.2,1);transform-style:preserve-3d;will-change:transform;perspective:1600px}
+.tilt-cover .cover-layer{position:absolute;inset:0;transform-style:preserve-3d;transition:transform 1.3s cubic-bezier(.4,.05,.3,1),filter 1.3s}
+
+/* Reveal items */
+.rv{opacity:0;transform:translateY(20px);transition:opacity .8s cubic-bezier(.2,.75,.2,1),transform .8s cubic-bezier(.2,.75,.2,1)}
+.panel[data-active="true"] .rv{opacity:1;transform:none}
+.panel[data-active="true"] .rv.d1{transition-delay:.10s}
+.panel[data-active="true"] .rv.d2{transition-delay:.20s}
+.panel[data-active="true"] .rv.d3{transition-delay:.32s}
+.panel[data-active="true"] .rv.d4{transition-delay:.44s}
+.panel[data-active="true"] .rv.d5{transition-delay:.56s}
+.panel[data-active="true"] .rv.d6{transition-delay:.68s}
+
+/* Berry */
+.berry{position:absolute;width:30px;height:34px;will-change:transform;pointer-events:none}
+.berry .bd{position:absolute;inset:0;border-radius:46% 46% 48% 48%/36% 36% 66% 66%;background-image:radial-gradient(circle at 30% 40%,#f6ead0 0 1.1px,transparent 1.7px),radial-gradient(circle at 56% 32%,#f6ead0 0 1.1px,transparent 1.7px),radial-gradient(circle at 44% 60%,#f6ead0 0 1.1px,transparent 1.7px),radial-gradient(circle at 70% 56%,#f6ead0 0 1.1px,transparent 1.7px),radial-gradient(circle at 32% 72%,#f6ead0 0 1.1px,transparent 1.7px),radial-gradient(circle at 62% 76%,#f6ead0 0 1.1px,transparent 1.7px),radial-gradient(circle at 34% 30%,#db4129,#a81d1a 74%);box-shadow:inset -3px -4px 6px rgba(110,20,20,.55),inset 3px 3px 5px rgba(255,205,170,.4)}
+.berry .lf{position:absolute;top:-6px;left:50%;width:21px;height:14px;transform:translateX(-50%);background:#7fa04a;clip-path:polygon(50% 100%,10% 36%,27% 52%,40% 6%,50% 40%,60% 6%,73% 52%,90% 36%)}
+
+/* Spark */
+.spark{position:absolute;width:8px;height:8px;pointer-events:none;background:radial-gradient(circle,#fff 0 18%,#f2c84b 30% 42%,transparent 60%);clip-path:polygon(50% 0,58% 42%,100% 50%,58% 58%,50% 100%,42% 58%,0 50%,42% 42%)}
+
+/* Scallop */
+.scallop{-webkit-mask:radial-gradient(12px at 12px 100%,#0000 96%,#000) 0 0/24px 100% repeat-x;mask:radial-gradient(12px at 12px 100%,#0000 96%,#000) 0 0/24px 100% repeat-x}
+
+/* Button */
+.pbtn{cursor:pointer;border:none;font-family:'Fredoka',sans-serif;transition:transform .25s cubic-bezier(.2,.8,.3,1.4),box-shadow .25s,filter .2s}
+.pbtn:active{transform:scale(.96)}
+a.pbtn{text-decoration:none}
+
+/* Grain overlay */
+.grain{position:absolute;inset:0;pointer-events:none;z-index:7;mix-blend-mode:soft-light;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.07}
+
+/* Keyframes from original Claude Design */
+@keyframes floatY{0%,100%{transform:translateY(0) rotate(var(--r,0deg))}50%{transform:translateY(-15px) rotate(calc(var(--r,0deg) + 7deg))}}
+@keyframes sunPulse{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:.85;transform:scale(1.05)}}
+@keyframes sparkleA{0%,100%{opacity:0;transform:scale(.3) rotate(0)}50%{opacity:.95;transform:scale(1) rotate(40deg)}}
+@keyframes hintPulse{0%,100%{transform:translateY(0);opacity:.9}50%{transform:translateY(5px);opacity:1}}
+@keyframes dripBob{0%,100%{transform:translateY(0) scaleY(1)}50%{transform:translateY(4px) scaleY(1.08)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+
+/* QR */
+.qr-overlay{position:absolute;inset:0;z-index:40;background:rgba(24,10,6,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:30px;animation:fadeUp .35s ease;cursor:pointer}
+.qr-card{position:relative;background:radial-gradient(120% 100% at 50% 0%,#fbf3de,#f1e1ba);border-radius:26px;padding:30px 28px 24px;display:flex;flex-direction:column;align-items:center;gap:14px;box-shadow:0 30px 60px -20px rgba(0,0,0,.7);max-width:300px;width:100%;cursor:default}
+
+/* Hidden state */
+.hidden{display:none!important}
+
+/* Berries floating */
+.berry.f1{top:11%;right:10%;--r:16deg;width:26px;height:29px;animation:floatY 7.5s ease-in-out infinite;opacity:.85;z-index:1}
+.berry.f2{bottom:7%;left:9%;--r:-14deg;width:23px;height:26px;animation:floatY 8.5s ease-in-out 1.2s infinite;opacity:.75;z-index:1}
+</style>
 </head>
 <body>
-  <div id="root"></div>
+
+<div class="stage" id="stage">
+
+  <div class="deck" id="deck">
+
+    <!-- ========== CARD 1 — COVER (clickable) ========== -->
+    <div class="panel" id="card1" data-active="true" style="cursor:pointer;background:#f5e4d0" onclick="flipDeck()">
+      <div class="panel-scroll" style="overflow:hidden">
+        <div class="tilt-cover" id="tiltCover">
+          <div class="cover-layer" id="coverLayer">
+            <div style="position:absolute;top:-70px;left:50%;width:300px;height:300px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(242,200,75,.28),transparent 62%);animation:sunPulse 7s ease-in-out infinite"></div>
+            <div class="spark" style="top:5%;left:16%;animation:sparkleA 3.6s ease-in-out infinite"></div>
+            <div class="spark" style="top:9%;right:14%;width:11px;height:11px;animation:sparkleA 4.2s ease-in-out 1s infinite"></div>
+            <div class="spark" style="top:16%;left:38%;width:6px;height:6px;animation:sparkleA 3s ease-in-out 1.6s infinite"></div>
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='418' height='600' viewBox='0 0 418 600'%3E%3Crect width='418' height='600' fill='%23f5e4d0'/%3E%3Ccircle cx='209' cy='200' r='120' fill='rgba(242,200,75,.15)'/%3E%3Ctext x='209' y='320' text-anchor='middle' font-family='Georgia, serif' font-size='22' fill='%23841412' font-style='italic'%3EDie s%C3%BCsseste%3C/text%3E%3Ctext x='209' y='352' text-anchor='middle' font-family='Georgia, serif' font-size='22' fill='%23841412' font-style='italic'%3EEinladung des%3C/text%3E%3Ctext x='209' y='384' text-anchor='middle' font-family='Georgia, serif' font-size='22' fill='%23841412' font-style='italic'%3ESommers%3C/text%3E%3Ctext x='209' y='420' text-anchor='middle' font-family='Georgia, serif' font-size='14' fill='%239e1a1a'%3E18. Juli 2026%3C/text%3E%3C/svg%3E" alt="Sunbite Opening" style="position:absolute;bottom:0;left:0;width:100%;max-height:100%;object-fit:contain;object-position:center bottom;display:block">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== CARD 2 — BIG OPENING ========== -->
+    <div class="panel" id="card2" data-active="false" style="background:radial-gradient(130% 100% at 50% 0%,#b42420,#9e1a1a 50%,#7c1414)">
+      <div class="panel-scroll">
+        <div style="position:relative;flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;justify-content:center;gap:0;padding:42px 22px 20px;transform-style:preserve-3d">
+
+          <div style="position:absolute;top:-40px;left:50%;width:240px;height:240px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(244,230,196,.22),transparent 64%);animation:sunPulse 7s ease-in-out infinite;pointer-events:none"></div>
+          <div class="scallop" style="position:absolute;top:0;left:0;right:0;height:30px;background:linear-gradient(#3a1c12,#4a2418);pointer-events:none"></div>
+
+          <div style="position:absolute;top:28px;left:22%;width:12px;height:20px;background:#46210f;border-radius:50% 50% 50% 50%/58% 58% 42% 42%;animation:dripBob 4.5s ease-in-out infinite;pointer-events:none"></div>
+          <div style="position:absolute;top:28px;left:64%;width:10px;height:26px;background:#46210f;border-radius:50% 50% 50% 50%/58% 58% 42% 42%;animation:dripBob 5.5s ease-in-out .6s infinite;pointer-events:none"></div>
+
+          <div class="berry f1"><div class="bd"></div><div class="lf"></div></div>
+          <div class="berry f2"><div class="bd"></div><div class="lf"></div></div>
+
+          <div class="spark" style="top:22%;left:12%;animation:sparkleA 3.4s ease-in-out infinite"></div>
+          <div class="spark" style="top:38%;right:10%;width:11px;height:11px;animation:sparkleA 4.2s ease-in-out 1s infinite"></div>
+
+          <div class="rv d1" style="font-family:'Fredoka',sans-serif;font-weight:500;letter-spacing:.38em;font-size:11px;color:rgba(244,230,196,.75);padding-left:.38em;z-index:2">THE SECRET IS OUT</div>
+
+          <h1 class="rv d2" style="font-family:'Fredoka',sans-serif;font-weight:700;font-size:clamp(32px,10.5vw,44px);line-height:.98;color:#f4e6c4;margin:10px 0 0;text-shadow:0 4px 0 #6e1414,0 6px 16px rgba(0,0,0,.35);z-index:2">SUNBITE<br>BIG OPENING</h1>
+
+          <p class="rv d3" style="font-family:'Spectral',serif;font-style:italic;font-size:14.5px;line-height:1.45;color:rgba(242,200,75,.95);margin:10px 0 0;max-width:300px;z-index:2">Come celebrate the very first evening of Sunbite with us.</p>
+
+          <div class="rv d4" style="width:100%;max-width:312px;margin:16px 0 0;display:flex;flex-direction:column;gap:1px;background:rgba(244,230,196,.22);border-radius:18px;overflow:hidden;z-index:2">
+            <div style="display:flex;align-items:center;gap:13px;padding:9px 16px;background:rgba(126,20,20,.55)"><span style="font-size:19px">📅</span><div style="text-align:left"><div style="font-family:'Fredoka',sans-serif;font-weight:600;font-size:15.5px;color:#f4e6c4">18 July 2026</div><div style="font-family:'Fredoka',sans-serif;font-weight:400;font-size:10.5px;letter-spacing:.18em;color:rgba(244,230,196,.6)">SAVE THE DATE</div></div></div>
+            <div style="display:flex;align-items:center;gap:13px;padding:9px 16px;background:rgba(126,20,20,.55)"><span style="font-size:19px">🕗</span><div style="text-align:left"><div style="font-family:'Fredoka',sans-serif;font-weight:600;font-size:15.5px;color:#f4e6c4">20:00 – Midnight</div><div style="font-family:'Fredoka',sans-serif;font-weight:400;font-size:10.5px;letter-spacing:.18em;color:rgba(244,230,196,.6)">GOLDEN HOUR ONWARDS</div></div></div>
+            <div style="display:flex;align-items:center;gap:13px;padding:9px 16px;background:rgba(126,20,20,.55)"><span style="font-size:19px">📍</span><div style="text-align:left"><div style="font-family:'Fredoka',sans-serif;font-weight:600;font-size:15.5px;color:#f4e6c4">Stadtkirche Aarau</div><div style="font-family:'Fredoka',sans-serif;font-weight:400;font-size:10.5px;letter-spacing:.14em;color:rgba(244,230,196,.6)">KIRCHGASSE 19 · 5000 AARAU</div></div></div>
+          </div>
+
+          <div class="rv d5" style="width:100%;max-width:312px;margin:14px 0 0;display:flex;flex-direction:column;gap:8px;z-index:2">
+            <a class="pbtn" href="https://maps.app.goo.gl/e3p8f4RT8s27M5LE6?g_st=iw" target="_blank" rel="noopener" style="background:#f4e6c4;color:#9e1a1a;font-family:'Fredoka',sans-serif;font-weight:600;font-size:15.5px;padding:12px;border-radius:40px;box-shadow:0 10px 24px -8px rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;gap:9px"><span style="font-size:16px">📍</span> Open in Google Maps</a>
+            <a class="pbtn" href="https://maps.app.goo.gl/18ZLLaEoVpY12SsA8" target="_blank" rel="noopener" style="background:rgba(126,20,20,.4);color:#f4e6c4;font-family:'Fredoka',sans-serif;font-weight:600;font-size:15.5px;padding:11px;border-radius:40px;border:1.5px solid rgba(244,230,196,.65);display:flex;align-items:center;justify-content:center;gap:9px"><span style="font-size:16px">🌅</span> See the spot in 360°</a>
+            <button class="pbtn" onclick="showQR()" style="background:#f2c84b;color:#6e1414;font-weight:600;font-size:15.5px;padding:12px;border-radius:40px;box-shadow:0 10px 24px -10px rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;gap:9px;width:100%"><span style="font-size:16px">▣</span> Show QR Code</button>
+          </div>
+
+          <div class="rv d6" style="font-family:'Spectral',serif;font-style:italic;font-size:13.5px;color:rgba(247,234,208,.75);margin:12px 0 0;z-index:2">See you on July 18 <span style="font-style:normal">❤️</span></div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="grain"></div>
+
+  <!-- QR Overlay -->
+  <div class="qr-overlay hidden" id="qrOverlay" onclick="hideQR(event)">
+    <div class="qr-card" onclick="event.stopPropagation()">
+      <button class="pbtn" onclick="hideQR(event)" aria-label="Close" style="position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;background:rgba(158,26,26,.12);color:#9e1a1a;font-size:16px;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer">✕</button>
+      <div style="font-family:'Fredoka',sans-serif;font-weight:500;letter-spacing:.34em;font-size:10.5px;color:#b5563a;padding-left:.34em">SCAN ME</div>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=440x440&color=7c1414&bgcolor=fdf6e8&qzone=2&data=https%3A%2F%2Fsunbite.ch" alt="QR code — sunbite.ch" style="width:208px;height:208px;border-radius:14px;border:1.5px solid rgba(158,26,26,.25);background:#fdf6e8;display:block">
+      <div style="font-family:'Fredoka',sans-serif;font-weight:600;font-size:19px;color:#9e1a1a;line-height:1">sunbite.ch</div>
+      <div style="font-family:'Spectral',serif;font-style:italic;font-size:13px;color:#8a4733;margin-top:-6px">All the sweet details, in one place</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// Card flip
+var flipped = false;
+function flipDeck() {
+  if (flipped) return;
+  flipped = true;
+  document.getElementById('deck').classList.add('flipped');
+  document.getElementById('card1').dataset.active = 'false';
+  document.getElementById('card2').dataset.active = 'true';
+}
+
+// QR overlay
+function showQR() {
+  document.getElementById('qrOverlay').classList.remove('hidden');
+}
+function hideQR(e) {
+  if (e) e.stopPropagation();
+  document.getElementById('qrOverlay').classList.add('hidden');
+}
+
+// Tilt effect on cover
+(function(){
+  var stage = document.getElementById('stage');
+  var tilt = document.getElementById('tiltCover');
+  var layer = document.getElementById('coverLayer');
+  if (!stage || !tilt) return;
+
+  stage.addEventListener('mousemove', function(e) {
+    if (flipped) return;
+    var r = stage.getBoundingClientRect();
+    var nx = ((e.clientX - r.left) / r.width - 0.5) * 2;
+    var ny = ((e.clientY - r.top) / r.height - 0.5) * 2;
+    tilt.style.transform = 'rotateX(' + (-ny * 3.2).toFixed(2) + 'deg) rotateY(' + (nx * 3.2).toFixed(2) + 'deg)';
+  });
+
+  stage.addEventListener('mouseleave', function() {
+    tilt.style.transform = '';
+  });
+
+  stage.addEventListener('touchmove', function(e) {
+    if (flipped) return;
+    var t = e.touches[0];
+    if (!t) return;
+    var r = stage.getBoundingClientRect();
+    var nx = ((t.clientX - r.left) / r.width - 0.5) * 2;
+    var ny = ((t.clientY - r.top) / r.height - 0.5) * 2;
+    tilt.style.transform = 'rotateX(' + (-ny * 3.2).toFixed(2) + 'deg) rotateY(' + (nx * 3.2).toFixed(2) + 'deg)';
+  }, {passive:true});
+})();
+</script>
 </body>
 </html>
