@@ -2,20 +2,18 @@ import { motion } from 'framer-motion'
 import { useLanguage } from '../LanguageContext'
 import { links } from '../links'
 import { InstagramIcon } from './Icons'
-import galleryCupGolden   from '../assets/gallery-cup-golden.jpg'
-import galleryRomana      from '../assets/gallery-romana.jpg'
 import galleryBike        from '../assets/gallery-bike.jpg'
 import galleryCupTray     from '../assets/gallery-cup-tray.jpg'
 import galleryIngredients from '../assets/gallery-ingredients.jpg'
 import galleryStickers    from '../assets/gallery-stickers.jpg'
+import galleryCounter     from '../assets/gallery-counter.jpg'
 
 const photos = [
-  { src: galleryCupGolden,   alt: 'Strawberry Chocolate Cup – goldene Stunde' },
-  { src: galleryRomana,      alt: 'Romana mit frischen Erdbeeren' },
   { src: galleryBike,        alt: 'Das Sunbite.ch Foodbike' },
   { src: galleryCupTray,     alt: 'Sunbite Erdbeer-Schoko-Becher auf Tablett' },
   { src: galleryIngredients, alt: 'Frische Zutaten – Erdbeeren & Schokolade' },
   { src: galleryStickers,    alt: 'Sunbite Erdbeeren-Sticker' },
+  { src: galleryCounter,     alt: 'Die Sunbite Werkstation' },
 ]
 
 export function GallerySection() {
