@@ -2,20 +2,20 @@ import { motion } from 'framer-motion'
 import { useLanguage } from '../LanguageContext'
 import { links } from '../links'
 import { InstagramIcon } from './Icons'
-import galleryCupGolden from '../assets/gallery-cup-golden.jpg'
-import galleryRomana    from '../assets/gallery-romana.jpg'
-import galleryBike      from '../assets/gallery-bike.jpg'
-import galleryCup       from '../assets/gallery-cup.jpg'
-import galleryChoco     from '../assets/gallery-choco.jpg'
-import galleryStickers  from '../assets/gallery-stickers.jpg'
+import galleryCupGolden   from '../assets/gallery-cup-golden.jpg'
+import galleryRomana      from '../assets/gallery-romana.jpg'
+import galleryBike        from '../assets/gallery-bike.jpg'
+import galleryCupTray     from '../assets/gallery-cup-tray.jpg'
+import galleryIngredients from '../assets/gallery-ingredients.jpg'
+import galleryStickers    from '../assets/gallery-stickers.jpg'
 
 const photos = [
-  { src: galleryCupGolden, alt: 'Strawberry Chocolate Cup – goldene Stunde' },
-  { src: galleryRomana,    alt: 'Romana mit frischen Erdbeeren' },
-  { src: galleryBike,      alt: 'Das Sunbite.ch Foodbike' },
-  { src: galleryCup,       alt: 'Sunbite Erdbeer-Schoko-Becher' },
-  { src: galleryChoco,     alt: 'Premium Schweizer Schokolade' },
-  { src: galleryStickers,  alt: 'Sunbite Erdbeeren-Sticker' },
+  { src: galleryCupGolden,   alt: 'Strawberry Chocolate Cup – goldene Stunde' },
+  { src: galleryRomana,      alt: 'Romana mit frischen Erdbeeren' },
+  { src: galleryBike,        alt: 'Das Sunbite.ch Foodbike' },
+  { src: galleryCupTray,     alt: 'Sunbite Erdbeer-Schoko-Becher auf Tablett' },
+  { src: galleryIngredients, alt: 'Frische Zutaten – Erdbeeren & Schokolade' },
+  { src: galleryStickers,    alt: 'Sunbite Erdbeeren-Sticker' },
 ]
 
 export function GallerySection() {
