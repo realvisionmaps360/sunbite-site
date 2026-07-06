@@ -11,7 +11,7 @@ const en = {
     about:   'About',
     gallery: 'Gallery',
     findUs:  'Find Us',
-    book:    'Book',
+    book:    'Opening',
     bookCTA: 'Book SUNBITE',
   },
 
@@ -139,7 +139,7 @@ const de: typeof en = {
     about:   'Über SUNBITE',
     gallery: 'Galerie',
     findUs:  'Finde uns',
-    book:    'Buchen',
+    book:    'Eröffnung',
     bookCTA: 'SUNBITE buchen',
   },
 
