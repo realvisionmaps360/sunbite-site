@@ -6,7 +6,7 @@
 <title>Sunbite — Big Opening · 18. Juli 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Fraunces:wght@700;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;padding:0;height:100%}
@@ -47,7 +47,9 @@ body{background:#1c0f0a;font-family:'Spectral',Georgia,serif;color:#5a2a1e;-webk
 .grain{position:absolute;inset:0;pointer-events:none;z-index:7;mix-blend-mode:soft-light;
  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 .scallop{-webkit-mask:radial-gradient(12px at 12px 100%,#0000 96%,#000) 0 0/24px 100% repeat-x;mask:radial-gradient(12px at 12px 100%,#0000 96%,#000) 0 0/24px 100% repeat-x}
-.pbtn{cursor:pointer;border:none;font-family:'Fredoka',sans-serif;transition:transform .25s cubic-bezier(.2,.8,.3,1.4),box-shadow .25s,filter .2s}
+.pbtn{cursor:pointer;border:none;font-family:'Spectral',Georgia,serif;transition:transform .25s cubic-bezier(.2,.8,.3,1.4),box-shadow .25s,filter .2s}
+.fbike{position:absolute;right:12px;bottom:38px;width:152px;height:auto;z-index:2;pointer-events:none}
+@media(max-width:479px){.fbike{right:14px;bottom:38px;width:132px}}
 .pbtn:active{transform:scale(.96)}
 @keyframes floatY{0%,100%{transform:translateY(0) rotate(var(--r,0deg))}50%{transform:translateY(-15px) rotate(calc(var(--r,0deg) + 7deg))}}
 @keyframes sunPulse{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:.85;transform:scale(1.05)}}
@@ -100,61 +102,64 @@ body{background:#1c0f0a;font-family:'Spectral',Georgia,serif;color:#5a2a1e;-webk
       </div>
     </div>
 
-    <!-- ============ CARD 2 — THE SECRET IS OUT ============ -->
-    <div class="panel" id="panel1" data-active="false" style="background:radial-gradient(130% 100% at 50% 0%,#b42420,#9e1a1a 50%,#7c1414)">
+    <!-- ============ CARD 2 — EINLADUNG DETAILS ============ -->
+    <div class="panel" id="panel1" data-active="false" style="background:radial-gradient(125% 88% at 50% 8%,#f9f0da 0%,#f4e6c4 58%,#efdcb2 100%)">
       <div class="panel-scroll">
-      <div class="tilt" id="tilt1" style="padding:42px 22px 20px;align-items:center;text-align:center;justify-content:center;gap:0">
-        <div style="position:absolute;top:-40px;left:50%;width:240px;height:240px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(244,230,196,.22),transparent 64%);animation:sunPulse 7s ease-in-out infinite;pointer-events:none"></div>
-        <div class="scallop" style="position:absolute;top:0;left:0;right:0;height:30px;background:linear-gradient(#3a1c12,#4a2418);pointer-events:none"></div>
-        <div style="position:absolute;top:28px;left:22%;width:12px;height:20px;background:#46210f;border-radius:50% 50% 50% 50%/58% 58% 42% 42%;animation:dripBob 4.5s ease-in-out infinite;pointer-events:none"></div>
-        <div style="position:absolute;top:28px;left:64%;width:10px;height:26px;background:#46210f;border-radius:50% 50% 50% 50%/58% 58% 42% 42%;animation:dripBob 5.5s ease-in-out .6s infinite;pointer-events:none"></div>
-        <div class="berry" style="top:11%;right:10%;--r:16deg;width:26px;height:29px;animation:floatY 7.5s ease-in-out infinite;opacity:.85;z-index:1"><div class="bd"></div><div class="lf"></div></div>
-        <div class="berry" style="bottom:7%;left:9%;--r:-14deg;width:23px;height:26px;animation:floatY 8.5s ease-in-out 1.2s infinite;opacity:.75;z-index:1"><div class="bd"></div><div class="lf"></div></div>
-        <div class="spark" style="top:22%;left:12%;animation:sparkleA 3.4s ease-in-out infinite"></div>
-        <div class="spark" style="top:38%;right:10%;width:11px;height:11px;animation:sparkleA 4.2s ease-in-out 1s infinite"></div>
+      <div class="tilt" id="tilt1" style="padding:62px 28px 84px;align-items:center;text-align:center;justify-content:flex-start;gap:0">
+        <div class="scallop" style="position:absolute;top:0;left:0;right:0;height:18px;background:linear-gradient(#3a1c12,#4a2418);opacity:.92;pointer-events:none"></div>
+        <div style="position:absolute;top:16px;left:16%;width:8px;height:13px;background:#46210f;border-radius:50% 50% 50% 50%/58% 58% 42% 42%;opacity:.8;animation:dripBob 4.5s ease-in-out infinite;pointer-events:none"></div>
+        <div style="position:absolute;top:16px;left:82%;width:7px;height:17px;background:#46210f;border-radius:50% 50% 50% 50%/58% 58% 42% 42%;opacity:.8;animation:dripBob 5.5s ease-in-out .6s infinite;pointer-events:none"></div>
 
-        <div class="rv d1" style="font-family:'Fredoka';font-weight:500;letter-spacing:.38em;font-size:11px;color:rgba(244,230,196,.75);padding-left:.38em;z-index:2">THE SECRET IS OUT</div>
-        <h1 class="rv d2" style="font-family:'Fredoka';font-weight:700;font-size:clamp(32px,10.5vw,44px);line-height:.98;color:#f4e6c4;margin:10px 0 0;text-shadow:0 4px 0 #6e1414,0 6px 16px rgba(0,0,0,.35);z-index:2">SUNBITE<br>BIG OPENING</h1>
-        <p class="rv d3" style="font-family:'Spectral';font-style:italic;font-size:14.5px;line-height:1.5;color:rgba(242,200,75,.95);margin:12px 0 0;max-width:290px;z-index:2">You're invited to the very first Sunbite evening &mdash; fresh strawberries, Swiss chocolate and golden summer light.</p>
+        <button class="pbtn" onclick="goBack(event)" aria-label="Zur ersten Karte zurück" style="position:absolute;top:42px;left:16px;width:38px;height:38px;border-radius:50%;background:rgba(255,252,244,.55);border:1px solid rgba(168,31,28,.32);color:#a81f1c;display:flex;align-items:center;justify-content:center;z-index:3;padding:0">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#a81f1c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
 
-        <div class="rv d4" style="width:100%;max-width:312px;margin:18px 0 0;background:linear-gradient(180deg,#f9efd8,#f0dfb8);border-radius:20px;box-shadow:0 18px 36px -14px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.6);overflow:hidden;z-index:2">
-          <div style="display:flex;align-items:center;gap:14px;padding:12px 20px;text-align:left">
-            <div style="flex:0 0 auto;width:38px;height:38px;border-radius:12px;background:rgba(158,26,26,.10);display:flex;align-items:center;justify-content:center">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#9e1a1a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/></svg>
-            </div>
-            <div><div style="font-family:'Fredoka';font-weight:600;font-size:16px;color:#7c1414;line-height:1.15">18 July 2026</div><div style="font-family:'Fredoka';font-weight:500;font-size:10px;letter-spacing:.2em;color:#b5563a;margin-top:2px">SAVE THE DATE</div></div>
+        <div class="rv d1" style="font-family:'Spectral';font-weight:500;font-size:10.5px;letter-spacing:.32em;color:rgba(168,31,28,.62);padding-left:.32em;z-index:2">ES IST SO WEIT</div>
+        <h1 class="rv d2" style="font-family:'Fraunces',serif;font-weight:900;font-size:clamp(34px,10vw,40px);line-height:1.04;color:#a81f1c;margin:10px 0 0;z-index:2">Sunbite<br>f&auml;hrt los.</h1>
+        <svg class="rv d2" viewBox="0 0 120 10" width="84" style="display:block;margin:14px auto 0;z-index:2" aria-hidden="true"><path d="M2 5q7-7 14 0t14 0 14 0 14 0 14 0 14 0 14 0 14 0" fill="none" stroke="#c9973d" stroke-width="2" stroke-linecap="round"/></svg>
+
+        <p class="rv d3" style="font-family:'Spectral';font-style:italic;font-size:14px;line-height:1.6;color:#5a2a1e;margin:16px 0 0;max-width:296px;z-index:2">Nach Monaten voller Ideen, Schrauben, Testen und Bauen ist aus einer kleinen Idee endlich Wirklichkeit geworden.</p>
+        <p class="rv d3" style="font-family:'Spectral';font-size:14px;line-height:1.6;color:#5a2a1e;margin:11px 0 0;max-width:296px;z-index:2">Am <span style="color:#a81f1c;font-weight:600">18. Juli</span> feiern wir den ersten Sunbite-Abend in Aarau &mdash; mit frisch zubereiteten Erdbeer-Schoko-Cups, Sommerluft, Musik und Menschen, die diesen Start mit mir teilen.</p>
+
+        <div class="rv d4" style="width:100%;max-width:284px;margin:24px 0 0;background:#a81f1c;border-radius:12px;position:relative;box-shadow:0 12px 24px -18px rgba(120,25,15,.45);z-index:2">
+          <div style="font-family:'Spectral';font-weight:500;font-size:10px;letter-spacing:.3em;color:rgba(245,230,200,.82);padding:9px 18px 7px;padding-left:calc(18px + .3em)">ER&Ouml;FFNUNGSANGEBOT</div>
+          <div style="position:relative;height:1px">
+            <div style="position:absolute;left:14px;right:14px;top:0;border-top:1px dashed rgba(245,230,200,.42)"></div>
+            <div style="position:absolute;left:-6px;top:-6px;width:12px;height:12px;border-radius:50%;background:#f4e6c4"></div>
+            <div style="position:absolute;right:-6px;top:-6px;width:12px;height:12px;border-radius:50%;background:#f4e6c4"></div>
           </div>
-          <div style="margin:0 18px;border-top:1.5px dashed rgba(158,26,26,.28)"></div>
-          <div style="display:flex;align-items:center;gap:14px;padding:12px 20px;text-align:left">
-            <div style="flex:0 0 auto;width:38px;height:38px;border-radius:12px;background:rgba(158,26,26,.10);display:flex;align-items:center;justify-content:center">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#9e1a1a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg>
-            </div>
-            <div><div style="font-family:'Fredoka';font-weight:600;font-size:16px;color:#7c1414;line-height:1.15">20:00 &ndash; Midnight</div><div style="font-family:'Fredoka';font-weight:500;font-size:10px;letter-spacing:.2em;color:#b5563a;margin-top:2px">GOLDEN HOUR ONWARDS</div></div>
-          </div>
-          <div style="margin:0 18px;border-top:1.5px dashed rgba(158,26,26,.28)"></div>
-          <div style="display:flex;align-items:center;gap:14px;padding:12px 20px;text-align:left">
-            <div style="flex:0 0 auto;width:38px;height:38px;border-radius:12px;background:rgba(158,26,26,.10);display:flex;align-items:center;justify-content:center">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#9e1a1a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.6-7-11a7 7 0 0 1 14 0c0 5.4-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
-            </div>
-            <div><div style="font-family:'Fredoka';font-weight:600;font-size:16px;color:#7c1414;line-height:1.15">Stadtkirche Aarau</div><div style="font-family:'Fredoka';font-weight:500;font-size:10px;letter-spacing:.14em;color:#b5563a;margin-top:2px">KIRCHGASSE 19 &middot; 5000 AARAU</div></div>
+          <div style="padding:9px 18px 12px">
+            <div style="font-family:'Fraunces',serif;font-weight:700;font-size:22px;color:#F5E6C8;white-space:nowrap">Sunbite Cup CHF 6.&ndash;</div>
+            <div style="font-family:'Spectral';font-size:12.5px;color:rgba(245,230,200,.85);margin-top:3px">nur zur Er&ouml;ffnung &middot; solange Vorrat</div>
           </div>
         </div>
 
-        <div class="rv d5" style="width:100%;max-width:312px;margin:14px 0 0;display:flex;flex-direction:column;gap:8px;z-index:2">
-          <a class="pbtn" href="https://maps.app.goo.gl/e3p8f4RT8s27M5LE6?g_st=iw" target="_blank" rel="noopener" style="text-decoration:none;background:#f2c84b;color:#6e1414;font-family:'Fredoka';font-weight:600;font-size:15.5px;padding:12px;border-radius:40px;box-shadow:0 10px 24px -8px rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;gap:9px">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#6e1414" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.6-7-11a7 7 0 0 1 14 0c0 5.4-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
-            Open in Google Maps</a>
-          <a class="pbtn" href="https://maps.app.goo.gl/18ZLLaEoVpY12SsA8" target="_blank" rel="noopener" style="text-decoration:none;background:rgba(126,20,20,.4);color:#f4e6c4;font-family:'Fredoka';font-weight:600;font-size:15.5px;padding:11px;border-radius:40px;border:1.5px solid rgba(244,230,196,.65);display:flex;align-items:center;justify-content:center;gap:9px">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#f4e6c4" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="9" ry="3.8"/></svg>
-            See the spot in 360&deg;</a>
-          <button class="pbtn" onclick="openQr(event)" style="background:#f4e6c4;color:#9e1a1a;font-weight:600;font-size:15.5px;padding:12px;border-radius:40px;box-shadow:0 10px 24px -10px rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;gap:9px;width:100%">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#9e1a1a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><path d="M14 14h3v3h-3zM20 14v2M20 20h-3M14 20v-1"/></svg>
-            Show QR Code</button>
+        <div class="rv d5" style="width:100%;max-width:280px;margin:24px 0 0;z-index:2">
+          <div style="font-family:'Fraunces',serif;font-weight:700;font-size:18px;color:#a81f1c">18. Juli 2026</div>
+          <div style="font-family:'Spectral';font-weight:500;font-size:10.5px;letter-spacing:.22em;color:rgba(168,31,28,.72);margin-top:4px;padding-left:.22em">AB 20:00 UHR</div>
+          <div style="width:44px;height:1px;background:rgba(201,151,61,.75);margin:13px auto"></div>
+          <a href="https://www.google.com/maps/@47.3942738,8.0397937,3a,75y,114.13h,90t/data=!3m8!1e1!3m6!1sCIHM0ogKEICAgIDq88fU_AE!2e10!3e11!6shttps:%2F%2Flh3.googleusercontent.com%2Fgpms-cs-s%2FABJJf52a4dp_A0yVvOogrjya7MmFzFKWBTJdZ6hV_nu9P6qvKfgHji8uoTMFE4PzbkFIukvepFGtosB_Bs1ytT5TrFBkyOystB4_IuKNEdwv_ynz4RAL0m-9D6Xsblyf74d0VNyB1fmh%3Dw900-h600-k-no-pi0-ya159.3362692015263-ro0-fo100!7i11000!8i5500?entry=ttu&amp;g_ep=EgoyMDI2MDcwNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" style="text-decoration:none;display:block">
+            <div style="font-family:'Fraunces',serif;font-weight:700;font-size:16px;color:#a81f1c">An der Aare</div>
+            <div style="font-family:'Spectral';font-size:12px;color:rgba(90,42,30,.78);margin-top:4px;display:inline-block;border-bottom:1px dotted rgba(168,31,28,.5);padding-bottom:1px">Albert-Einstein-Weg &middot; 5000 Aarau</div>
+            <div style="font-family:'Spectral';font-weight:500;font-size:9.5px;letter-spacing:.2em;color:rgba(168,31,28,.6);margin-top:7px;padding-left:.2em">IN 360&deg; ANSEHEN</div>
+          </a>
         </div>
 
-        <div class="rv d6" style="font-family:'Spectral';font-style:italic;font-size:13.5px;color:rgba(247,234,208,.8);margin:14px 0 0;z-index:2;display:flex;align-items:center;gap:7px">See you on July 18
-          <svg viewBox="0 0 24 26" width="13" height="14" style="display:inline-block"><path d="M12 25C6.5 22 3 16.5 3 11.8 3 8.2 7 6.5 12 6.5s9 1.7 9 5.3C21 16.5 17.5 22 12 25z" fill="#e14a32"/><path d="M12 2.5v4.2" stroke="#7fa04a" stroke-width="1.5" stroke-linecap="round" fill="none"/><path d="M12 7.2 8.6 4.6l3.4.8 3.4-.8z" fill="#7fa04a"/><g fill="#f6ead0"><circle cx="9" cy="12" r=".9"/><circle cx="15" cy="12" r=".9"/><circle cx="12" cy="15.5" r=".9"/><circle cx="9.5" cy="19" r=".9"/><circle cx="14.5" cy="19" r=".9"/></g></svg>
+        <div class="rv d5" style="width:100%;max-width:280px;margin:24px 0 0;z-index:2">
+          <a class="pbtn" href="https://www.google.com/maps/dir/?api=1&amp;destination=47.39416,8.039765" target="_blank" rel="noopener" style="text-decoration:none;background:#faf2df;color:#a81f1c;font-weight:600;font-size:15px;padding:12px;border-radius:40px;border:1.5px solid rgba(168,31,28,.55);box-shadow:0 8px 18px -12px rgba(120,25,15,.4);display:block">Route &ouml;ffnen</a>
         </div>
+
+        <div class="rv d6" style="margin:13px 0 0;z-index:2">
+          <a class="pbtn" href="/" style="text-decoration:none;background:transparent;display:inline-block;padding:6px 2px;font-weight:500;font-size:12.5px;color:#a81f1c;border-bottom:1px dotted rgba(168,31,28,.5)">sunbite.ch</a>
+        </div>
+
+        <div class="rv d6" style="position:absolute;left:0;right:0;bottom:0;line-height:0;z-index:1;pointer-events:none">
+          <svg viewBox="0 0 400 90" preserveAspectRatio="none" style="width:100%;height:66px;display:block" aria-hidden="true">
+            <path d="M0 40 Q 100 8 200 30 T 400 30 L400 90 L0 90 Z" fill="#a81f1c"/>
+            <path d="M0 62 Q 110 40 220 56 T 400 54 L400 90 L0 90 Z" fill="#8a1512"/>
+          </svg>
+        </div>
+        <img class="rv d6 fbike" src="/eroffnung/assets/foodbike.png" alt="Sunbite Foodbike" />
       </div>
       </div>
     </div>
@@ -169,11 +174,11 @@ body{background:#1c0f0a;font-family:'Spectral',Georgia,serif;color:#5a2a1e;-webk
   <!-- ============ QR OVERLAY ============ -->
   <div id="qrOverlay" onclick="closeQr(event)" style="display:none;position:absolute;inset:0;z-index:40;background:rgba(24,10,6,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:30px;animation:fadeUp .35s ease;cursor:pointer">
     <div onclick="event.stopPropagation()" style="position:relative;background:radial-gradient(120% 100% at 50% 0%,#fbf3de,#f1e1ba);border-radius:26px;padding:30px 28px 24px;display:flex;flex-direction:column;align-items:center;gap:14px;box-shadow:0 30px 60px -20px rgba(0,0,0,.7);max-width:300px;width:100%;cursor:default">
-      <button class="pbtn" onclick="closeQr(event)" aria-label="Close" style="position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;background:rgba(158,26,26,.12);color:#9e1a1a;font-size:16px;display:flex;align-items:center;justify-content:center">✕</button>
-      <div style="font-family:'Fredoka';font-weight:500;letter-spacing:.34em;font-size:10.5px;color:#b5563a;padding-left:.34em">SCAN ME</div>
-      <img src="/eroffnung/assets/qr-sunbite.png" alt="QR code — sunbite.ch" style="width:208px;height:208px;border-radius:14px;border:1.5px solid rgba(158,26,26,.25);background:#fdf6e8;display:block">
-      <div style="font-family:'Fredoka';font-weight:600;font-size:19px;color:#9e1a1a;line-height:1">sunbite.ch</div>
-      <div style="font-family:'Spectral';font-style:italic;font-size:13px;color:#8a4733;margin-top:-6px">All the sweet details, in one place</div>
+      <button class="pbtn" onclick="closeQr(event)" aria-label="Close" style="position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;background:rgba(132,20,18,.12);color:#841412;font-size:16px;display:flex;align-items:center;justify-content:center">✕</button>
+      <div style="font-family:'Spectral';font-weight:500;letter-spacing:.34em;font-size:10.5px;color:rgba(132,20,18,.65);padding-left:.34em">SCAN MICH</div>
+      <img src="/eroffnung/assets/qr-sunbite.png" alt="QR-Code — sunbite.ch" style="width:208px;height:208px;border-radius:14px;border:1.5px solid rgba(132,20,18,.25);background:#fdf6e8;display:block">
+      <div style="font-family:'Fraunces',serif;font-weight:700;font-size:19px;color:#841412;line-height:1">sunbite.ch</div>
+      <div style="font-family:'Spectral';font-style:italic;font-size:13px;color:#8a4733;margin-top:-6px">Alle s&uuml;ssen Details an einem Ort</div>
     </div>
   </div>
 
@@ -266,6 +271,18 @@ body{background:#1c0f0a;font-family:'Spectral',Georgia,serif;color:#5a2a1e;-webk
     tilts.forEach(function(el){ if(el) el.style.transform=''; });
     if(FX === 'slide'){ setState({step:1}); return; }
     beginChoc();
+  };
+
+  /* ---------- back to cover (simple slide, chocolate FX untouched) ---------- */
+  window.goBack = function(e){
+    if(e&&e.stopPropagation) e.stopPropagation();
+    if(state.step !== 1 || state.phase === 'run') return;
+    tilts.forEach(function(el){ if(el) el.style.transform=''; });
+    deck.style.transition = 'transform 1.05s cubic-bezier(.62,.04,.16,1)';
+    deck.style.transform = 'translateY(0%)';
+    state.step = 0; state.phase = 'idle';
+    panel0.setAttribute('data-active','true');
+    panel1.setAttribute('data-active','false');
   };
 
   /* ============ chocolate-pour simulation ============ */
