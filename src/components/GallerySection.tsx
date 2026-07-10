@@ -64,16 +64,17 @@ export function GallerySection() {
           {photos.map((photo, i) => (
             <motion.div
               key={photo.src}
-              initial={{ opacity: 0, scale: 0.96 }}
+              initial={{ opacity: 0, scale: 0.98 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.55, delay: Math.min(i * 0.08, 0.6) }}
+              transition={{ duration: 0.4, delay: Math.min((i % 3) * 0.05, 0.1) }}
               className="overflow-hidden rounded-2xl md:rounded-3xl"
             >
               <img
                 src={photo.src}
                 alt={photo.alt}
                 loading="lazy"
+                decoding="async"
                 className="aspect-[4/5] w-full object-cover transition-transform duration-500 hover:scale-[1.03]"
               />
             </motion.div>

@@ -164,7 +164,7 @@ const de: typeof en = {
     eyebrow:   'Erdbeeren & Schokolade',
     headline:  'Eine Idee.\nPerfekt umgesetzt.',
     body:      'Wir bieten keine grosse Speisekarte. Wir konzentrieren uns auf ein einziges Produkt – und bereiten jeden Becher mit der Sorgfalt zu, die er verdient. Frische Erdbeeren. Schweizer Premium-Schokolade. Frisch zubereitet für jeden einzelnen Gast.',
-    pullQuote: 'Das sind keine gewöhnlichen Schoko-Erdbeeren.',
+    pullQuote: 'Ein kleiner Genussmoment, nur für dich.',
   },
 
   ingredients: {

@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Lokale Original-Fotos (Backup vor der Galerie-Optimierung, nicht fürs Web)
+_gallery-originals
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
