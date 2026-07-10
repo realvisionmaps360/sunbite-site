@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { useLanguage } from '../LanguageContext'
-import cup from '../assets/strawberry-cup.png'
+import cup from '../assets/hero-cup-photo.png'
 
 export function Hero() {
   const { t, lang } = useLanguage()
@@ -58,7 +58,7 @@ export function Hero() {
           <img
             src={cup}
             alt="Sunbite Strawberry Chocolate Cups"
-            className="w-64 rounded-[2rem] shadow-2xl ring-4 ring-cream/10 md:w-80 lg:w-96"
+            className="w-64 rounded-[2rem] object-cover shadow-2xl ring-4 ring-[#25441f] ring-offset-2 ring-offset-[#25441f]/40 md:w-80 lg:w-96"
           />
         </motion.div>
 
