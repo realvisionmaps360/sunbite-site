@@ -2,23 +2,38 @@ import { motion } from 'framer-motion'
 import { useLanguage } from '../LanguageContext'
 import { links } from '../links'
 import { InstagramIcon } from './Icons'
-import galleryCupHand    from '../assets/gallery-cup-hand.png'
-import galleryBikeLeaves  from '../assets/gallery-bike-leaves.jpg'
-import galleryBike        from '../assets/gallery-bike.jpg'
-import galleryCupTray     from '../assets/gallery-cup-tray.jpg'
-import galleryIngredients from '../assets/gallery-ingredients.jpg'
-import galleryCounter     from '../assets/gallery-counter.jpg'
-import galleryStickers    from '../assets/gallery-stickers.jpg'
 
-const photos = [
-  { src: galleryCupHand,    alt: 'Sunbite Erdbeer-Schoko-Becher' },
-  { src: galleryBikeLeaves, alt: 'Das Sunbite.ch Foodbike im Park' },
-  { src: galleryBike,       alt: 'Das Sunbite.ch Foodbike' },
-  { src: galleryCupTray,    alt: 'Sunbite Erdbeer-Schoko-Becher auf Tablett' },
-  { src: galleryIngredients, alt: 'Frische Zutaten – Erdbeeren & Schokolade' },
-  { src: galleryCounter,    alt: 'Die Sunbite Werkstation' },
-  { src: galleryStickers,   alt: 'Sunbite Erdbeeren-Sticker' },
-]
+/*
+ * Galerie-Fotos: einfach Bilddateien in  src/assets/gallery/  ablegen.
+ * Alle .jpg/.jpeg/.png/.webp aus diesem Ordner werden automatisch geladen –
+ * KEINE Import-Zeile und KEINE Liste mehr pflegen. Keine feste Obergrenze
+ * (weit über 20 Fotos möglich). Die Reihenfolge folgt dem Dateinamen, darum
+ * die Nummern-Präfixe 01-, 02-, … voranstellen (03-, 04- … für neue Fotos).
+ */
+const modules = import.meta.glob<{ default: string }>(
+  '../assets/gallery/*.{jpg,jpeg,png,webp}',
+  { eager: true },
+)
+
+// Passende Alt-Texte für die bekannten Fotos; neue Fotos bekommen einen
+// sinnvollen Standard-Alt-Text (nach dem Datei-Basisnamen ohne Nummern-Präfix).
+const altByName: Record<string, string> = {
+  'cup-hand':    'Sunbite Erdbeer-Schoko-Becher',
+  'bike-leaves': 'Das Sunbite.ch Foodbike im Park',
+  'bike':        'Das Sunbite.ch Foodbike',
+  'cup-tray':    'Sunbite Erdbeer-Schoko-Becher auf Tablett',
+  'ingredients': 'Frische Zutaten – Erdbeeren & Schokolade',
+  'counter':     'Die Sunbite Werkstation',
+  'stickers':    'Sunbite Erdbeeren-Sticker',
+}
+
+const photos = Object.keys(modules)
+  .sort()
+  .map((path) => {
+    const file = path.split('/').pop() ?? ''
+    const base = file.replace(/\.[^.]+$/, '').replace(/^\d+[-_]?/, '')
+    return { src: modules[path].default, alt: altByName[base] ?? 'Sunbite.ch – Erdbeer-Schoko-Becher' }
+  })
 
 export function GallerySection() {
   const { t } = useLanguage()
@@ -45,11 +60,11 @@ export function GallerySection() {
         <div className="mb-14 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
           {photos.map((photo, i) => (
             <motion.div
-              key={photo.alt}
+              key={photo.src}
               initial={{ opacity: 0, scale: 0.96 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.55, delay: i * 0.08 }}
+              transition={{ duration: 0.55, delay: Math.min(i * 0.08, 0.6) }}
               className="overflow-hidden rounded-2xl md:rounded-3xl"
             >
               <img
