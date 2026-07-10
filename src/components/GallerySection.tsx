@@ -18,13 +18,15 @@ const modules = import.meta.glob<{ default: string }>(
 // Passende Alt-Texte für die bekannten Fotos; neue Fotos bekommen einen
 // sinnvollen Standard-Alt-Text (nach dem Datei-Basisnamen ohne Nummern-Präfix).
 const altByName: Record<string, string> = {
-  'cup-hand':    'Sunbite Erdbeer-Schoko-Becher',
-  'bike-leaves': 'Das Sunbite.ch Foodbike im Park',
-  'bike':        'Das Sunbite.ch Foodbike',
-  'cup-tray':    'Sunbite Erdbeer-Schoko-Becher auf Tablett',
-  'ingredients': 'Frische Zutaten – Erdbeeren & Schokolade',
-  'counter':     'Die Sunbite Werkstation',
-  'stickers':    'Sunbite Erdbeeren-Sticker',
+  'cup-hand':          'Sunbite Erdbeer-Schoko-Becher',
+  'bike':              'Das Sunbite.ch Foodbike',
+  'crochet-deco':      'Gehäkelte Erdbeer-Deko am Sunbite Foodbike',
+  'strawberries-bowl': 'Schale mit frischen Erdbeeren',
+  'ingredients':       'Frische Zutaten – Erdbeeren & Schokolade',
+  'counter':           'Die Sunbite Werkstation',
+  'strawberry-field':  'Frisch gepflückte Erdbeere im Feld',
+  'strawberry-boxes':  'Frische Erdbeeren in Schälchen',
+  'stickers':          'Sunbite Erdbeeren-Sticker',
 }
 
 const photos = Object.keys(modules)
