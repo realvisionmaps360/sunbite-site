@@ -26,7 +26,14 @@ export function Footer() {
 
         <div className="text-center text-xs text-cream/40 md:text-right">
           <p>© {year} Sunbite.ch · {t.footer.rights}</p>
-          <p className="mt-1">{t.footer.builtBy}</p>
+          <a
+            href={links.realVision}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-1 inline-block transition-colors hover:text-cream/70"
+          >
+            {t.footer.builtBy}
+          </a>
         </div>
       </div>
     </footer>
