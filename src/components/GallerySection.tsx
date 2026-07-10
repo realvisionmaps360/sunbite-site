@@ -23,6 +23,7 @@ const altByName: Record<string, string> = {
   'crochet-deco':      'Gehäkelte Erdbeer-Deko am Sunbite Foodbike',
   'strawberries-bowl': 'Schale mit frischen Erdbeeren',
   'ingredients':       'Frische Zutaten – Erdbeeren & Schokolade',
+  'chocolate-pour':    'Fliessende Schweizer Schokolade über frischen Erdbeeren',
   'counter':           'Die Sunbite Werkstation',
   'strawberry-field':  'Frisch gepflückte Erdbeere im Feld',
   'strawberry-boxes':  'Frische Erdbeeren in Schälchen',
