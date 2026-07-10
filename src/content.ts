@@ -130,7 +130,7 @@ const en = {
 
   footer: {
     slogan:  'Made for Sunny Days.',
-    contact: 'hello@sunbite.ch',
+    contact: 'info.sunbite@gmail.com',
     rights:  'All rights reserved.',
     builtBy: 'Site by Real Vision',
   },
@@ -260,7 +260,7 @@ const de: typeof en = {
 
   footer: {
     slogan:  'Made for Sunny Days.',
-    contact: 'hello@sunbite.ch',
+    contact: 'info.sunbite@gmail.com',
     rights:  'Alle Rechte vorbehalten.',
     builtBy: 'Website von Real Vision',
   },
