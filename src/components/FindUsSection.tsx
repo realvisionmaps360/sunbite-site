@@ -59,7 +59,7 @@ export function FindUsSection() {
                   {t.findUs.openingBody}
                 </p>
                 <a
-                  href={lang === 'de' ? '/eroeffnung' : '/opening'}
+                  href={lang === 'de' ? '/eroeffnung/' : '/opening/'}
                   className="inline-flex items-center gap-2 rounded-full bg-cream px-6 py-3.5 font-body text-sm font-bold text-brand transition-transform hover:scale-[1.03] active:scale-95"
                 >
                   {t.hero.primaryCTA}

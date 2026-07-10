@@ -47,7 +47,7 @@ export function Header() {
             <a href="#about"   className="transition-colors hover:text-brand">{t.nav.about}</a>
             <a href="#gallery" className="transition-colors hover:text-brand">{t.nav.gallery}</a>
             <a href="#find-us" className="transition-colors hover:text-brand">{t.nav.findUs}</a>
-            <a href={lang === 'de' ? '/eroeffnung' : '/opening'} className="transition-colors hover:text-brand">{t.nav.book}</a>
+            <a href={lang === 'de' ? '/eroeffnung/' : '/opening/'} className="transition-colors hover:text-brand">{t.nav.book}</a>
           </nav>
         </div>
 

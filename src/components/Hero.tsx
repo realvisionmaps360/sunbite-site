@@ -39,7 +39,7 @@ export function Hero() {
 
           <div className="flex">
             <a
-              href={lang === 'de' ? '/eroeffnung' : '/opening'}
+              href={lang === 'de' ? '/eroeffnung/' : '/opening/'}
               className="inline-flex items-center justify-center rounded-full bg-cream px-7 py-4 font-body text-base font-bold text-brand shadow-lg transition-transform hover:scale-[1.03] active:scale-95"
             >
               {t.hero.primaryCTA}
