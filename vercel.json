@@ -20,16 +20,17 @@
         "Vercel-CDN-Cache-Control": "no-store"
       }
     },
-    { "src": "/eroffnung/assets/(.*)", "dest": "/eroffnung/assets/$1" },
+    { "src": "/eroeffnung/assets/(.*)", "dest": "/eroeffnung/assets/$1" },
     {
-      "src": "/eroffnung/?",
-      "dest": "/eroffnung/index.html",
+      "src": "/eroeffnung/?",
+      "dest": "/eroeffnung/index.html",
       "headers": {
         "Cache-Control": "no-store, no-cache, must-revalidate",
         "CDN-Cache-Control": "no-store",
         "Vercel-CDN-Cache-Control": "no-store"
       }
     },
+    { "src": "/eroffnung(?:/.*)?", "status": 308, "headers": { "Location": "/eroeffnung/" } },
     { "handle": "filesystem" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
