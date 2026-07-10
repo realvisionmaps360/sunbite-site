@@ -54,7 +54,7 @@ export function Header() {
         {/* Right side */}
         <div className="ml-auto flex items-center gap-3 pl-4 sm:gap-4 sm:pl-6 lg:gap-5 lg:pl-10">
           {/* Language switch */}
-          <div className={`hidden items-center rounded-full border p-0.5 text-xs font-bold uppercase sm:flex ${onDark ? 'border-cream/30' : 'border-brand/25'}`}>
+          <div className={`flex items-center rounded-full border p-0.5 text-xs font-bold uppercase ${onDark ? 'border-cream/30' : 'border-brand/25'}`}>
             <button
               type="button"
               onClick={() => setLang('en')}
