@@ -17,8 +17,10 @@ const en = {
 
   hero: {
     headline:     'The strawberry cup worth chasing.',
-    subheadline:  'Fresh strawberries. Premium Swiss chocolate. Prepared fresh for every cup.',
-    primaryCTA:   'See Next Locations',
+    openingLead:  'SUNBITE opens on July 18.',
+    subheadline:  'Celebrate the first SUNBITE evening with us — fresh strawberries, Swiss chocolate and summer vibes by the Aare.',
+    eventMeta:    'July 18 · from 19:30 · Aarau',
+    primaryCTA:   'View Invitation',
     secondaryCTA: 'Book SUNBITE',
   },
 
@@ -145,8 +147,10 @@ const de: typeof en = {
 
   hero: {
     headline:     'Der Geschmack des Sommers.',
-    subheadline:  'Frische Erdbeeren. Schweizer Premium-Schokolade.',
-    primaryCTA:   'Finde uns',
+    openingLead:  'SUNBITE eröffnet am 18. Juli.',
+    subheadline:  'Feiere mit uns den ersten SUNBITE-Abend mit frischen Erdbeeren, Schweizer Schokolade und Sommerstimmung an der Aare.',
+    eventMeta:    '18. Juli · ab 19:30 · Aarau',
+    primaryCTA:   'Einladung ansehen',
     secondaryCTA: 'SUNBITE buchen',
   },
 

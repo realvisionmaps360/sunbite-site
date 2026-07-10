@@ -1,10 +1,9 @@
 import { motion } from 'framer-motion'
 import { useLanguage } from '../LanguageContext'
-import { MapPinIcon } from './Icons'
 import cup from '../assets/strawberry-cup.png'
 
 export function Hero() {
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
   return (
     <section id="top" className="warm-glow relative min-h-svh overflow-hidden bg-brand">
 
@@ -26,23 +25,24 @@ export function Hero() {
             {t.hero.headline}
           </h1>
 
-          <p className="mb-10 max-w-sm text-base leading-relaxed text-cream/75 md:text-lg">
+          <p className="mb-2 max-w-sm text-lg font-semibold leading-snug text-cream md:text-xl">
+            {t.hero.openingLead}
+          </p>
+
+          <p className="mb-5 max-w-sm text-base leading-relaxed text-cream/75 md:text-lg">
             {t.hero.subheadline}
           </p>
 
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+          <p className="mb-10 text-sm font-semibold tracking-wide text-cream/90">
+            {t.hero.eventMeta}
+          </p>
+
+          <div className="flex">
             <a
-              href="#find-us"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-cream px-7 py-4 font-body text-base font-bold text-brand shadow-lg transition-transform hover:scale-[1.03] active:scale-95"
+              href={lang === 'de' ? '/eroeffnung' : '/opening'}
+              className="inline-flex items-center justify-center rounded-full bg-cream px-7 py-4 font-body text-base font-bold text-brand shadow-lg transition-transform hover:scale-[1.03] active:scale-95"
             >
-              <MapPinIcon className="h-4 w-4" />
               {t.hero.primaryCTA}
-            </a>
-            <a
-              href="#book"
-              className="inline-flex items-center justify-center rounded-full border-2 border-cream/40 px-7 py-3.5 font-body text-base font-semibold text-cream transition-all hover:border-cream/80 hover:bg-cream/10"
-            >
-              {t.hero.secondaryCTA}
             </a>
           </div>
         </motion.div>

@@ -81,7 +81,7 @@ export function Header() {
           {/* Book CTA */}
           <a
             href="#book"
-            className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-brand px-4 py-2.5 text-sm font-semibold text-cream shadow-md transition-transform hover:scale-[1.03] active:scale-95"
+            className="hidden items-center gap-1.5 whitespace-nowrap rounded-full bg-brand px-4 py-2.5 text-sm font-semibold text-cream shadow-md transition-transform hover:scale-[1.03] active:scale-95 md:inline-flex"
           >
             {t.nav.bookCTA}
           </a>
