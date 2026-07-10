@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useLanguage } from '../LanguageContext'
+import { BookingPopover } from './BookingPopover'
 import logo from '../assets/logo-wordmark-tight.png'
 
 export function Header() {
@@ -78,13 +79,13 @@ export function Header() {
             </button>
           </div>
 
-          {/* Book CTA */}
-          <a
-            href="#book"
-            className="hidden items-center gap-1.5 whitespace-nowrap rounded-full bg-brand px-4 py-2.5 text-sm font-semibold text-cream shadow-md transition-transform hover:scale-[1.03] active:scale-95 md:inline-flex"
-          >
-            {t.nav.bookCTA}
-          </a>
+          {/* Book CTA — click reveals a small email popover (desktop only) */}
+          <BookingPopover
+            label={t.nav.bookCTA}
+            align="right"
+            wrapperClassName="relative hidden md:block"
+            triggerClassName="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-brand px-4 py-2.5 text-sm font-semibold text-cream shadow-md transition-transform hover:scale-[1.03] active:scale-95"
+          />
         </div>
       </div>
     </header>

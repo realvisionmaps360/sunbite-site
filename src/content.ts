@@ -13,6 +13,9 @@ const en = {
     findUs:  'Find Us',
     book:    'Opening',
     bookCTA: 'Book SUNBITE',
+    bookPrompt: 'Write us to book:',
+    copy:    'Copy',
+    copied:  'Copied!',
   },
 
   hero: {
@@ -143,6 +146,9 @@ const de: typeof en = {
     findUs:  'Finde uns',
     book:    'Eröffnung',
     bookCTA: 'SUNBITE buchen',
+    bookPrompt: 'Schreib uns für deine Buchung:',
+    copy:    'Kopieren',
+    copied:  'Kopiert!',
   },
 
   hero: {

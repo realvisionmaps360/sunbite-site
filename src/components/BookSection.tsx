@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useLanguage } from '../LanguageContext'
-import { links } from '../links'
+import { BookingPopover } from './BookingPopover'
 
 const ICONS = [
   // 01 Weddings — interlocking rings + solitaire
@@ -205,12 +205,11 @@ export function BookSection() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="text-center"
         >
-          <a
-            href={links.contact}
-            className="inline-flex items-center justify-center rounded-full bg-brand px-10 py-4 font-body text-base font-bold text-cream shadow-lg transition-transform hover:scale-[1.03] active:scale-95"
-          >
-            {t.book.cta}
-          </a>
+          <BookingPopover
+            label={t.book.cta}
+            align="center"
+            triggerClassName="inline-flex items-center justify-center rounded-full bg-brand px-10 py-4 font-body text-base font-bold text-cream shadow-lg transition-transform hover:scale-[1.03] active:scale-95"
+          />
           <p className="mt-4 font-body text-sm text-ink/40">{t.book.trust}</p>
         </motion.div>
 
