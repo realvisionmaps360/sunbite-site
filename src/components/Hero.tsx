@@ -3,7 +3,7 @@ import { useLanguage } from '../LanguageContext'
 import cup from '../assets/hero-cup-photo.png'
 
 export function Hero() {
-  const { t, lang } = useLanguage()
+  const { t } = useLanguage()
   return (
     <section id="top" className="warm-glow relative min-h-svh overflow-hidden bg-brand">
 
@@ -25,26 +25,11 @@ export function Hero() {
             {t.hero.headline}
           </h1>
 
-          <p className="mb-2 max-w-sm text-lg font-semibold leading-snug text-cream md:text-xl">
-            {t.hero.openingLead}
-          </p>
+          {/* openingLead + eventMeta + botão de convite — ocultos temporariamente (inauguração fora do ar por enquanto) */}
 
           <p className="mb-5 max-w-sm text-base leading-relaxed text-cream/75 md:text-lg">
             {t.hero.subheadline}
           </p>
-
-          <p className="mb-10 text-sm font-semibold tracking-wide text-cream/90">
-            {t.hero.eventMeta}
-          </p>
-
-          <div className="flex">
-            <a
-              href={lang === 'de' ? '/eroeffnung/' : '/opening/'}
-              className="inline-flex items-center justify-center rounded-full bg-cream px-7 py-4 font-body text-base font-bold text-brand shadow-lg transition-transform hover:scale-[1.03] active:scale-95"
-            >
-              {t.hero.primaryCTA}
-            </a>
-          </div>
         </motion.div>
 
         {/* Right — product image */}

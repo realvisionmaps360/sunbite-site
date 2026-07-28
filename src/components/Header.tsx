@@ -44,10 +44,10 @@ export function Header() {
 
           {/* Nav links — desktop */}
           <nav className={`hidden items-center gap-5 whitespace-nowrap text-[15px] font-semibold md:flex lg:gap-8 ${onDark ? 'text-cream/85' : 'text-ink/70'}`}>
-            <a href="#about"   className="transition-colors hover:text-brand">{t.nav.about}</a>
+            {/* <a href="#about" className="transition-colors hover:text-brand">{t.nav.about}</a> — oculto: aponta pra RomanaSection, oculta temporariamente */}
             <a href="#gallery" className="transition-colors hover:text-brand">{t.nav.gallery}</a>
             <a href="#find-us" className="transition-colors hover:text-brand">{t.nav.findUs}</a>
-            <a href={lang === 'de' ? '/eroeffnung/' : '/opening/'} className="transition-colors hover:text-brand">{t.nav.book}</a>
+            {/* <a href={lang === 'de' ? '/eroeffnung/' : '/opening/'} className="transition-colors hover:text-brand">{t.nav.book}</a> — oculto temporariamente */}
           </nav>
         </div>
 

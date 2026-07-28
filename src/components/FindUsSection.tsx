@@ -5,7 +5,7 @@ import { InstagramIcon, CalendarIcon } from './Icons'
 import { upcomingEvents } from '../data/events'
 
 export function FindUsSection() {
-  const { t, lang } = useLanguage()
+  const { t } = useLanguage()
   const [headline1, headline2] = t.findUs.headline.split('\n')
 
   return (
@@ -48,23 +48,10 @@ export function FindUsSection() {
             </div>
 
             {upcomingEvents.length === 0 ? (
-              <div>
-                <p className="mb-3 font-body text-xs font-bold uppercase tracking-widest text-cream/50">
-                  {t.findUs.openingEyebrow}
-                </p>
-                <p className="mb-2 font-display text-2xl font-bold text-cream">
-                  {t.hero.eventMeta}
-                </p>
-                <p className="mb-6 text-base leading-relaxed text-cream/60">
-                  {t.findUs.openingBody}
-                </p>
-                <a
-                  href={lang === 'de' ? '/eroeffnung/' : '/opening/'}
-                  className="inline-flex items-center gap-2 rounded-full bg-cream px-6 py-3.5 font-body text-sm font-bold text-brand transition-transform hover:scale-[1.03] active:scale-95"
-                >
-                  {t.hero.primaryCTA}
-                </a>
-              </div>
+              /* bloco "Grand Opening" oculto temporariamente — mostrando noEvents (texto genérico já existente em content.ts) */
+              <p className="text-base leading-relaxed text-cream/60">
+                {t.findUs.noEvents}
+              </p>
             ) : (
               <ul className="space-y-4">
                 {upcomingEvents.map((ev, i) => (

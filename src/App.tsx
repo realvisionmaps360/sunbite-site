@@ -3,7 +3,7 @@ import { Header }           from './components/Header'
 import { Hero }             from './components/Hero'
 import { ProductSection }   from './components/ProductSection'
 import { IngredientsSection } from './components/IngredientsSection'
-import { RomanaSection }    from './components/RomanaSection'
+// import { RomanaSection }    from './components/RomanaSection' // oculto temporariamente — Romana pediu sigilo (28/07/2026)
 import { FindUsSection }    from './components/FindUsSection'
 import { BookSection }      from './components/BookSection'
 import { GallerySection }   from './components/GallerySection'
@@ -19,7 +19,7 @@ function App() {
         <Hero />              {/* 1 — Crave it   */}
         <ProductSection />    {/* 2 — Want it    */}
         <IngredientsSection />{/* 3 — Trust it   */}
-        <RomanaSection />     {/* 4 — Connect    */}
+        {/* <RomanaSection /> */}{/* 4 — Connect — oculto temporariamente */}
         <FindUsSection />     {/* 5 — Locate it  */}
         <BookSection />       {/* 6 — Reserve it */}
         <GallerySection />    {/* 7 — Share it   */}
